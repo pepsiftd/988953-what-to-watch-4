@@ -23,4 +23,10 @@ module.exports = {
     ],
   },
   devtool: `source-map`,
+  resolve: {
+    alias: {
+      '@': path.resolve('./src')
+    },
+    extensions: ['*', '.js', '.json', '.jsx']
+  }
 };
