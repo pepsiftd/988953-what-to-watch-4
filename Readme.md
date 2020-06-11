@@ -1,7 +1,7 @@
 # Личный проект «Что посмотреть» [![Build status][travis-image]][travis-url]
 
 * Студент: [Владимир Санников](https://up.htmlacademy.ru/react/4/user/988953).
-* Наставник: `Неизвестно`.
+* Наставник: [Владимир Ульянов](https://up.htmlacademy.ru/react/4/user/135131).
 
 ---
 
