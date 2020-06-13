@@ -1,4 +1,6 @@
 import React from 'react';
+import PropTypes from 'prop-types';
+
 import SmallMovieCard from '@/components/small-movie-card/small-movie-card';
 
 const Main = ({promoMovieTitle, promoMovieGenre, promoMovieYear, movieNames}) => {
@@ -126,6 +128,13 @@ const Main = ({promoMovieTitle, promoMovieGenre, promoMovieYear, movieNames}) =>
       </div>
     </React.Fragment>
   );
+};
+
+Main.propTypes = {
+  promoMovieTitle: PropTypes.string.isRequired,
+  promoMovieGenre: PropTypes.string.isRequired,
+  promoMovieYear: PropTypes.string.isRequired,
+  movieNames: PropTypes.arrayOf(PropTypes.string).isRequired,
 };
 
 export default Main;
