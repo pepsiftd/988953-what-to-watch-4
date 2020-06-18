@@ -159,6 +159,7 @@ Array [
           <a
             className="catalog__genres-link"
             href="#"
+            onClick={[MockFunction]}
           >
             All genres
           </a>
@@ -169,6 +170,7 @@ Array [
           <a
             className="catalog__genres-link"
             href="#"
+            onClick={[MockFunction]}
           >
             Comedies
           </a>
@@ -179,6 +181,7 @@ Array [
           <a
             className="catalog__genres-link"
             href="#"
+            onClick={[MockFunction]}
           >
             Crime
           </a>
@@ -189,6 +192,7 @@ Array [
           <a
             className="catalog__genres-link"
             href="#"
+            onClick={[MockFunction]}
           >
             Documentary
           </a>
@@ -199,6 +203,7 @@ Array [
           <a
             className="catalog__genres-link"
             href="#"
+            onClick={[MockFunction]}
           >
             Dramas
           </a>
@@ -209,6 +214,7 @@ Array [
           <a
             className="catalog__genres-link"
             href="#"
+            onClick={[MockFunction]}
           >
             Horror
           </a>
@@ -219,6 +225,7 @@ Array [
           <a
             className="catalog__genres-link"
             href="#"
+            onClick={[MockFunction]}
           >
             Kids & Family
           </a>
@@ -229,6 +236,7 @@ Array [
           <a
             className="catalog__genres-link"
             href="#"
+            onClick={[MockFunction]}
           >
             Romance
           </a>
@@ -239,6 +247,7 @@ Array [
           <a
             className="catalog__genres-link"
             href="#"
+            onClick={[MockFunction]}
           >
             Sci-Fi
           </a>
@@ -249,6 +258,7 @@ Array [
           <a
             className="catalog__genres-link"
             href="#"
+            onClick={[MockFunction]}
           >
             Thrillers
           </a>
