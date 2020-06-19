@@ -1,8 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+const getImageSrc = (name) => {
+  return `img/${name.replace(/\s+/g, `-`).replace(/[^a-zA-Z-]/g, ``).toLowerCase()}.jpg`;
+};
+
 const SmallMovieCard = ({movieName}) => {
-  const imageSrc = `img/${movieName.replace(/\s+/g, `-`).replace(/[^a-zA-Z-]/g, ``).toLowerCase()}.jpg`;
+  const imageSrc = getImageSrc(movieName);
 
   return (
     <article className="small-movie-card catalog__movies-card">
@@ -21,3 +25,4 @@ SmallMovieCard.propTypes = {
 };
 
 export default SmallMovieCard;
+export {getImageSrc};

@@ -1,0 +1,28 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`SmallMovieCard should render correct movie name 1`] = `
+<article
+  className="small-movie-card catalog__movies-card"
+>
+  <div
+    className="small-movie-card__image"
+  >
+    <img
+      alt="Some movie: Revenge"
+      height="175"
+      src="img/some-movie-revenge.jpg"
+      width="280"
+    />
+  </div>
+  <h3
+    className="small-movie-card__title"
+  >
+    <a
+      className="small-movie-card__link"
+      href="movie-page.html"
+    >
+      Some movie: Revenge
+    </a>
+  </h3>
+</article>
+`;

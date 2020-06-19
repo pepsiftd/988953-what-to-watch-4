@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 import SmallMovieCard from '@/components/small-movie-card/small-movie-card';
 
-const Main = ({promoMovieTitle, promoMovieGenre, promoMovieYear, movieNames}) => {
+const Main = ({promoMovieTitle, promoMovieGenre, promoMovieYear, movieNames, titleClickHandler}) => {
 
   return (
     <React.Fragment>
@@ -68,34 +68,34 @@ const Main = ({promoMovieTitle, promoMovieGenre, promoMovieYear, movieNames}) =>
 
           <ul className="catalog__genres-list">
             <li className="catalog__genres-item catalog__genres-item--active">
-              <a href="#" className="catalog__genres-link">All genres</a>
+              <a href="#" className="catalog__genres-link" onClick={titleClickHandler}>All genres</a>
             </li>
             <li className="catalog__genres-item">
-              <a href="#" className="catalog__genres-link">Comedies</a>
+              <a href="#" className="catalog__genres-link" onClick={titleClickHandler}>Comedies</a>
             </li>
             <li className="catalog__genres-item">
-              <a href="#" className="catalog__genres-link">Crime</a>
+              <a href="#" className="catalog__genres-link" onClick={titleClickHandler}>Crime</a>
             </li>
             <li className="catalog__genres-item">
-              <a href="#" className="catalog__genres-link">Documentary</a>
+              <a href="#" className="catalog__genres-link" onClick={titleClickHandler}>Documentary</a>
             </li>
             <li className="catalog__genres-item">
-              <a href="#" className="catalog__genres-link">Dramas</a>
+              <a href="#" className="catalog__genres-link" onClick={titleClickHandler}>Dramas</a>
             </li>
             <li className="catalog__genres-item">
-              <a href="#" className="catalog__genres-link">Horror</a>
+              <a href="#" className="catalog__genres-link" onClick={titleClickHandler}>Horror</a>
             </li>
             <li className="catalog__genres-item">
-              <a href="#" className="catalog__genres-link">Kids & Family</a>
+              <a href="#" className="catalog__genres-link" onClick={titleClickHandler}>Kids & Family</a>
             </li>
             <li className="catalog__genres-item">
-              <a href="#" className="catalog__genres-link">Romance</a>
+              <a href="#" className="catalog__genres-link" onClick={titleClickHandler}>Romance</a>
             </li>
             <li className="catalog__genres-item">
-              <a href="#" className="catalog__genres-link">Sci-Fi</a>
+              <a href="#" className="catalog__genres-link" onClick={titleClickHandler}>Sci-Fi</a>
             </li>
             <li className="catalog__genres-item">
-              <a href="#" className="catalog__genres-link">Thrillers</a>
+              <a href="#" className="catalog__genres-link" onClick={titleClickHandler}>Thrillers</a>
             </li>
           </ul>
 
@@ -135,6 +135,7 @@ Main.propTypes = {
   promoMovieGenre: PropTypes.string.isRequired,
   promoMovieYear: PropTypes.string.isRequired,
   movieNames: PropTypes.arrayOf(PropTypes.string).isRequired,
+  titleClickHandler: PropTypes.func.isRequired,
 };
 
 export default Main;
