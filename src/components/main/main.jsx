@@ -1,9 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import SmallMovieCard from '@/components/small-movie-card/small-movie-card';
-
-const handleSmallCardHover = () => {};
+import MoviesList from '@/components/movies-list/movies-list';
 
 const Main = ({promoMovieTitle, promoMovieGenre, promoMovieYear, movies, titleClickHandler}) => {
 
@@ -101,13 +99,9 @@ const Main = ({promoMovieTitle, promoMovieGenre, promoMovieYear, movies, titleCl
             </li>
           </ul>
 
-          <div className="catalog__movies-list">
-            {
-              movies.map((movie, index) => {
-                return <SmallMovieCard key={movie + index} movie={movie} handleHover={handleSmallCardHover}/>;
-              })
-            }
-          </div>
+          <MoviesList
+            movies={movies}
+          />
 
           <div className="catalog__more">
             <button className="catalog__button" type="button">Show more</button>

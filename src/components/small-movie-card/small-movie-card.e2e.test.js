@@ -18,10 +18,10 @@ const handleHover = jest.fn();
 
 it(`When SmallMovieCard hovered should return movie data`, () => {
   const card = shallow(
-    <SmallMovieCard
-      movie={movie}
-      handleHover={handleHover}
-    />);
+      <SmallMovieCard
+        movie={movie}
+        handleHover={handleHover}
+      />);
 
   card.simulate(`mouseEnter`);
 
