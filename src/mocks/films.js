@@ -5,6 +5,7 @@ const films = [
     genre: `drama`,
     year: `2001`,
     imageSrc: `http://placehold.it/280x175`,
+    movieLink: `movie-page.html`,
   },
   {
     id: 2,
@@ -12,6 +13,7 @@ const films = [
     genre: `antiutopia`,
     year: `1966`,
     imageSrc: `http://placehold.it/280x175`,
+    movieLink: `movie-page.html`,
   },
   {
     id: 3,
@@ -19,6 +21,7 @@ const films = [
     genre: `antiutopia`,
     year: `2002`,
     imageSrc: `http://placehold.it/280x175`,
+    movieLink: `movie-page.html`,
   },
   {
     id: 4,
@@ -26,6 +29,7 @@ const films = [
     genre: `fantasy`,
     year: `2001`,
     imageSrc: `http://placehold.it/280x175`,
+    movieLink: `movie-page.html`,
   },
   {
     id: 5,
@@ -33,6 +37,7 @@ const films = [
     genre: `fantasy`,
     year: `2002`,
     imageSrc: `http://placehold.it/280x175`,
+    movieLink: `movie-page.html`,
   },
   {
     id: 6,
@@ -40,6 +45,7 @@ const films = [
     genre: `fantasy`,
     year: `2003`,
     imageSrc: `http://placehold.it/280x175`,
+    movieLink: `movie-page.html`,
   },
   {
     id: 7,
@@ -47,6 +53,7 @@ const films = [
     genre: `cyberpunk`,
     year: `2017`,
     imageSrc: `http://placehold.it/280x175`,
+    movieLink: `movie-page.html`,
   },
   {
     id: 8,
@@ -54,5 +61,8 @@ const films = [
     genre: `action`,
     year: `2001`,
     imageSrc: `http://placehold.it/280x175`,
+    movieLink: `movie-page.html`,
   }
 ];
+
+export default films;

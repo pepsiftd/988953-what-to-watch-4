@@ -5,13 +5,13 @@ import Main from '@/components/main/main';
 
 const titleClickHandler = () => {};
 
-const App = ({promoMovieTitle, promoMovieGenre, promoMovieYear, movieNames}) => {
+const App = ({promoMovieTitle, promoMovieGenre, promoMovieYear, movies}) => {
   return (
     <Main
       promoMovieTitle={promoMovieTitle}
       promoMovieGenre={promoMovieGenre}
       promoMovieYear={promoMovieYear}
-      movieNames={movieNames}
+      movies={movies}
       titleClickHandler={titleClickHandler}
     />
   );
@@ -21,7 +21,11 @@ App.propTypes = {
   promoMovieTitle: PropTypes.string.isRequired,
   promoMovieGenre: PropTypes.string.isRequired,
   promoMovieYear: PropTypes.string.isRequired,
-  movieNames: PropTypes.arrayOf(PropTypes.string).isRequired,
+  movies: PropTypes.arrayOf(PropTypes.shape({
+    title: PropTypes.string.isRequired,
+    imageSrc: PropTypes.string.isRequired,
+    movieLink: PropTypes.string.isRequired,
+  }).isRequired).isRequired,
 };
 
 export default App;
