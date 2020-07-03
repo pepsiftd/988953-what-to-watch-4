@@ -1,8 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-import App from '@/components/app/app';
-import films from '@/mocks/films';
+import {App} from '@/components/app/app';
+import {films} from '@/mocks/films';
 
 const PromoMovie = {
   TITLE: `The Grand Budapest Hotel`,

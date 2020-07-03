@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import MoviesList from '@/components/movies-list/movies-list';
+import {MoviesList} from '@/components/movies-list/movies-list';
 
 const Main = ({promoMovieTitle, promoMovieGenre, promoMovieYear, movies, titleClickHandler}) => {
 
@@ -138,4 +138,4 @@ Main.propTypes = {
   titleClickHandler: PropTypes.func.isRequired,
 };
 
-export default Main;
+export {Main};

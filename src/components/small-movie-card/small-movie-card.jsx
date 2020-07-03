@@ -29,4 +29,4 @@ SmallMovieCard.propTypes = {
   handleHover: PropTypes.func.isRequired
 };
 
-export default SmallMovieCard;
+export {SmallMovieCard};

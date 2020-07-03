@@ -1,6 +1,6 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
-import SmallMovieCard from './small-movie-card';
+import {SmallMovieCard} from './small-movie-card';
 
 const movie = {
   title: `Some movie: Revenge`,

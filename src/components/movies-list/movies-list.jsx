@@ -1,7 +1,7 @@
 import React, {PureComponent} from 'react';
 import PropTypes from 'prop-types';
 
-import SmallMovieCard from '@/components/small-movie-card/small-movie-card';
+import {SmallMovieCard} from '@/components/small-movie-card/small-movie-card';
 
 class MoviesList extends PureComponent {
   constructor(props) {
@@ -39,4 +39,4 @@ MoviesList.propTypes = {
   }).isRequired).isRequired,
 };
 
-export default MoviesList;
+export {MoviesList};

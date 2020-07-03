@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import Main from '@/components/main/main';
+import {Main} from '@/components/main/main';
 
 const titleClickHandler = () => {};
 
@@ -28,4 +28,4 @@ App.propTypes = {
   }).isRequired).isRequired,
 };
 
-export default App;
+export {App};

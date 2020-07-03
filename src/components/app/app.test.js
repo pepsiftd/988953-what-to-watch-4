@@ -1,6 +1,6 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
-import App from './app';
+import {App} from './app';
 
 const promoMovieTitle = `I Am the Movie`;
 const promoMovieGenre = `Thriller`;
