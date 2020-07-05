@@ -1,10 +1,8 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
-import {App} from './app';
 
-const promoMovieTitle = `I Am the Movie`;
-const promoMovieGenre = `Thriller`;
-const promoMovieYear = `2001`;
+import {MoviesList} from './movies-list';
+
 const movies = [
   {
     title: `I, Robot`,
@@ -38,12 +36,9 @@ const movies = [
   }
 ];
 
-it(`App should render correctly`, () => {
+it(`MoviesList should render correctly`, () => {
   const tree = renderer.create(
-      <App
-        promoMovieTitle={promoMovieTitle}
-        promoMovieGenre={promoMovieGenre}
-        promoMovieYear={promoMovieYear}
+      <MoviesList
         movies={movies}
       />
   );

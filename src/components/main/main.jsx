@@ -1,9 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import SmallMovieCard from '@/components/small-movie-card/small-movie-card';
+import {MoviesList} from '@/components/movies-list/movies-list';
 
-const Main = ({promoMovieTitle, promoMovieGenre, promoMovieYear, movieNames, titleClickHandler}) => {
+const Main = ({promoMovieTitle, promoMovieGenre, promoMovieYear, movies, titleClickHandler}) => {
 
   return (
     <React.Fragment>
@@ -99,13 +99,9 @@ const Main = ({promoMovieTitle, promoMovieGenre, promoMovieYear, movieNames, tit
             </li>
           </ul>
 
-          <div className="catalog__movies-list">
-            {
-              movieNames.map((movieName, index) => {
-                return <SmallMovieCard key={movieName + index} movieName={movieName}/>;
-              })
-            }
-          </div>
+          <MoviesList
+            movies={movies}
+          />
 
           <div className="catalog__more">
             <button className="catalog__button" type="button">Show more</button>
@@ -134,8 +130,12 @@ Main.propTypes = {
   promoMovieTitle: PropTypes.string.isRequired,
   promoMovieGenre: PropTypes.string.isRequired,
   promoMovieYear: PropTypes.string.isRequired,
-  movieNames: PropTypes.arrayOf(PropTypes.string).isRequired,
+  movies: PropTypes.arrayOf(PropTypes.shape({
+    title: PropTypes.string.isRequired,
+    imageSrc: PropTypes.string.isRequired,
+    movieLink: PropTypes.string.isRequired,
+  }).isRequired).isRequired,
   titleClickHandler: PropTypes.func.isRequired,
 };
 
-export default Main;
+export {Main};
