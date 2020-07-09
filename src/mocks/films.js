@@ -6,7 +6,7 @@ const films = [
     year: `2001`,
     imageSrc: `http://placehold.it/280x175`,
     movieLink: `movie-page.html`,
-    preview: `https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4`,
+    preview: `https://upload.wikimedia.org/wikipedia/commons/transcoded/b/b3/Big_Buck_Bunny_Trailer_400p.ogv/Big_Buck_Bunny_Trailer_400p.ogv.360p.webm`,
   },
   {
     id: 2,
@@ -24,7 +24,7 @@ const films = [
     year: `2002`,
     imageSrc: `http://placehold.it/280x175`,
     movieLink: `movie-page.html`,
-    preview: `https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4`,
+    preview: `https://upload.wikimedia.org/wikipedia/commons/transcoded/b/b3/Big_Buck_Bunny_Trailer_400p.ogv/Big_Buck_Bunny_Trailer_400p.ogv.360p.webm`,
   },
   {
     id: 4,
@@ -42,7 +42,7 @@ const films = [
     year: `2002`,
     imageSrc: `http://placehold.it/280x175`,
     movieLink: `movie-page.html`,
-    preview: `https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4`,
+    preview: `https://upload.wikimedia.org/wikipedia/commons/transcoded/b/b3/Big_Buck_Bunny_Trailer_400p.ogv/Big_Buck_Bunny_Trailer_400p.ogv.360p.webm`,
   },
   {
     id: 6,
@@ -60,7 +60,7 @@ const films = [
     year: `2017`,
     imageSrc: `http://placehold.it/280x175`,
     movieLink: `movie-page.html`,
-    preview: `https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4`,
+    preview: `https://upload.wikimedia.org/wikipedia/commons/transcoded/b/b3/Big_Buck_Bunny_Trailer_400p.ogv/Big_Buck_Bunny_Trailer_400p.ogv.360p.webm`,
   },
   {
     id: 8,

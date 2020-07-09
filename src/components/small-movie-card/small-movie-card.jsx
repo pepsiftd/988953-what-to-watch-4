@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 import {VideoPlayer} from '@/components/video-player/video-player';
 
-const SmallMovieCard = ({movie, handleHover, isPreviewPlaying}) => {
+const SmallMovieCard = ({movie, handleHover, onMouseLeave, isPreviewPlaying}) => {
   const {title, imageSrc, movieLink, preview} = movie;
 
   return (
@@ -11,6 +11,7 @@ const SmallMovieCard = ({movie, handleHover, isPreviewPlaying}) => {
       onMouseEnter={() => {
         handleHover(movie);
       }}
+      onMouseLeave={onMouseLeave}
     >
       <div className="small-movie-card__image">
         <VideoPlayer

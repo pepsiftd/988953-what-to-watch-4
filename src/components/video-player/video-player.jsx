@@ -55,6 +55,7 @@ class VideoPlayer extends PureComponent {
       video.play();
     } else {
       video.pause();
+      video.currentTime = 0;
     }
   }
 }
@@ -64,6 +65,8 @@ VideoPlayer.propTypes = {
   poster: PropTypes.string.isRequired,
   isPlaying: PropTypes.bool.isRequired,
   isMute: PropTypes.bool.isRequired,
+  width: PropTypes.string.isRequired,
+  height: PropTypes.string.isRequired,
 };
 
 export {VideoPlayer};
