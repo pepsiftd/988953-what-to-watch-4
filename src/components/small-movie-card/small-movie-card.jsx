@@ -1,27 +1,20 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import {VideoPlayer} from '@/components/video-player/video-player';
+const IS_MUTE = true;
 
-const SmallMovieCard = ({movie, handleHover, onMouseLeave, isPreviewPlaying}) => {
-  const {title, imageSrc, movieLink, preview} = movie;
+const SmallMovieCard = ({movie, renderPlayer, onMouseEnter, onMouseLeave}) => {
+  const {title, movieLink} = movie;
 
   return (
     <article className="small-movie-card catalog__movies-card"
       onMouseEnter={() => {
-        handleHover(movie);
+        onMouseEnter(movie);
       }}
       onMouseLeave={onMouseLeave}
     >
       <div className="small-movie-card__image">
-        <VideoPlayer
-          src={preview}
-          poster={imageSrc}
-          isPlaying={isPreviewPlaying}
-          isMute={true}
-          width="280"
-          height="175"
-        />
+        {renderPlayer(movie, IS_MUTE, `280`, `175`)}
       </div>
       <h3 className="small-movie-card__title">
         <a className="small-movie-card__link" href={movieLink}>{title}</a>
@@ -37,8 +30,9 @@ SmallMovieCard.propTypes = {
     movieLink: PropTypes.string.isRequired,
     preview: PropTypes.string.isRequired,
   }).isRequired,
-  handleHover: PropTypes.func.isRequired,
-  isPreviewPlaying: PropTypes.bool.isRequired,
+  renderPlayer: PropTypes.func.isRequired,
+  onMouseEnter: PropTypes.func.isRequired,
+  onMouseLeave: PropTypes.func.isRequired,
 };
 
 export {SmallMovieCard};

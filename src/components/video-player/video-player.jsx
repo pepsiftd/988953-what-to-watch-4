@@ -10,7 +10,6 @@ class VideoPlayer extends PureComponent {
     this.state = {
       isMute: this.props.isMute,
       isPlaying: this.props.isPlaying,
-      isLoading: true,
     };
   }
 
@@ -25,9 +24,15 @@ class VideoPlayer extends PureComponent {
     video.width = width;
     video.height = height;
 
-    video.oncanplaythrough = () => {
+    video.onplay = () => {
       this.setState({
-        isLoading: false,
+        isPlaying: true
+      });
+    };
+
+    video.onpause = () => {
+      this.setState({
+        isPlaying: false
       });
     };
   }
@@ -37,7 +42,11 @@ class VideoPlayer extends PureComponent {
 
     video.src = ``;
     video.poster = ``;
-    video.oncanplaythrough = null;
+    video.onplay = null;
+    video.onpause = null;
+    video.muted = null;
+    video.width = null;
+    video.height = null;
   }
 
   render() {

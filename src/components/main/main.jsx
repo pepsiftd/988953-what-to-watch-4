@@ -2,6 +2,9 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import {MoviesList} from '@/components/movies-list/movies-list';
+import {withVideoPlayer} from '@/hocs/with-video-player/with-video-player';
+
+const MoviesListWrapped = withVideoPlayer(MoviesList);
 
 const Main = ({promoMovieTitle, promoMovieGenre, promoMovieYear, movies, titleClickHandler}) => {
 
@@ -99,7 +102,7 @@ const Main = ({promoMovieTitle, promoMovieGenre, promoMovieYear, movies, titleCl
             </li>
           </ul>
 
-          <MoviesList
+          <MoviesListWrapped
             movies={movies}
           />
 

@@ -34,15 +34,17 @@ const withVideoPlayer = (Component) => {
     }
 
     render() {
+      const current = this.state.current;
+
       return (
         <Component
           {...this.props}
-          renderPlayer={(src, poster, isPlaying, isMute, width, height) => {
+          renderPlayer={(movie, isMute, width, height) => {
             return (
               <VideoPlayer
-                src={src}
-                poster={poster}
-                isPlaying={isPlaying}
+                src={movie.preview}
+                poster={movie.imageSrc}
+                isPlaying={movie.id === current}
                 isMute={isMute}
                 width={width}
                 height={height}
