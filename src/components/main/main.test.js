@@ -49,6 +49,17 @@ const movies = [
     preview: `preview-video.mp4`,
   }
 ];
+const genres = [
+  `Comedies`,
+  `Crime`,
+  `Documentary`,
+  `Dramas`,
+  `Horror`,
+  `Kids & Family`,
+  `Romance`,
+  `Sci-Fi`,
+  `Thrillers`,
+];
 const titleClickHandler = jest.fn();
 
 it(`Main should render correctly`, () => {
@@ -58,6 +69,7 @@ it(`Main should render correctly`, () => {
         promoMovieGenre={promoMovieGenre}
         promoMovieYear={promoMovieYear}
         movies={movies}
+        genres={genres}
         titleClickHandler={titleClickHandler}
       />,
       {

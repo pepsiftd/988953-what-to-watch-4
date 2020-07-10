@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 
 import {App} from '@/components/app/app';
 import {films} from '@/mocks/films';
+import {genres} from '@/mocks/genres';
 
 const PromoMovie = {
   TITLE: `The Grand Budapest Hotel`,
@@ -16,6 +17,7 @@ ReactDOM.render(
       promoMovieGenre={PromoMovie.GENRE}
       promoMovieYear={PromoMovie.YEAR}
       movies={films}
+      genres={genres}
     />,
     document.querySelector(`#root`)
 );

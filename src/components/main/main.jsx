@@ -6,7 +6,7 @@ import {withVideoPlayer} from '@/hocs/with-video-player/with-video-player';
 
 const MoviesListWrapped = withVideoPlayer(MoviesList);
 
-const Main = ({promoMovieTitle, promoMovieGenre, promoMovieYear, movies, titleClickHandler}) => {
+const Main = ({promoMovieTitle, promoMovieGenre, promoMovieYear, movies, genres, titleClickHandler}) => {
 
   return (
     <React.Fragment>
@@ -73,33 +73,13 @@ const Main = ({promoMovieTitle, promoMovieGenre, promoMovieYear, movies, titleCl
             <li className="catalog__genres-item catalog__genres-item--active">
               <a href="#" className="catalog__genres-link" onClick={titleClickHandler}>All genres</a>
             </li>
-            <li className="catalog__genres-item">
-              <a href="#" className="catalog__genres-link" onClick={titleClickHandler}>Comedies</a>
-            </li>
-            <li className="catalog__genres-item">
-              <a href="#" className="catalog__genres-link" onClick={titleClickHandler}>Crime</a>
-            </li>
-            <li className="catalog__genres-item">
-              <a href="#" className="catalog__genres-link" onClick={titleClickHandler}>Documentary</a>
-            </li>
-            <li className="catalog__genres-item">
-              <a href="#" className="catalog__genres-link" onClick={titleClickHandler}>Dramas</a>
-            </li>
-            <li className="catalog__genres-item">
-              <a href="#" className="catalog__genres-link" onClick={titleClickHandler}>Horror</a>
-            </li>
-            <li className="catalog__genres-item">
-              <a href="#" className="catalog__genres-link" onClick={titleClickHandler}>Kids & Family</a>
-            </li>
-            <li className="catalog__genres-item">
-              <a href="#" className="catalog__genres-link" onClick={titleClickHandler}>Romance</a>
-            </li>
-            <li className="catalog__genres-item">
-              <a href="#" className="catalog__genres-link" onClick={titleClickHandler}>Sci-Fi</a>
-            </li>
-            <li className="catalog__genres-item">
-              <a href="#" className="catalog__genres-link" onClick={titleClickHandler}>Thrillers</a>
-            </li>
+            {genres.map((genre) => {
+              return (
+                <li key={genre} className="catalog__genres-item">
+                  <a href="#" className="catalog__genres-link" onClick={titleClickHandler}>{genre}</a>
+                </li>
+              );
+            })}
           </ul>
 
           <MoviesListWrapped
@@ -140,6 +120,7 @@ Main.propTypes = {
     movieLink: PropTypes.string.isRequired,
     preview: PropTypes.string.isRequired,
   }).isRequired).isRequired,
+  genres: PropTypes.arrayOf(PropTypes.string).isRequired,
   titleClickHandler: PropTypes.func.isRequired,
 };
 
