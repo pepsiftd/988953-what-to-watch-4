@@ -2,9 +2,11 @@ import React from 'react';
 import renderer from 'react-test-renderer';
 import {Main} from './main';
 
-const promoMovieTitle = `I Am the Movie`;
-const promoMovieGenre = `Thriller`;
-const promoMovieYear = `2001`;
+const PromoMovie = {
+  TITLE: `I Am the Movie`,
+  GENRE: `Thriller`,
+  YEAR: `2001`,
+};
 const movies = [
   {
     id: 1,
@@ -65,9 +67,7 @@ const titleClickHandler = jest.fn();
 it(`Main should render correctly`, () => {
   const tree = renderer.create(
       <Main
-        promoMovieTitle={promoMovieTitle}
-        promoMovieGenre={promoMovieGenre}
-        promoMovieYear={promoMovieYear}
+        PromoMovie={PromoMovie}
         movies={movies}
         genres={genres}
         titleClickHandler={titleClickHandler}

@@ -3,9 +3,11 @@ import Enzyme, {shallow} from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 import {Main} from './main';
 
-const promoMovieTitle = `I Am the Movie`;
-const promoMovieGenre = `Thriller`;
-const promoMovieYear = `2001`;
+const PromoMovie = {
+  TITLE: `I Am the Movie`,
+  GENRE: `Thriller`,
+  YEAR: `2001`,
+};
 const movies = [
   {
     id: 1,
@@ -71,9 +73,7 @@ it(`Should titles be pressed`, () => {
 
   const main = shallow(
       <Main
-        promoMovieTitle={promoMovieTitle}
-        promoMovieGenre={promoMovieGenre}
-        promoMovieYear={promoMovieYear}
+        PromoMovie={PromoMovie}
         movies={movies}
         genres={genres}
         titleClickHandler={titleClickHandler}

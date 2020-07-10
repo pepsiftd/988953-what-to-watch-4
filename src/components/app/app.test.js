@@ -2,9 +2,11 @@ import React from 'react';
 import renderer from 'react-test-renderer';
 import {App} from './app';
 
-const promoMovieTitle = `I Am the Movie`;
-const promoMovieGenre = `Thriller`;
-const promoMovieYear = `2001`;
+const PromoMovie = {
+  TITLE: `I Am the Movie`,
+  GENRE: `Thriller`,
+  YEAR: `2001`,
+};
 const movies = [
   {
     id: 1,
@@ -64,9 +66,7 @@ const genres = [
 it(`App should render correctly`, () => {
   const tree = renderer.create(
       <App
-        promoMovieTitle={promoMovieTitle}
-        promoMovieGenre={promoMovieGenre}
-        promoMovieYear={promoMovieYear}
+        PromoMovie={PromoMovie}
         movies={movies}
         genres={genres}
       />,

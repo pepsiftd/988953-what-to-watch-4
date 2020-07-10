@@ -6,7 +6,7 @@ import {withVideoPlayer} from '@/hocs/with-video-player/with-video-player';
 
 const MoviesListWrapped = withVideoPlayer(MoviesList);
 
-const Main = ({promoMovieTitle, promoMovieGenre, promoMovieYear, movies, genres, titleClickHandler}) => {
+const Main = ({PromoMovie, movies, genres, titleClickHandler}) => {
 
   return (
     <React.Fragment>
@@ -40,10 +40,10 @@ const Main = ({promoMovieTitle, promoMovieGenre, promoMovieYear, movies, genres,
             </div>
 
             <div className="movie-card__desc">
-              <h2 className="movie-card__title">{promoMovieTitle}</h2>
+              <h2 className="movie-card__title">{PromoMovie.TITLE}</h2>
               <p className="movie-card__meta">
-                <span className="movie-card__genre">{promoMovieGenre}</span>
-                <span className="movie-card__year">{promoMovieYear}</span>
+                <span className="movie-card__genre">{PromoMovie.GENRE}</span>
+                <span className="movie-card__year">{PromoMovie.YEAR}</span>
               </p>
 
               <div className="movie-card__buttons">
@@ -110,9 +110,11 @@ const Main = ({promoMovieTitle, promoMovieGenre, promoMovieYear, movies, genres,
 };
 
 Main.propTypes = {
-  promoMovieTitle: PropTypes.string.isRequired,
-  promoMovieGenre: PropTypes.string.isRequired,
-  promoMovieYear: PropTypes.string.isRequired,
+  PromoMovie: PropTypes.shape({
+    TITLE: PropTypes.string.isRequired,
+    GENRE: PropTypes.string.isRequired,
+    YEAR: PropTypes.string.isRequired,
+  }).isRequired,
   movies: PropTypes.arrayOf(PropTypes.shape({
     id: PropTypes.number.isRequired,
     title: PropTypes.string.isRequired,
