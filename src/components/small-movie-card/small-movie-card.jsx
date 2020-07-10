@@ -25,6 +25,7 @@ const SmallMovieCard = ({movie, renderPlayer, onMouseEnter, onMouseLeave}) => {
 
 SmallMovieCard.propTypes = {
   movie: PropTypes.shape({
+    id: PropTypes.number.isRequired,
     title: PropTypes.string.isRequired,
     imageSrc: PropTypes.string.isRequired,
     movieLink: PropTypes.string.isRequired,

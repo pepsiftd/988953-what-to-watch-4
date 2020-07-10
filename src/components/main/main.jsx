@@ -134,9 +134,11 @@ Main.propTypes = {
   promoMovieGenre: PropTypes.string.isRequired,
   promoMovieYear: PropTypes.string.isRequired,
   movies: PropTypes.arrayOf(PropTypes.shape({
+    id: PropTypes.number.isRequired,
     title: PropTypes.string.isRequired,
     imageSrc: PropTypes.string.isRequired,
     movieLink: PropTypes.string.isRequired,
+    preview: PropTypes.string.isRequired,
   }).isRequired).isRequired,
   titleClickHandler: PropTypes.func.isRequired,
 };

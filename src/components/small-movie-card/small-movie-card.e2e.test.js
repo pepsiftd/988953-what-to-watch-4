@@ -9,22 +9,34 @@ Enzyme.configure({
 });
 
 const movie = {
+  id: 152,
   title: `Some movie: Revenge`,
   imageSrc: `img/some-movie-revenge.jpg`,
   movieLink: `movie-page.html`,
+  preview: `preview-link.mp4`,
 };
 
-const handleHover = jest.fn();
+const renderPlayer = jest.fn();
+const onMouseEnter = jest.fn();
+const onMouseLeave = jest.fn();
 
 it(`When SmallMovieCard hovered should return movie data`, () => {
   const card = shallow(
       <SmallMovieCard
         movie={movie}
-        handleHover={handleHover}
-      />);
+        renderPlayer={renderPlayer}
+        onMouseEnter={onMouseEnter}
+        onMouseLeave={onMouseLeave}
+      />
+  );
 
   card.simulate(`mouseEnter`);
+  card.simulate(`mouseLeave`);
+  card.simulate(`mouseEnter`);
+  card.simulate(`mouseLeave`);
 
-  expect(handleHover).toHaveBeenCalledTimes(1);
-  expect(handleHover.mock.calls[0][0]).toMatchObject(movie);
+  expect(renderPlayer).toHaveBeenCalledTimes(1);
+  expect(onMouseEnter).toHaveBeenCalledTimes(2);
+  expect(onMouseLeave).toHaveBeenCalledTimes(2);
+  expect(onMouseEnter.mock.calls[0][0]).toMatchObject(movie);
 });

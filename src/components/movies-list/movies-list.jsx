@@ -25,9 +25,11 @@ const MoviesList = ({movies, renderPlayer, onMouseEnter, onMouseLeave}) => {
 
 MoviesList.propTypes = {
   movies: PropTypes.arrayOf(PropTypes.shape({
+    id: PropTypes.number.isRequired,
     title: PropTypes.string.isRequired,
     imageSrc: PropTypes.string.isRequired,
     movieLink: PropTypes.string.isRequired,
+    preview: PropTypes.string.isRequired,
   }).isRequired).isRequired,
   renderPlayer: PropTypes.func.isRequired,
   onMouseEnter: PropTypes.func.isRequired,
