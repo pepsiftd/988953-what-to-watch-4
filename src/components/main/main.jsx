@@ -2,8 +2,11 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import {MoviesList} from '@/components/movies-list/movies-list';
+import {withVideoPlayer} from '@/hocs/with-video-player/with-video-player';
 
-const Main = ({promoMovieTitle, promoMovieGenre, promoMovieYear, movies, titleClickHandler}) => {
+const MoviesListWrapped = withVideoPlayer(MoviesList);
+
+const Main = ({PromoMovie, movies, genres, titleClickHandler}) => {
 
   return (
     <React.Fragment>
@@ -37,10 +40,10 @@ const Main = ({promoMovieTitle, promoMovieGenre, promoMovieYear, movies, titleCl
             </div>
 
             <div className="movie-card__desc">
-              <h2 className="movie-card__title">{promoMovieTitle}</h2>
+              <h2 className="movie-card__title">{PromoMovie.TITLE}</h2>
               <p className="movie-card__meta">
-                <span className="movie-card__genre">{promoMovieGenre}</span>
-                <span className="movie-card__year">{promoMovieYear}</span>
+                <span className="movie-card__genre">{PromoMovie.GENRE}</span>
+                <span className="movie-card__year">{PromoMovie.YEAR}</span>
               </p>
 
               <div className="movie-card__buttons">
@@ -70,36 +73,16 @@ const Main = ({promoMovieTitle, promoMovieGenre, promoMovieYear, movies, titleCl
             <li className="catalog__genres-item catalog__genres-item--active">
               <a href="#" className="catalog__genres-link" onClick={titleClickHandler}>All genres</a>
             </li>
-            <li className="catalog__genres-item">
-              <a href="#" className="catalog__genres-link" onClick={titleClickHandler}>Comedies</a>
-            </li>
-            <li className="catalog__genres-item">
-              <a href="#" className="catalog__genres-link" onClick={titleClickHandler}>Crime</a>
-            </li>
-            <li className="catalog__genres-item">
-              <a href="#" className="catalog__genres-link" onClick={titleClickHandler}>Documentary</a>
-            </li>
-            <li className="catalog__genres-item">
-              <a href="#" className="catalog__genres-link" onClick={titleClickHandler}>Dramas</a>
-            </li>
-            <li className="catalog__genres-item">
-              <a href="#" className="catalog__genres-link" onClick={titleClickHandler}>Horror</a>
-            </li>
-            <li className="catalog__genres-item">
-              <a href="#" className="catalog__genres-link" onClick={titleClickHandler}>Kids & Family</a>
-            </li>
-            <li className="catalog__genres-item">
-              <a href="#" className="catalog__genres-link" onClick={titleClickHandler}>Romance</a>
-            </li>
-            <li className="catalog__genres-item">
-              <a href="#" className="catalog__genres-link" onClick={titleClickHandler}>Sci-Fi</a>
-            </li>
-            <li className="catalog__genres-item">
-              <a href="#" className="catalog__genres-link" onClick={titleClickHandler}>Thrillers</a>
-            </li>
+            {genres.map((genre) => {
+              return (
+                <li key={genre} className="catalog__genres-item">
+                  <a href="#" className="catalog__genres-link" onClick={titleClickHandler}>{genre}</a>
+                </li>
+              );
+            })}
           </ul>
 
-          <MoviesList
+          <MoviesListWrapped
             movies={movies}
           />
 
@@ -127,14 +110,19 @@ const Main = ({promoMovieTitle, promoMovieGenre, promoMovieYear, movies, titleCl
 };
 
 Main.propTypes = {
-  promoMovieTitle: PropTypes.string.isRequired,
-  promoMovieGenre: PropTypes.string.isRequired,
-  promoMovieYear: PropTypes.string.isRequired,
+  PromoMovie: PropTypes.shape({
+    TITLE: PropTypes.string.isRequired,
+    GENRE: PropTypes.string.isRequired,
+    YEAR: PropTypes.string.isRequired,
+  }).isRequired,
   movies: PropTypes.arrayOf(PropTypes.shape({
+    id: PropTypes.number.isRequired,
     title: PropTypes.string.isRequired,
     imageSrc: PropTypes.string.isRequired,
     movieLink: PropTypes.string.isRequired,
+    preview: PropTypes.string.isRequired,
   }).isRequired).isRequired,
+  genres: PropTypes.arrayOf(PropTypes.string).isRequired,
   titleClickHandler: PropTypes.func.isRequired,
 };
 
