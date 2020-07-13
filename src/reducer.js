@@ -2,14 +2,13 @@ import {films} from '@/mocks/films';
 import {extend, getMoviesByGenre} from '@/utils';
 
 const initialState = {
-  currentGenre: `all`,
+  currentGenre: `All genres`,
   movies: films,
   filteredMovies: films,
 };
 
 const ActionType = {
   SET_CURRENT_GENRE: `SET_CURRENT_GENRE`,
-  GET_MOVIES_BY_GENRE: `GET_MOVIES_BY_GENRE`,
 };
 
 const ActionCreator = {
@@ -19,23 +18,14 @@ const ActionCreator = {
       payload: genre,
     };
   },
-  getMoviesByGenre: (genre) => {
-    return {
-      type: ActionType.GET_MOVIES_BY_GENRE,
-      payload: genre,
-    };
-  },
 };
 
 const reducer = (state = initialState, action) => {
   switch (action.type) {
     case ActionType.SET_CURRENT_GENRE:
       return extend(state, {
-        currentGenre: action.payload
-      });
-    case ActionType.GET_MOVIES_BY_GENRE:
-      return extend(state, {
-        filteredMovies: getMoviesByGenre(state.movies, action.payload)
+        currentGenre: action.payload,
+        filteredMovies: getMoviesByGenre(state.movies, action.payload),
       });
   }
 

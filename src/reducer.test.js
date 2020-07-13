@@ -1,4 +1,4 @@
-import {ActionType, ActionCreator, reducer} from './reducer';
+import {ActionType, ActionCreator, reducer, initialState} from './reducer';
 
 const movies = [
   {
@@ -35,17 +35,16 @@ it(`ActionCreator works correctly`, () => {
     type: ActionType.SET_CURRENT_GENRE,
     payload: `ibm`,
   });
-
-  expect(ActionCreator.getMoviesByGenre(`chi`)).toEqual({
-    type: ActionType.GET_MOVIES_BY_GENRE,
-    payload: `chi`,
-  });
 });
 
 describe(`reducer`, () => {
+  it(`returns initial state when not passed arguments`, () => {
+    expect(reducer(undefined, {})).toEqual(initialState);
+  });
+
   it(`sets current genre correctly`, () => {
     expect(reducer({
-      currentGenre: `all`,
+      currentGenre: `All genres`,
       movies,
       filteredMovies: movies,
     }, {
@@ -54,18 +53,20 @@ describe(`reducer`, () => {
     })).toEqual({
       currentGenre: `soap`,
       movies,
-      filteredMovies: movies,
+      filteredMovies: [],
     });
   });
 
   it(`gets filtered movies list correctly`, () => {
     expect(reducer({
+      currentGenre: `All genres`,
       movies,
       filteredMovies: movies,
     }, {
-      type: ActionType.GET_MOVIES_BY_GENRE,
+      type: ActionType.SET_CURRENT_GENRE,
       payload: `drama`,
     })).toEqual({
+      currentGenre: `drama`,
       movies,
       filteredMovies: [
         {
