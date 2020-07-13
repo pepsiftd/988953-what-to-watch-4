@@ -52,17 +52,6 @@ const movies = [
     preview: `preview-video.mp4`,
   }
 ];
-const genres = [
-  `Comedies`,
-  `Crime`,
-  `Documentary`,
-  `Dramas`,
-  `Horror`,
-  `Kids & Family`,
-  `Romance`,
-  `Sci-Fi`,
-  `Thrillers`,
-];
 
 Enzyme.configure({
   adapter: new Adapter(),
@@ -75,7 +64,8 @@ it(`Should titles be pressed`, () => {
       <Main
         PromoMovie={PromoMovie}
         movies={movies}
-        genres={genres}
+        filteredMovies={movies}
+        currentGenre={`All genres`}
         titleClickHandler={titleClickHandler}
       />
   );

@@ -9,14 +9,14 @@ const GenresList = ({movies, currentGenre, titleClickHandler}) => {
 
   return (
     <ul className="catalog__genres-list">
-      <li className={`catalog__genres-item ${currentGenre === `All genres` && activeGenreClass}`}>
+      <li className={`catalog__genres-item ${currentGenre === `All genres` ? activeGenreClass : ``}`}>
         <a href="#" className="catalog__genres-link" onClick={() => {
           titleClickHandler(`All genres`);
         }}>All genres</a>
       </li>
       {genres.map((genre) => {
         return (
-          <li key={genre} className={`catalog__genres-item ${currentGenre === genre && activeGenreClass}`}>
+          <li key={genre} className={`catalog__genres-item ${currentGenre === genre ? activeGenreClass : ``}`}>
             <a href="#" className="catalog__genres-link" onClick={() => {
               titleClickHandler(genre);
             }}>{genre}</a>
