@@ -3,9 +3,8 @@ import ReactDOM from 'react-dom';
 import {createStore} from 'redux';
 import {Provider} from 'react-redux';
 
-import {App} from '@/components/app/app';
+import App from '@/components/app/app';
 import {films} from '@/mocks/films';
-import {genres} from '@/mocks/genres';
 import {PromoMovie} from '@/mocks/promo';
 import {reducer} from '@/reducer';
 
@@ -19,7 +18,6 @@ ReactDOM.render(
       <App
         PromoMovie={PromoMovie}
         movies={films}
-        genres={genres}
       />
     </Provider>,
     document.querySelector(`#root`)

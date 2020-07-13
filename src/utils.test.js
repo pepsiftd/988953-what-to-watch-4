@@ -1,4 +1,4 @@
-import {extend, getMoviesByGenre} from './utils';
+import {extend, getMoviesByGenre, getUniqueItems, getGenresFromMovies} from './utils';
 
 const movies = [
   {
@@ -67,3 +67,11 @@ describe(`getMoviesByGenre returns`, () => {
   });
 });
 
+it(`getUniqueItems works correctly`, () => {
+  expect(getUniqueItems([0, 0, 1, 2, 5, 1, 0, 5, 2])).toEqual([0, 1, 2, 5]);
+  expect(getUniqueItems(movies.map((movie) => movie.genre))).toEqual([`drama`, `antiutopia`]);
+});
+
+it(`getGenresFromMovies works correctly`, () => {
+  expect(getGenresFromMovies(movies)).toEqual([`drama`, `antiutopia`]);
+});
