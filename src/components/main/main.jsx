@@ -2,11 +2,12 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import {MoviesList} from '@/components/movies-list/movies-list';
+import {GenresList} from '@/components/genres-list/genres-list';
 import {withVideoPlayer} from '@/hocs/with-video-player/with-video-player';
 
 const MoviesListWrapped = withVideoPlayer(MoviesList);
 
-const Main = ({PromoMovie, movies, genres, titleClickHandler}) => {
+const Main = ({PromoMovie, movies, filteredMovies, currentGenre, titleClickHandler}) => {
 
   return (
     <React.Fragment>
@@ -69,21 +70,14 @@ const Main = ({PromoMovie, movies, genres, titleClickHandler}) => {
         <section className="catalog">
           <h2 className="catalog__title visually-hidden">Catalog</h2>
 
-          <ul className="catalog__genres-list">
-            <li className="catalog__genres-item catalog__genres-item--active">
-              <a href="#" className="catalog__genres-link" onClick={titleClickHandler}>All genres</a>
-            </li>
-            {genres.map((genre) => {
-              return (
-                <li key={genre} className="catalog__genres-item">
-                  <a href="#" className="catalog__genres-link" onClick={titleClickHandler}>{genre}</a>
-                </li>
-              );
-            })}
-          </ul>
+          <GenresList
+            movies={movies}
+            currentGenre={currentGenre}
+            titleClickHandler={titleClickHandler}
+          />
 
           <MoviesListWrapped
-            movies={movies}
+            movies={filteredMovies}
           />
 
           <div className="catalog__more">
@@ -122,7 +116,14 @@ Main.propTypes = {
     movieLink: PropTypes.string.isRequired,
     preview: PropTypes.string.isRequired,
   }).isRequired).isRequired,
-  genres: PropTypes.arrayOf(PropTypes.string).isRequired,
+  filteredMovies: PropTypes.arrayOf(PropTypes.shape({
+    id: PropTypes.number.isRequired,
+    title: PropTypes.string.isRequired,
+    imageSrc: PropTypes.string.isRequired,
+    movieLink: PropTypes.string.isRequired,
+    preview: PropTypes.string.isRequired,
+  }).isRequired).isRequired,
+  currentGenre: PropTypes.string.isRequired,
   titleClickHandler: PropTypes.func.isRequired,
 };
 
