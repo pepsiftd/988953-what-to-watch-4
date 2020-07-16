@@ -2,19 +2,33 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import {SmallMovieCard} from '@/components/small-movie-card/small-movie-card';
+import {withVideo} from '@/hocs/with-video/with-video';
+
+const SmallMovieCardWithVideo = withVideo(SmallMovieCard);
 
 const MoviesList = ({movies, renderPlayer, onMouseEnter, onMouseLeave}) => {
   return (
     <div className="catalog__movies-list">
       {
         movies.map((movie) => {
+          const videoSettings = {
+            src: movie.preview,
+            poster: movie.imageSrc,
+            isActive: false,
+            isMute: true,
+            width: `280`,
+            height: `175`,
+          };
+
           return (
-            <SmallMovieCard
+            <SmallMovieCardWithVideo
               key={movie.title}
               movie={movie}
               renderPlayer={renderPlayer}
               onMouseEnter={onMouseEnter}
               onMouseLeave={onMouseLeave}
+
+              videoSettings={videoSettings}
             />
           );
         })

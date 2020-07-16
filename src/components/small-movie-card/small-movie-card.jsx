@@ -1,9 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const IS_MUTE = true;
-
-const SmallMovieCard = ({movie, renderPlayer, onMouseEnter, onMouseLeave}) => {
+const SmallMovieCard = ({movie, onMouseEnter, onMouseLeave, children}) => {
   const {title, movieLink} = movie;
 
   return (
@@ -14,7 +12,7 @@ const SmallMovieCard = ({movie, renderPlayer, onMouseEnter, onMouseLeave}) => {
       onMouseLeave={onMouseLeave}
     >
       <div className="small-movie-card__image">
-        {renderPlayer(movie, IS_MUTE, `280`, `175`)}
+        {children}
       </div>
       <h3 className="small-movie-card__title">
         <a className="small-movie-card__link" href={movieLink}>{title}</a>
@@ -31,7 +29,7 @@ SmallMovieCard.propTypes = {
     movieLink: PropTypes.string.isRequired,
     preview: PropTypes.string.isRequired,
   }).isRequired,
-  renderPlayer: PropTypes.func.isRequired,
+  children: PropTypes.element.isRequired,
   onMouseEnter: PropTypes.func.isRequired,
   onMouseLeave: PropTypes.func.isRequired,
 };
