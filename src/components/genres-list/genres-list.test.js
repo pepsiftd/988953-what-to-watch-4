@@ -64,7 +64,8 @@ it(`GenresList renders correctly`, () => {
   const tree = renderer.create(
       <GenresList
         movies={movies}
-        currentGenre={`All genres`}
+        renderItem={() => {}}
+        setActiveItem={() => {}}
         titleClickHandler={() => {}}
       />
   );

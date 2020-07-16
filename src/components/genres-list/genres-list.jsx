@@ -1,28 +1,31 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+import {GenresListItem} from '@/components/genres-list-item/genres-list-item';
 import {getGenresFromMovies} from '@/utils';
 
-const GenresList = ({movies, currentGenre, titleClickHandler}) => {
-  const genres = getGenresFromMovies(movies);
-  const activeGenreClass = `catalog__genres-item--active`;
+const GenresList = ({movies, renderItem, setActiveItem, titleClickHandler}) => {
+  const genres = [`All genres`, ...getGenresFromMovies(movies)];
 
   return (
     <ul className="catalog__genres-list">
-      <li className={`catalog__genres-item ${currentGenre === `All genres` ? activeGenreClass : ``}`}>
-        <a href="#" className="catalog__genres-link" onClick={() => {
-          titleClickHandler(`All genres`);
-        }}>All genres</a>
-      </li>
       {genres.map((genre) => {
         return (
-          <li key={genre} className={`catalog__genres-item ${currentGenre === genre ? activeGenreClass : ``}`}>
-            <a href="#" className="catalog__genres-link" onClick={() => {
-              titleClickHandler(genre);
-            }}>{genre}</a>
-          </li>
+          renderItem(
+              GenresListItem,
+              genre,
+              {
+                key: genre,
+                genre,
+                titleClickHandler: (...args) => {
+                  setActiveItem(...args);
+                  titleClickHandler(...args);
+                },
+              }
+          )
         );
       })}
+
     </ul>
   );
 };
@@ -35,7 +38,8 @@ GenresList.propTypes = {
     movieLink: PropTypes.string.isRequired,
     preview: PropTypes.string.isRequired,
   }).isRequired).isRequired,
-  currentGenre: PropTypes.string.isRequired,
+  renderItem: PropTypes.func.isRequired,
+  setActiveItem: PropTypes.func.isRequired,
   titleClickHandler: PropTypes.func.isRequired,
 };
 

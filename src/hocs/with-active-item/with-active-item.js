@@ -1,11 +1,12 @@
 import React, {PureComponent} from 'react';
+import PropTypes from 'prop-types';
 
 const withActiveItem = (Component) => {
   class WithActiveItem extends PureComponent {
     constructor(props) {
       super(props);
       this.state = {
-        currentItemId: null
+        currentItemId: props.initialItemId ? props.initialItemId : null
       };
     }
 
@@ -39,7 +40,10 @@ const withActiveItem = (Component) => {
   }
 
   WithActiveItem.propTypes = {
-
+    initialItemId: PropTypes.oneOfType([
+      PropTypes.string,
+      PropTypes.number,
+    ]),
   };
 
   return WithActiveItem;
