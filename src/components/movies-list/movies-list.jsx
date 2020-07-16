@@ -6,31 +6,30 @@ import {withVideo} from '@/hocs/with-video/with-video';
 
 const SmallMovieCardWithVideo = withVideo(SmallMovieCard);
 
-const MoviesList = ({movies, renderPlayer, onMouseEnter, onMouseLeave}) => {
+const VIDEO_SETTINGS = {
+  isMute: true,
+  width: `280`,
+  height: `175`,
+};
+
+const MoviesList = ({movies, renderItem, setActiveItem, clearActiveItem}) => {
   return (
     <div className="catalog__movies-list">
       {
         movies.map((movie) => {
-          const videoSettings = {
+          const videoSettings = Object.assign({}, {
             src: movie.preview,
             poster: movie.imageSrc,
-            isActive: false,
-            isMute: true,
-            width: `280`,
-            height: `175`,
-          };
+          }, VIDEO_SETTINGS);
 
-          return (
-            <SmallMovieCardWithVideo
-              key={movie.title}
-              movie={movie}
-              renderPlayer={renderPlayer}
-              onMouseEnter={onMouseEnter}
-              onMouseLeave={onMouseLeave}
+          return renderItem(SmallMovieCardWithVideo, movie.id, {
+            key: movie.id,
+            movie,
+            onMouseEnter: setActiveItem,
+            onMouseLeave: clearActiveItem,
 
-              videoSettings={videoSettings}
-            />
-          );
+            videoSettings,
+          });
         })
       }
     </div>
@@ -45,9 +44,9 @@ MoviesList.propTypes = {
     movieLink: PropTypes.string.isRequired,
     preview: PropTypes.string.isRequired,
   }).isRequired).isRequired,
-  renderPlayer: PropTypes.func.isRequired,
-  onMouseEnter: PropTypes.func.isRequired,
-  onMouseLeave: PropTypes.func.isRequired,
+  renderItem: PropTypes.func.isRequired,
+  setActiveItem: PropTypes.func.isRequired,
+  clearActiveItem: PropTypes.func.isRequired,
 };
 
 export {MoviesList};

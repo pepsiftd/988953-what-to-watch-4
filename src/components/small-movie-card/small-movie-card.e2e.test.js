@@ -16,27 +16,26 @@ const movie = {
   preview: `preview-link.mp4`,
 };
 
-const renderPlayer = jest.fn();
 const onMouseEnter = jest.fn();
 const onMouseLeave = jest.fn();
 
-it(`When SmallMovieCard hovered should return movie data`, () => {
+it(`When SmallMovieCard hovered should return movie id`, () => {
   const card = shallow(
       <SmallMovieCard
         movie={movie}
-        renderPlayer={renderPlayer}
         onMouseEnter={onMouseEnter}
         onMouseLeave={onMouseLeave}
-      />
+      >
+        <video />
+      </SmallMovieCard>
   );
 
   card.simulate(`mouseEnter`);
   card.simulate(`mouseLeave`);
-  card.simulate(`mouseEnter`);
-  card.simulate(`mouseLeave`);
 
-  expect(renderPlayer).toHaveBeenCalledTimes(1);
-  expect(onMouseEnter).toHaveBeenCalledTimes(2);
-  expect(onMouseLeave).toHaveBeenCalledTimes(2);
-  expect(onMouseEnter.mock.calls[0][0]).toMatchObject(movie);
+  setTimeout(() => {
+    expect(onMouseEnter).toHaveBeenCalledTimes(1);
+    expect(onMouseEnter.mock.calls[0][0]).toMatchObject(movie.id);
+  }, 1100);
+  expect(onMouseLeave).toHaveBeenCalledTimes(1);
 });

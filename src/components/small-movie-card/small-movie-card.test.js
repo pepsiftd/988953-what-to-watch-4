@@ -14,10 +14,11 @@ it(`SmallMovieCard should render correct movie name`, () => {
   const tree = renderer.create(
       <SmallMovieCard
         movie={movie}
-        renderPlayer={() => {}}
         onMouseEnter={() => {}}
         onMouseLeave={() => {}}
-      />
+      >
+        <video />
+      </SmallMovieCard>
   );
 
   expect(tree).toMatchSnapshot();

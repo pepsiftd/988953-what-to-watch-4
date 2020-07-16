@@ -52,9 +52,9 @@ it(`MoviesList should render correctly`, () => {
   const tree = renderer.create(
       <MoviesList
         movies={movies}
-        renderPlayer={() => {}}
-        onMouseEnter={() => {}}
-        onMouseLeave={() => {}}
+        renderItem={() => {}}
+        setActiveItem={() => {}}
+        clearActiveItem={() => {}}
       />
   );
 

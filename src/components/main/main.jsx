@@ -3,9 +3,9 @@ import PropTypes from 'prop-types';
 
 import {MoviesList} from '@/components/movies-list/movies-list';
 import {GenresList} from '@/components/genres-list/genres-list';
-import {withVideoPlayer} from '@/hocs/with-video-player/with-video-player';
+import {withActiveItem} from '@/hocs/with-active-item/with-active-item';
 
-const MoviesListWrapped = withVideoPlayer(MoviesList);
+const MoviesListWrapped = withActiveItem(MoviesList);
 
 const Main = ({PromoMovie, movies, filteredMovies, currentGenre, titleClickHandler}) => {
 

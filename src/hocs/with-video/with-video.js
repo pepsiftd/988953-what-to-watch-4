@@ -5,14 +5,13 @@ const withVideo = (Component) => {
   class WithVideo extends PureComponent {
     constructor(props) {
       super(props);
-      console.log(props);
       this._videoSettings = props.videoSettings;
 
       this._videoRef = createRef();
 
       this.state = {
         isMute: this._videoSettings.isMute,
-        isActive: this._videoSettings.isActive,
+        isActive: props.isActive,
       };
     }
 
@@ -43,7 +42,7 @@ const withVideo = (Component) => {
     componentDidUpdate() {
       const video = this._videoRef.current;
 
-      if (this._videoSettings.isActive) {
+      if (this.props.isActive) {
         video.play();
       } else {
         video.load();
@@ -68,11 +67,11 @@ const withVideo = (Component) => {
     videoSettings: PropTypes.shape({
       src: PropTypes.string.isRequired,
       poster: PropTypes.string.isRequired,
-      isActive: PropTypes.bool.isRequired,
       isMute: PropTypes.bool.isRequired,
       width: PropTypes.string.isRequired,
       height: PropTypes.string.isRequired,
-    })
+    }),
+    isActive: PropTypes.bool.isRequired,
   };
 
   return WithVideo;

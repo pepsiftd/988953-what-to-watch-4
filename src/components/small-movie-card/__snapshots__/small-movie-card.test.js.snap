@@ -8,7 +8,9 @@ exports[`SmallMovieCard should render correct movie name 1`] = `
 >
   <div
     className="small-movie-card__image"
-  />
+  >
+    <video />
+  </div>
   <h3
     className="small-movie-card__title"
   >

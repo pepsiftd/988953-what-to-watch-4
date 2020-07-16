@@ -1,15 +1,25 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+const PREVIEW_START_TIMEOUT = 1000;
+
 const SmallMovieCard = ({movie, onMouseEnter, onMouseLeave, children}) => {
   const {title, movieLink} = movie;
+  let timeout = null;
 
   return (
     <article className="small-movie-card catalog__movies-card"
       onMouseEnter={() => {
-        onMouseEnter(movie);
+        timeout = setTimeout(() => {
+          onMouseEnter(movie.id);
+        }, PREVIEW_START_TIMEOUT);
       }}
-      onMouseLeave={onMouseLeave}
+      onMouseLeave={() => {
+        if (timeout) {
+          clearTimeout(timeout);
+        }
+        onMouseLeave();
+      }}
     >
       <div className="small-movie-card__image">
         {children}
