@@ -1,0 +1,12 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`withActiveItem renders Active-Inactive items correctly 1`] = `
+<ul>
+  <li
+    className="list-item list-item--active"
+  />
+  <li
+    className="list-item "
+  />
+</ul>
+`;
