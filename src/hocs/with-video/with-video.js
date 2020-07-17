@@ -1,8 +1,8 @@
-import React, {PureComponent, createRef} from 'react';
+import React, {createRef} from 'react';
 import PropTypes from 'prop-types';
 
 const withVideo = (Component) => {
-  class WithVideo extends PureComponent {
+  class WithVideo extends React.Component {
     constructor(props) {
       super(props);
       this._videoSettings = props.videoSettings;
@@ -13,6 +13,10 @@ const withVideo = (Component) => {
         isMute: this._videoSettings.isMute,
         isActive: props.isActive,
       };
+    }
+
+    shouldComponentUpdate(nextProps) {
+      return this.props.isActive !== nextProps.isActive;
     }
 
     componentDidMount() {
