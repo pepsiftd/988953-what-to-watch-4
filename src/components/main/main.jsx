@@ -3,11 +3,14 @@ import PropTypes from 'prop-types';
 
 import {MoviesList} from '@/components/movies-list/movies-list';
 import {GenresList} from '@/components/genres-list/genres-list';
-import {withVideoPlayer} from '@/hocs/with-video-player/with-video-player';
+import {withActiveItem} from '@/hocs/with-active-item/with-active-item';
 
-const MoviesListWrapped = withVideoPlayer(MoviesList);
+const INITIAL_GENRE_FILTER = `All genres`;
 
-const Main = ({PromoMovie, movies, filteredMovies, currentGenre, titleClickHandler}) => {
+const MoviesListWrapped = withActiveItem(MoviesList);
+const GenresListWrapped = withActiveItem(GenresList);
+
+const Main = ({PromoMovie, movies, filteredMovies, titleClickHandler}) => {
 
   return (
     <React.Fragment>
@@ -70,9 +73,9 @@ const Main = ({PromoMovie, movies, filteredMovies, currentGenre, titleClickHandl
         <section className="catalog">
           <h2 className="catalog__title visually-hidden">Catalog</h2>
 
-          <GenresList
+          <GenresListWrapped
+            initialItemId={INITIAL_GENRE_FILTER}
             movies={movies}
-            currentGenre={currentGenre}
             titleClickHandler={titleClickHandler}
           />
 
@@ -123,7 +126,6 @@ Main.propTypes = {
     movieLink: PropTypes.string.isRequired,
     preview: PropTypes.string.isRequired,
   }).isRequired).isRequired,
-  currentGenre: PropTypes.string.isRequired,
   titleClickHandler: PropTypes.func.isRequired,
 };
 
