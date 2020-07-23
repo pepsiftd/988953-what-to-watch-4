@@ -9,12 +9,14 @@ import {createAPI} from '@/api';
 import {PromoMovie} from '@/mocks/promo';
 import {reducer} from '@/reducer';
 
+const api = createAPI(() => {
+
+});
+
 const store = createStore(
     reducer,
     applyMiddleware(thunk.withExtraArgument(api))
 );
-
-const api = createAPI();
 
 ReactDOM.render(
     <Provider store={store}>
