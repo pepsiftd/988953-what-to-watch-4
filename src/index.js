@@ -7,10 +7,13 @@ import thunk from 'redux-thunk';
 import App from '@/components/app/app';
 import {createAPI} from '@/api';
 import {PromoMovie} from '@/mocks/promo';
-import {reducer, ActionCreator, AuthorizationStatus, Operation} from '@/reducer';
+import {combined as reducer} from '@/reducer/reducer';
+import {ActionCreator} from '@/reducer/app/app';
+import {AuthorizationStatus, ActionCreator as UserActionCreator, Operation as UserOperation} from '@/reducer/user/user';
+import {Operation as DataOperation} from '@/reducer/data/data';
 
 const onUnauthorized = () => {
-  store.dispatch(ActionCreator.setAuthorizationStatus(AuthorizationStatus.UNAUTHORIZED));
+  store.dispatch(UserActionCreator.setAuthorizationStatus(AuthorizationStatus.UNAUTHORIZED));
 };
 
 const api = createAPI(onUnauthorized);
@@ -31,10 +34,10 @@ const render = () => {
   );
 };
 
-store.dispatch(Operation.loadFilms())
+store.dispatch(DataOperation.loadFilms())
   .then(() => {
     store.dispatch(ActionCreator.setCurrentGenre(`All genres`));
   })
   .then(render);
-store.dispatch(Operation.checkAuth());
+store.dispatch(UserOperation.checkAuth());
 

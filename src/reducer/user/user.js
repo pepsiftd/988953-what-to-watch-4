@@ -1,6 +1,4 @@
-// import {films} from '@/mocks/films';
-import {extend, getMoviesByGenre} from '@/utils';
-import {FilmModel} from '@/models/film-model';
+import {extend} from '@/utils';
 
 const AuthorizationStatus = {
   AUTHORIZED: `AUTHORIZED`,
@@ -8,51 +6,27 @@ const AuthorizationStatus = {
 };
 
 const initialState = {
-  currentGenre: `All genres`,
-  movies: [],
-  filteredMovies: [],
   authorizationStatus: AuthorizationStatus.UNAUTHORIZED,
 };
 
 const ActionType = {
   SET_AUTHORIZATION_STATUS: `SET_AUTHORIZATION_STATUS`,
-  SET_CURRENT_GENRE: `SET_CURRENT_GENRE`,
-  LOAD_FILMS: `LOAD_FILMS`,
 };
 
 const ActionCreator = {
-  setCurrentGenre: (genre) => {
-    return {
-      type: ActionType.SET_CURRENT_GENRE,
-      payload: genre,
-    };
-  },
-
   setAuthorizationStatus: (status) => {
     return {
       type: ActionType.SET_AUTHORIZATION_STATUS,
       payload: status,
     };
   },
-
-  loadFilms: (movies) => {
-    return {
-      type: ActionType.LOAD_FILMS,
-      payload: movies,
-    };
-  }
 };
 
 const reducer = (state = initialState, action) => {
   switch (action.type) {
-    case ActionType.SET_CURRENT_GENRE:
+    case ActionType.SET_AUTHORIZATION_STATUS:
       return extend(state, {
-        currentGenre: action.payload,
-        filteredMovies: getMoviesByGenre(state.movies, action.payload),
-      });
-    case ActionType.LOAD_FILMS:
-      return extend(state, {
-        movies: action.payload,
+        authorizationStatus: action.payload,
       });
   }
 
@@ -77,17 +51,6 @@ const Operation = {
     })
       .then(() => {
         dispatch(ActionCreator.setAuthorizationStatus(AuthorizationStatus.AUTHORIZED));
-      })
-      .catch((err) => {
-        throw err;
-      });
-  },
-
-  loadFilms: () => (dispatch, getState, api) => {
-    return api.get(`/films`)
-      .then((response) => {
-        const movies = FilmModel.parseFilms(response.data);
-        dispatch(ActionCreator.loadFilms(movies));
       })
       .catch((err) => {
         throw err;
