@@ -1,23 +1,25 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import {createStore} from 'redux';
+import {createStore, applyMiddleware} from 'redux';
 import {Provider} from 'react-redux';
+import thunk from 'redux-thunk';
 
 import App from '@/components/app/app';
-import {films} from '@/mocks/films';
+import {createAPI} from '@/api';
 import {PromoMovie} from '@/mocks/promo';
 import {reducer} from '@/reducer';
 
 const store = createStore(
     reducer,
-    window.__REDUX_DEVTOOLS_EXTENSION__ ? window.__REDUX_DEVTOOLS_EXTENSION__() : (f) => f
+    applyMiddleware(thunk.withExtraArgument(api))
 );
+
+const api = createAPI();
 
 ReactDOM.render(
     <Provider store={store}>
       <App
         PromoMovie={PromoMovie}
-        movies={films}
       />
     </Provider>,
     document.querySelector(`#root`)
