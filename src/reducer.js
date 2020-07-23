@@ -14,6 +14,7 @@ const initialState = {
 };
 
 const ActionType = {
+  SET_AUTHORIZATION_STATUS: `SET_AUTHORIZATION_STATUS`,
   SET_CURRENT_GENRE: `SET_CURRENT_GENRE`,
   LOAD_FILMS: `LOAD_FILMS`,
 };
@@ -23,6 +24,13 @@ const ActionCreator = {
     return {
       type: ActionType.SET_CURRENT_GENRE,
       payload: genre,
+    };
+  },
+
+  setAuthorizationStatus: (status) => {
+    return {
+      type: ActionType.SET_AUTHORIZATION_STATUS,
+      payload: status,
     };
   },
 
@@ -85,4 +93,4 @@ const Operation = {
   },
 };
 
-export {initialState, ActionType, ActionCreator, Operation, reducer};
+export {initialState, ActionType, ActionCreator, Operation, reducer, AuthorizatinStatus};

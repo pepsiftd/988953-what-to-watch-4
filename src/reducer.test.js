@@ -1,4 +1,15 @@
-import {ActionType, ActionCreator, reducer, initialState} from './reducer';
+import {ActionType, ActionCreator, reducer, initialState, Operation, AuthorizatinStatus} from './reducer';
+import MockAdapter from 'axios-mock-adapter';
+import {createAPI} from '@/api.js';
+
+const api = createAPI(() => {});
+
+const authInfo = {
+  "id": 1,
+  "email": "Oliver.conner@gmail.com",
+  "name": "Oliver.conner",
+  "avatar_url": "img/1.png"
+};
 
 const movies = [
   {
@@ -34,6 +45,44 @@ it(`ActionCreator works correctly`, () => {
   expect(ActionCreator.setCurrentGenre(`ibm`)).toEqual({
     type: ActionType.SET_CURRENT_GENRE,
     payload: `ibm`,
+  });
+});
+
+describe(`Operation`, () => {
+  const apiMock = new MockAdapter(api);
+  apiMock
+      .onGet(`/films`)
+      .reply(200, [{fake: true}]);
+  apiMock
+      .onGet(`/login`)
+      .reply(200, authInfo);
+
+  it(`should make a correct api-request to /films`, function () {
+    const dispatch = jest.fn();
+    const filmsLoader = Operation.loadFilms();
+
+    return filmsLoader(dispatch, () => {}, api)
+      .then(() => {
+        expect(dispatch).toHaveBeenCalledTimes(1);
+        expect(dispatch).toHaveBeenNthCalledWith(1, {
+          type: ActionType.LOAD_FILMS,
+          payload: [{fake: true}],
+        });
+      });
+  });
+
+  it(`should make a correct api-request to /login`, function () {
+    const dispatch = jest.fn();
+    const authChecker = Operation.checkAuth();
+
+    return authChecker(dispatch, () => {}, api)
+      .then(() => {
+        expect(dispatch).toHaveBeenCalledTimes(1);
+        expect(dispatch).toHaveBeenNthCalledWith(1, {
+          type: ActionType.SET_AUTHORIZATION_STATUS,
+          payload: AuthorizatinStatus.AUTHORIZED,
+        });
+      });
   });
 });
 
