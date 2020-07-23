@@ -7,22 +7,34 @@ import thunk from 'redux-thunk';
 import App from '@/components/app/app';
 import {createAPI} from '@/api';
 import {PromoMovie} from '@/mocks/promo';
-import {reducer} from '@/reducer';
+import {reducer, ActionCreator, AuthorizationStatus, Operation} from '@/reducer';
 
-const api = createAPI(() => {
+const onUnauthorized = () => {
+  store.dispatch(ActionCreator.setAuthorizationStatus(AuthorizationStatus.UNAUTHORIZED));
+};
 
-});
+const api = createAPI(onUnauthorized);
 
 const store = createStore(
     reducer,
     applyMiddleware(thunk.withExtraArgument(api))
 );
 
-ReactDOM.render(
-    <Provider store={store}>
-      <App
-        PromoMovie={PromoMovie}
-      />
-    </Provider>,
-    document.querySelector(`#root`)
-);
+const render = () => {
+  ReactDOM.render(
+      <Provider store={store}>
+        <App
+          PromoMovie={PromoMovie}
+        />
+      </Provider>,
+      document.querySelector(`#root`)
+  );
+};
+
+store.dispatch(Operation.loadFilms())
+  .then(() => {
+    store.dispatch(ActionCreator.setCurrentGenre(`All genres`));
+  })
+  .then(render);
+store.dispatch(Operation.checkAuth());
+

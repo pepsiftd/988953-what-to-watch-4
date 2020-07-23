@@ -1,16 +1,17 @@
-import {films} from '@/mocks/films';
+// import {films} from '@/mocks/films';
 import {extend, getMoviesByGenre} from '@/utils';
+import {FilmModel} from '@/models/film-model';
 
-const AuthorizatinStatus = {
+const AuthorizationStatus = {
   AUTHORIZED: `AUTHORIZED`,
   UNAUTHORIZED: `UNAUTHORIZED`,
 };
 
 const initialState = {
   currentGenre: `All genres`,
-  movies: films,
-  filteredMovies: films,
-  authorizatinStatus: AuthorizatinStatus.UNAUTHORIZED,
+  movies: [],
+  filteredMovies: [],
+  authorizationStatus: AuthorizationStatus.UNAUTHORIZED,
 };
 
 const ActionType = {
@@ -62,7 +63,7 @@ const Operation = {
   checkAuth: () => (dispatch, getState, api) => {
     return api.get(`/login`)
       .then(() => {
-        dispatch(ActionCreator.setAuthorizationStatus(AuthorizatinStatus.AUTHORIZED));
+        dispatch(ActionCreator.setAuthorizationStatus(AuthorizationStatus.AUTHORIZED));
       })
       .catch((err) => {
         throw err;
@@ -75,7 +76,7 @@ const Operation = {
       password: authorizationData.password,
     })
       .then(() => {
-        dispatch(ActionCreator.setAuthorizationStatus(AuthorizatinStatus.AUTHORIZED));
+        dispatch(ActionCreator.setAuthorizationStatus(AuthorizationStatus.AUTHORIZED));
       })
       .catch((err) => {
         throw err;
@@ -85,7 +86,8 @@ const Operation = {
   loadFilms: () => (dispatch, getState, api) => {
     return api.get(`/films`)
       .then((response) => {
-        dispatch(ActionCreator.loadFilms(response.data));
+        const movies = FilmModel.parseFilms(response.data);
+        dispatch(ActionCreator.loadFilms(movies));
       })
       .catch((err) => {
         throw err;
@@ -93,4 +95,4 @@ const Operation = {
   },
 };
 
-export {initialState, ActionType, ActionCreator, Operation, reducer, AuthorizatinStatus};
+export {initialState, ActionType, ActionCreator, Operation, reducer, AuthorizationStatus};
