@@ -1,15 +1,17 @@
+import {createSelector} from 'reselect';
+
 import {NameSpace} from '@/reducer/name-space';
 import {getMoviesByGenre} from '@/utils';
+import {getCurrentGenre} from '@/reducer/app/selectors';
 
 const getMovies = (state) => {
   return state[NameSpace.DATA].movies;
 };
 
-const getMoviesOfCurrentGenre = (state) => {
-  const genre = state[NameSpace.APP].currentGenre;
-  const movies = state[NameSpace.DATA].movies;
-
-  return getMoviesByGenre(movies, genre);
-};
+const getMoviesOfCurrentGenre = createSelector(
+    getMovies,
+    getCurrentGenre,
+    getMoviesByGenre
+);
 
 export {getMovies, getMoviesOfCurrentGenre};
