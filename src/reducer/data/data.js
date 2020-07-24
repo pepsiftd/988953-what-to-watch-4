@@ -3,7 +3,6 @@ import {FilmModel} from '@/models/film-model';
 
 const initialState = {
   movies: [],
-  filteredMovies: [],
 };
 
 const ActionType = {

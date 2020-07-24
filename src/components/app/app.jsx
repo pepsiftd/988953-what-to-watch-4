@@ -2,7 +2,10 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 
-import {ActionCreator} from '@/reducer';
+import {getMovies, getMoviesOfCurrentGenre} from '@/reducer/data/selectors';
+import {getCurrentGenre} from '@/reducer/app/selectors';
+
+import {ActionCreator as AppActionCreator} from '@/reducer/app/app';
 import {Main} from '@/components/main/main';
 
 const App = ({PromoMovie, movies, filteredMovies, currentGenre, titleClickHandler}) => {
@@ -42,14 +45,14 @@ App.propTypes = {
 };
 
 const mapStateToProps = (state) => ({
-  movies: state.movies,
-  currentGenre: state.currentGenre,
-  filteredMovies: state.filteredMovies,
+  movies: getMovies(state),
+  currentGenre: getCurrentGenre(state),
+  filteredMovies: getMoviesOfCurrentGenre(state),
 });
 
 const mapDispatchToProps = (dispatch) => ({
   titleClickHandler: (genre) => {
-    dispatch(ActionCreator.setCurrentGenre(genre));
+    dispatch(AppActionCreator.setCurrentGenre(genre));
   },
 });
 
