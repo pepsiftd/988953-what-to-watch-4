@@ -40,12 +40,18 @@ it(`Data ActionCreator works correctly`, () => {
     type: ActionType.LOAD_FILMS,
     payload: movies,
   });
+
+  expect(ActionCreator.loadPromo({id: 0, title: `M`, genre: `O`, year: 1984})).toEqual({
+    type: ActionType.LOAD_PROMO,
+    payload: {id: 0, title: `M`, genre: `O`, year: 1984},
+  });
 });
 
 describe(`Data Reducer`, () => {
   it(`returns initial state when not passed arguments`, () => {
     expect(reducer(undefined, {})).toEqual({
       movies: [],
+      promoMovie: {},
     });
   });
 
@@ -59,6 +65,17 @@ describe(`Data Reducer`, () => {
       movies,
     });
   });
+
+  it(`loads promo movie correctly`, () => {
+    expect(reducer({
+      promoMovie: [],
+    }, {
+      type: ActionType.LOAD_PROMO,
+      payload: movies[0],
+    })).toEqual({
+      promoMovie: movies[0],
+    });
+  });
 });
 
 describe(`Data Operation`, () => {
@@ -66,6 +83,10 @@ describe(`Data Operation`, () => {
   apiMock
       .onGet(`/films`)
       .reply(200, [{fake: true}]);
+
+  apiMock
+      .onGet(`/films/promo`)
+      .reply(200, {name: `I`, genre: `AM`, year: 2000});
 
   it(`should make a correct api-request to /films`, function () {
     const dispatch = jest.fn();
@@ -77,6 +98,20 @@ describe(`Data Operation`, () => {
         expect(dispatch).toHaveBeenNthCalledWith(1, {
           type: ActionType.LOAD_FILMS,
           payload: ([new FilmModel({fake: true})]),
+        });
+      });
+  });
+
+  it(`should make a correct api-request to /films`, function () {
+    const dispatch = jest.fn();
+    const promoLoader = Operation.loadPromo();
+
+    return promoLoader(dispatch, () => {}, api)
+      .then(() => {
+        expect(dispatch).toHaveBeenCalledTimes(1);
+        expect(dispatch).toHaveBeenNthCalledWith(1, {
+          type: ActionType.LOAD_PROMO,
+          payload: (new FilmModel({name: `I`, genre: `AM`, year: 2000})),
         });
       });
   });

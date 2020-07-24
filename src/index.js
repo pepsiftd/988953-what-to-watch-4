@@ -6,7 +6,6 @@ import thunk from 'redux-thunk';
 
 import App from '@/components/app/app';
 import {createAPI} from '@/api';
-import {PromoMovie} from '@/mocks/promo';
 import {combined as reducer} from '@/reducer/reducer';
 import {AuthorizationStatus, ActionCreator as UserActionCreator, Operation as UserOperation} from '@/reducer/user/user';
 import {Operation as DataOperation} from '@/reducer/data/data';
@@ -28,15 +27,16 @@ const store = createStore(
 const render = () => {
   ReactDOM.render(
       <Provider store={store}>
-        <App
-          PromoMovie={PromoMovie}
-        />
+        <App />
       </Provider>,
       document.querySelector(`#root`)
   );
 };
 
-store.dispatch(DataOperation.loadFilms())
+Promise.all([
+  store.dispatch(DataOperation.loadFilms()),
+  store.dispatch(DataOperation.loadPromo()),
+])
   .then(render);
 store.dispatch(UserOperation.checkAuth());
 

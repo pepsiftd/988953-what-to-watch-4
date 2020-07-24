@@ -5,10 +5,10 @@ import renderer from 'react-test-renderer';
 import App from './app';
 import {NameSpace} from '@/reducer/name-space';
 
-const PromoMovie = {
-  TITLE: `I Am the Movie`,
-  GENRE: `Thriller`,
-  YEAR: `2001`,
+const promoMovie = {
+  title: `I Am the Movie`,
+  genre: `Thriller`,
+  year: 2001,
 };
 const movies = [
   {
@@ -72,7 +72,8 @@ const mockStore = configureStore([]);
 it(`App should render correctly`, () => {
   const store = mockStore({
     [NameSpace.DATA]: {
-      movies
+      movies,
+      promoMovie,
     },
     [NameSpace.APP]: {
       currentGenre: `All genres`
@@ -85,7 +86,6 @@ it(`App should render correctly`, () => {
   const tree = renderer.create(
       <Provider store={store}>
         <App
-          PromoMovie={PromoMovie}
           titleClickHandler={() => {}}
         />
       </Provider>,

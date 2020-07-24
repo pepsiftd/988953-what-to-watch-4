@@ -9,7 +9,7 @@ class FilmModel {
     this.preview = data[`preview_video_link`];
     this.fullVideo = data[`video_link`];
 
-    this.poster = data[`poster`];
+    this.poster = data[`poster_image`];
     this.backgroundImage = data[`background_image`];
     this.backgroundColor = data[`background_color`];
     this.description = data[`description`];

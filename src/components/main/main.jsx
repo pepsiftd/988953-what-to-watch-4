@@ -10,7 +10,7 @@ const INITIAL_GENRE_FILTER = `All genres`;
 const MoviesListWrapped = withActiveItem(MoviesList);
 const GenresListWrapped = withActiveItem(GenresList);
 
-const Main = ({PromoMovie, movies, filteredMovies, titleClickHandler}) => {
+const Main = ({promoMovie, movies, filteredMovies, titleClickHandler}) => {
 
   return (
     <React.Fragment>
@@ -44,10 +44,10 @@ const Main = ({PromoMovie, movies, filteredMovies, titleClickHandler}) => {
             </div>
 
             <div className="movie-card__desc">
-              <h2 className="movie-card__title">{PromoMovie.TITLE}</h2>
+              <h2 className="movie-card__title">{promoMovie.title}</h2>
               <p className="movie-card__meta">
-                <span className="movie-card__genre">{PromoMovie.GENRE}</span>
-                <span className="movie-card__year">{PromoMovie.YEAR}</span>
+                <span className="movie-card__genre">{promoMovie.genre}</span>
+                <span className="movie-card__year">{promoMovie.year}</span>
               </p>
 
               <div className="movie-card__buttons">
@@ -107,10 +107,10 @@ const Main = ({PromoMovie, movies, filteredMovies, titleClickHandler}) => {
 };
 
 Main.propTypes = {
-  PromoMovie: PropTypes.shape({
-    TITLE: PropTypes.string.isRequired,
-    GENRE: PropTypes.string.isRequired,
-    YEAR: PropTypes.string.isRequired,
+  promoMovie: PropTypes.shape({
+    title: PropTypes.string.isRequired,
+    genre: PropTypes.string.isRequired,
+    year: PropTypes.number.isRequired,
   }).isRequired,
   movies: PropTypes.arrayOf(PropTypes.shape({
     id: PropTypes.number.isRequired,
