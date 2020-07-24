@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import {createStore, applyMiddleware} from 'redux';
+import {createStore, applyMiddleware, compose} from 'redux';
 import {Provider} from 'react-redux';
 import thunk from 'redux-thunk';
 
@@ -8,7 +8,6 @@ import App from '@/components/app/app';
 import {createAPI} from '@/api';
 import {PromoMovie} from '@/mocks/promo';
 import {combined as reducer} from '@/reducer/reducer';
-import {ActionCreator} from '@/reducer/app/app';
 import {AuthorizationStatus, ActionCreator as UserActionCreator, Operation as UserOperation} from '@/reducer/user/user';
 import {Operation as DataOperation} from '@/reducer/data/data';
 
@@ -20,7 +19,10 @@ const api = createAPI(onUnauthorized);
 
 const store = createStore(
     reducer,
-    applyMiddleware(thunk.withExtraArgument(api))
+    compose(
+        applyMiddleware(thunk.withExtraArgument(api)),
+        window.__REDUX_DEVTOOLS_EXTENSION__ ? window.__REDUX_DEVTOOLS_EXTENSION__() : (f) => f
+    )
 );
 
 const render = () => {
@@ -35,9 +37,6 @@ const render = () => {
 };
 
 store.dispatch(DataOperation.loadFilms())
-  .then(() => {
-    store.dispatch(ActionCreator.setCurrentGenre(`All genres`));
-  })
   .then(render);
 store.dispatch(UserOperation.checkAuth());
 
