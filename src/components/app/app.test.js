@@ -3,6 +3,7 @@ import {Provider} from 'react-redux';
 import configureStore from 'redux-mock-store';
 import renderer from 'react-test-renderer';
 import App from './app';
+import {NameSpace} from '@/reducer/name-space';
 
 const PromoMovie = {
   TITLE: `I Am the Movie`,
@@ -70,9 +71,15 @@ const mockStore = configureStore([]);
 
 it(`App should render correctly`, () => {
   const store = mockStore({
-    movies,
-    currentGenre: `All genres`,
-    filteredMovies: movies,
+    [NameSpace.DATA]: {
+      movies
+    },
+    [NameSpace.APP]: {
+      currentGenre: `All genres`
+    },
+    [NameSpace.USER]: {
+      authorizationStatus: `AUTHORIZED`
+    },
   });
 
   const tree = renderer.create(

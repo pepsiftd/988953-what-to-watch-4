@@ -40,7 +40,7 @@ class FilmModel {
       "genre": this.genre,
       "released": this.year,
       "is_favorite": this.isFavorite,
-    }
+    };
   }
 
   static parseFilm(data) {
