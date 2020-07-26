@@ -3,10 +3,10 @@ import Enzyme, {shallow} from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 import {Main} from './main';
 
-const PromoMovie = {
-  TITLE: `I Am the Movie`,
-  GENRE: `Thriller`,
-  YEAR: `2001`,
+const promoMovie = {
+  title: `I Am the Movie`,
+  genre: `Thriller`,
+  year: 2001,
 };
 const movies = [
   {
@@ -62,7 +62,7 @@ it(`Should titles be pressed`, () => {
 
   const main = shallow(
       <Main
-        PromoMovie={PromoMovie}
+        promoMovie={promoMovie}
         movies={movies}
         filteredMovies={movies}
         currentGenre={`All genres`}

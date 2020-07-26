@@ -1,10 +1,7 @@
-import {films} from '@/mocks/films';
-import {extend, getMoviesByGenre} from '@/utils';
+import {extend} from '@/utils';
 
 const initialState = {
   currentGenre: `All genres`,
-  movies: films,
-  filteredMovies: films,
 };
 
 const ActionType = {
@@ -25,7 +22,6 @@ const reducer = (state = initialState, action) => {
     case ActionType.SET_CURRENT_GENRE:
       return extend(state, {
         currentGenre: action.payload,
-        filteredMovies: getMoviesByGenre(state.movies, action.payload),
       });
   }
 

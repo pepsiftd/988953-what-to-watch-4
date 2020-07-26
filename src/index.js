@@ -1,24 +1,42 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import {createStore} from 'redux';
+import {createStore, applyMiddleware, compose} from 'redux';
 import {Provider} from 'react-redux';
+import thunk from 'redux-thunk';
 
 import App from '@/components/app/app';
-import {films} from '@/mocks/films';
-import {PromoMovie} from '@/mocks/promo';
-import {reducer} from '@/reducer';
+import {createAPI} from '@/api';
+import {combined as reducer} from '@/reducer/reducer';
+import {AuthorizationStatus, ActionCreator as UserActionCreator, Operation as UserOperation} from '@/reducer/user/user';
+import {Operation as DataOperation} from '@/reducer/data/data';
+
+const onUnauthorized = () => {
+  store.dispatch(UserActionCreator.setAuthorizationStatus(AuthorizationStatus.UNAUTHORIZED));
+};
+
+const api = createAPI(onUnauthorized);
 
 const store = createStore(
     reducer,
-    window.__REDUX_DEVTOOLS_EXTENSION__ ? window.__REDUX_DEVTOOLS_EXTENSION__() : (f) => f
+    compose(
+        applyMiddleware(thunk.withExtraArgument(api)),
+        window.__REDUX_DEVTOOLS_EXTENSION__ ? window.__REDUX_DEVTOOLS_EXTENSION__() : (f) => f
+    )
 );
 
-ReactDOM.render(
-    <Provider store={store}>
-      <App
-        PromoMovie={PromoMovie}
-        movies={films}
-      />
-    </Provider>,
-    document.querySelector(`#root`)
-);
+const render = () => {
+  ReactDOM.render(
+      <Provider store={store}>
+        <App />
+      </Provider>,
+      document.querySelector(`#root`)
+  );
+};
+
+Promise.all([
+  store.dispatch(DataOperation.loadFilms()),
+  store.dispatch(DataOperation.loadPromo()),
+])
+  .then(render);
+store.dispatch(UserOperation.checkAuth());
+
