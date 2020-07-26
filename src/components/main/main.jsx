@@ -5,12 +5,14 @@ import {MoviesList} from '@/components/movies-list/movies-list';
 import {GenresList} from '@/components/genres-list/genres-list';
 import {withActiveItem} from '@/hocs/with-active-item/with-active-item';
 
+import {AuthorizationStatus} from '@/reducer/user/user';
+
 const INITIAL_GENRE_FILTER = `All genres`;
 
 const MoviesListWrapped = withActiveItem(MoviesList);
 const GenresListWrapped = withActiveItem(GenresList);
 
-const Main = ({promoMovie, movies, filteredMovies, titleClickHandler}) => {
+const Main = ({promoMovie, movies, filteredMovies, titleClickHandler, authorizationStatus}) => {
 
   return (
     <React.Fragment>
@@ -31,9 +33,15 @@ const Main = ({promoMovie, movies, filteredMovies, titleClickHandler}) => {
           </div>
 
           <div className="user-block">
-            <div className="user-block__avatar">
-              <img src="img/avatar.jpg" alt="User avatar" width="63" height="63" />
-            </div>
+            {authorizationStatus === AuthorizationStatus.AUTHORIZED &&
+              <div className="user-block__avatar">
+                <img src="img/avatar.jpg" alt="User avatar" width="63" height="63" />
+              </div>
+            }
+            {authorizationStatus === AuthorizationStatus.UNAUTHORIZED &&
+              <a href="sign-in.html" class="user-block__link">Sign in</a>
+            }
+
           </div>
         </header>
 
@@ -127,6 +135,7 @@ Main.propTypes = {
     preview: PropTypes.string.isRequired,
   }).isRequired).isRequired,
   titleClickHandler: PropTypes.func.isRequired,
+  authorizationStatus: PropTypes.oneOf(Object.values(AuthorizationStatus)),
 };
 
 export {Main};

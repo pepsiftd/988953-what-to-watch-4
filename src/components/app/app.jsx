@@ -4,19 +4,25 @@ import {connect} from 'react-redux';
 
 import {getMovies, getMoviesOfCurrentGenre, getPromoMovie} from '@/reducer/data/selectors';
 import {getCurrentGenre} from '@/reducer/app/selectors';
+import {getAuthorizationStatus} from '@/reducer/user/selectors';
 
 import {ActionCreator as AppActionCreator} from '@/reducer/app/app';
 import {Main} from '@/components/main/main';
+import {SignIn} from '@/components/sign-in/sign-in';
+import {AuthorizationStatus} from '@/reducer/user/user';
 
-const App = ({promoMovie, movies, filteredMovies, currentGenre, titleClickHandler}) => {
+const App = ({promoMovie, movies, filteredMovies, currentGenre, titleClickHandler, authorizationStatus}) => {
   return (
-    <Main
-      promoMovie={promoMovie}
-      movies={movies}
-      filteredMovies={filteredMovies}
-      currentGenre={currentGenre}
-      titleClickHandler={titleClickHandler}
-    />
+    authorizationStatus === AuthorizationStatus.AUTHORIZED ?
+      <Main
+        promoMovie={promoMovie}
+        movies={movies}
+        filteredMovies={filteredMovies}
+        currentGenre={currentGenre}
+        titleClickHandler={titleClickHandler}
+        authorizationStatus={authorizationStatus}
+      /> :
+      <SignIn />
   );
 };
 
@@ -42,6 +48,7 @@ App.propTypes = {
   }).isRequired).isRequired,
   currentGenre: PropTypes.string.isRequired,
   titleClickHandler: PropTypes.func.isRequired,
+  authorizationStatus: PropTypes.oneOf(Object.values(AuthorizationStatus)),
 };
 
 const mapStateToProps = (state) => ({
@@ -49,6 +56,7 @@ const mapStateToProps = (state) => ({
   currentGenre: getCurrentGenre(state),
   filteredMovies: getMoviesOfCurrentGenre(state),
   promoMovie: getPromoMovie(state),
+  authorizationStatus: getAuthorizationStatus(state),
 });
 
 const mapDispatchToProps = (dispatch) => ({
