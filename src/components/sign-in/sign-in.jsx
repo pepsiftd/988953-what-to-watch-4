@@ -1,7 +1,6 @@
 import React, {PureComponent, createRef} from 'react';
 import PropTypes from 'prop-types';
 
-const BAD_REQUEST = 400;
 
 const checkEmail = (email) => {
   const pattern = new RegExp(`^([A-z0-9_.-]{1,})@([A-z0-9_.-]{1,})([.]{1,})([A-z]{2,8})$`);
@@ -18,7 +17,6 @@ class SignIn extends PureComponent {
 
     this.state = {
       isValidEmail: true,
-      isBadRequest: false,
     };
 
     this._onSubmit = this._onSubmit.bind(this);
@@ -31,20 +29,13 @@ class SignIn extends PureComponent {
       this.props.onSignIn({
         email: this._emailInputRef.current.value,
         password: this._passwordInputRef.current.value,
-      })
-        .catch((err) => {
-          // НЕ ЛОВИТ ОШИБКУ
-          if (err.response.status === BAD_REQUEST) {
-            this.setState({
-              isBadRequest: true,
-            });
-          }
-        });
+      });
     }
   }
 
   render() {
-    const isError = !this.state.isValidEmail || this.state.isBadRequest;
+    const isBadRequest = this.props.isBadRequest;
+    const isError = !this.state.isValidEmail || isBadRequest;
     const wrongEmailClass = this.state.isValidEmail ? `` : `sign-in__field--error`;
 
     return (
@@ -70,7 +61,7 @@ class SignIn extends PureComponent {
             {isError &&
             <div className="sign-in__message">
               {!this.state.isValidEmail && <p>Please enter a valid email address</p>}
-              {this.state.isBadRequest && <p>We can’t recognize this email <br/> and password combination. Please try again.</p>}
+              {isBadRequest && <p>We can’t recognize this email <br/> and password combination. Please try again.</p>}
             </div>}
 
             <div className="sign-in__fields">
@@ -137,6 +128,7 @@ class SignIn extends PureComponent {
 
 SignIn.propTypes = {
   onSignIn: PropTypes.func.isRequired,
+  isBadRequest: PropTypes.bool.isRequired,
 };
 
 export {SignIn, checkEmail};

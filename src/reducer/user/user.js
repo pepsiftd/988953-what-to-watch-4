@@ -5,18 +5,31 @@ const AuthorizationStatus = {
   UNAUTHORIZED: `UNAUTHORIZED`,
 };
 
+const AuthorizationError = {
+  NO_ERROR: 200,
+  BAD_REQUEST: 400,
+};
+
 const initialState = {
   authorizationStatus: AuthorizationStatus.AUTHORIZED,
+  authorizationError: AuthorizationError.NO_ERROR,
 };
 
 const ActionType = {
   SET_AUTHORIZATION_STATUS: `SET_AUTHORIZATION_STATUS`,
+  SET_AUTHORIZATION_ERROR: `SET_AUTHORIZATION_ERROR`,
 };
 
 const ActionCreator = {
   setAuthorizationStatus: (status) => {
     return {
       type: ActionType.SET_AUTHORIZATION_STATUS,
+      payload: status,
+    };
+  },
+  setAuthorizationError: (status) => {
+    return {
+      type: ActionType.SET_AUTHORIZATION_ERROR,
       payload: status,
     };
   },
@@ -27,6 +40,10 @@ const reducer = (state = initialState, action) => {
     case ActionType.SET_AUTHORIZATION_STATUS:
       return extend(state, {
         authorizationStatus: action.payload,
+      });
+    case ActionType.SET_AUTHORIZATION_ERROR:
+      return extend(state, {
+        authorizationError: action.payload,
       });
   }
 
@@ -53,9 +70,13 @@ const Operation = {
         dispatch(ActionCreator.setAuthorizationStatus(AuthorizationStatus.AUTHORIZED));
       })
       .catch((err) => {
-        throw err;
+        if (err.response.status === AuthorizationError.BAD_REQUEST) {
+          dispatch(ActionCreator.setAuthorizationError(AuthorizationError.BAD_REQUEST));
+        } else {
+          throw err;
+        }
       });
   },
 };
 
-export {initialState, ActionType, ActionCreator, Operation, reducer, AuthorizationStatus};
+export {initialState, ActionType, ActionCreator, Operation, reducer, AuthorizationStatus, AuthorizationError};

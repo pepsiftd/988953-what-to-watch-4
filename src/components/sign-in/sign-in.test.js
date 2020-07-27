@@ -7,6 +7,7 @@ it(`SignIn screen should render correctly`, () => {
   const tree = renderer.create(
       <SignIn
         onSignIn={() => {}}
+        isBadRequest={false}
       />
   );
 
