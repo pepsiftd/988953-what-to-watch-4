@@ -3,6 +3,12 @@ import PropTypes from 'prop-types';
 
 const BAD_REQUEST = 400;
 
+const checkEmail = (email) => {
+  const pattern = new RegExp(`^([A-z0-9_.-]{1,})@([A-z0-9_.-]{1,})([.]{1,})([A-z]{2,8})$`);
+
+  return pattern.test(email.trim());
+};
+
 class SignIn extends PureComponent {
   constructor(props) {
     super(props);
@@ -21,18 +27,20 @@ class SignIn extends PureComponent {
   _onSubmit(evt) {
     evt.preventDefault();
 
-    this.props.onSignIn({
-      email: this._emailInputRef.current.value,
-      password: this._passwordInputRef.current.value,
-    })
-      .catch((err) => {
-        // НЕ ЛОВИТ ОШИБКУ
-        if (err.response.status === BAD_REQUEST) {
-          this.setState({
-            isBadRequest: true,
-          });
-        }
-      });
+    if (this.state.isValidEmail && this._passwordInputRef.current.value.length > 0) {
+      this.props.onSignIn({
+        email: this._emailInputRef.current.value,
+        password: this._passwordInputRef.current.value,
+      })
+        .catch((err) => {
+          // НЕ ЛОВИТ ОШИБКУ
+          if (err.response.status === BAD_REQUEST) {
+            this.setState({
+              isBadRequest: true,
+            });
+          }
+        });
+    }
   }
 
   render() {
@@ -74,6 +82,17 @@ class SignIn extends PureComponent {
                   placeholder="Email address"
                   name="user-email"
                   id="user-email"
+                  onInput={() => {
+                    if (checkEmail(this._emailInputRef.current.value)) {
+                      this.setState({
+                        isValidEmail: true
+                      });
+                    } else {
+                      this.setState({
+                        isValidEmail: false
+                      });
+                    }
+                  }}
                 />
                 <label className="sign-in__label visually-hidden" htmlFor="user-email">Email address</label>
               </div>
@@ -120,4 +139,4 @@ SignIn.propTypes = {
   onSignIn: PropTypes.func.isRequired,
 };
 
-export {SignIn};
+export {SignIn, checkEmail};

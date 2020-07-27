@@ -39,7 +39,7 @@ const Main = ({promoMovie, movies, filteredMovies, titleClickHandler, authorizat
               </div>
             }
             {authorizationStatus === AuthorizationStatus.UNAUTHORIZED &&
-              <a href="sign-in.html" class="user-block__link">Sign in</a>
+              <a href="sign-in.html" className="user-block__link">Sign in</a>
             }
 
           </div>
