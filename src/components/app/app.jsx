@@ -4,6 +4,7 @@ import {connect} from 'react-redux';
 
 import {Router, Route, Switch} from 'react-router-dom';
 import {history} from '@/history';
+import {AppRoute} from '@/const';
 
 import {getMovies, getMoviesOfCurrentGenre, getPromoMovie} from '@/reducer/data/selectors';
 import {getCurrentGenre} from '@/reducer/app/selectors';
@@ -19,7 +20,7 @@ const App = ({promoMovie, movies, filteredMovies, currentGenre, titleClickHandle
   return (
     <Router history={history}>
       <Switch>
-        <Route path="/" exact>
+        <Route path={AppRoute.ROOT} exact>
           <Main
             promoMovie={promoMovie}
             movies={movies}
@@ -29,7 +30,7 @@ const App = ({promoMovie, movies, filteredMovies, currentGenre, titleClickHandle
             authorizationStatus={authorizationStatus}
           />
         </Route>
-        <Route path="/login" exact>
+        <Route path={AppRoute.LOGIN} exact>
           <SignIn
             onSignIn={onSignIn}
             isBadRequest={isBadRequest}
@@ -81,7 +82,10 @@ const mapDispatchToProps = (dispatch) => ({
     dispatch(AppActionCreator.setCurrentGenre(genre));
   },
   onSignIn: (authorizationData) => {
-    dispatch(UserOperation.login(authorizationData));
+    dispatch(UserOperation.login(authorizationData))
+      .then(() => {
+        history.push(AppRoute.ROOT);
+      });
   },
 });
 

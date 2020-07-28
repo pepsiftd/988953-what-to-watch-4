@@ -1,5 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import {Link} from 'react-router-dom';
+import {AppRoute} from '@/const';
 
 import {MoviesList} from '@/components/movies-list/movies-list';
 import {GenresList} from '@/components/genres-list/genres-list';
@@ -35,11 +37,13 @@ const Main = ({promoMovie, movies, filteredMovies, titleClickHandler, authorizat
           <div className="user-block">
             {authorizationStatus === AuthorizationStatus.AUTHORIZED &&
               <div className="user-block__avatar">
-                <img src="img/avatar.jpg" alt="User avatar" width="63" height="63" />
+                <Link to={AppRoute.MY_LIST}>
+                  <img src="img/avatar.jpg" alt="User avatar" width="63" height="63" />
+                </Link>
               </div>
             }
             {authorizationStatus === AuthorizationStatus.UNAUTHORIZED &&
-              <a href="sign-in.html" className="user-block__link">Sign in</a>
+              <Link to={AppRoute.LOGIN} className="user-block__link">Sign in</Link>
             }
 
           </div>
