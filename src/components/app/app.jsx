@@ -2,30 +2,41 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 
+import {Router, Route, Switch} from 'react-router-dom';
+import {history} from '@/history';
+
 import {getMovies, getMoviesOfCurrentGenre, getPromoMovie} from '@/reducer/data/selectors';
 import {getCurrentGenre} from '@/reducer/app/selectors';
 import {getAuthorizationStatus, getBadRequestStatus} from '@/reducer/user/selectors';
 import {Operation as UserOperation} from '@/reducer/user/user';
 import {ActionCreator as AppActionCreator} from '@/reducer/app/app';
+import {AuthorizationStatus} from '@/reducer/user/user';
+
 import {Main} from '@/components/main/main';
 import {SignIn} from '@/components/sign-in/sign-in';
-import {AuthorizationStatus} from '@/reducer/user/user';
 
 const App = ({promoMovie, movies, filteredMovies, currentGenre, titleClickHandler, authorizationStatus, onSignIn, isBadRequest}) => {
   return (
-    authorizationStatus === AuthorizationStatus.AUTHORIZED ?
-      <Main
-        promoMovie={promoMovie}
-        movies={movies}
-        filteredMovies={filteredMovies}
-        currentGenre={currentGenre}
-        titleClickHandler={titleClickHandler}
-        authorizationStatus={authorizationStatus}
-      /> :
-      <SignIn
-        onSignIn={onSignIn}
-        isBadRequest={isBadRequest}
-      />
+    <Router history={history}>
+      <Switch>
+        <Route path="/" exact>
+          <Main
+            promoMovie={promoMovie}
+            movies={movies}
+            filteredMovies={filteredMovies}
+            currentGenre={currentGenre}
+            titleClickHandler={titleClickHandler}
+            authorizationStatus={authorizationStatus}
+          />
+        </Route>
+        <Route path="/login" exact>
+          <SignIn
+            onSignIn={onSignIn}
+            isBadRequest={isBadRequest}
+          />
+        </Route>
+      </Switch>
+    </Router>
   );
 };
 
