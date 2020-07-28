@@ -1,4 +1,4 @@
-import {initialState, ActionType, ActionCreator, Operation, reducer, AuthorizationStatus} from './user';
+import {initialState, ActionType, ActionCreator, Operation, reducer, AuthorizationStatus, AuthorizationError} from './user';
 import MockAdapter from 'axios-mock-adapter';
 import {createAPI} from '@/api.js';
 
@@ -24,6 +24,9 @@ describe(`User Operation`, () => {
   apiMock
       .onGet(`/login`)
       .reply(200, authInfo);
+  apiMock
+      .onPost(`/login`)
+      .reply(400, {response: {status: 400}});
 
   it(`should make a correct api-request to /login`, function () {
     const dispatch = jest.fn();
@@ -35,6 +38,20 @@ describe(`User Operation`, () => {
         expect(dispatch).toHaveBeenNthCalledWith(1, {
           type: ActionType.SET_AUTHORIZATION_STATUS,
           payload: AuthorizationStatus.AUTHORIZED,
+        });
+      });
+  });
+
+  it(`should correctly catch bad-request to /login`, function () {
+    const dispatch = jest.fn();
+    const login = Operation.login({email: `lsdkfj`, password: ``});
+
+    return login(dispatch, () => {}, api)
+      .then(() => {
+        expect(dispatch).toHaveBeenCalledTimes(1);
+        expect(dispatch).toHaveBeenNthCalledWith(1, {
+          type: ActionType.SET_AUTHORIZATION_ERROR,
+          payload: AuthorizationError.BAD_REQUEST,
         });
       });
   });
