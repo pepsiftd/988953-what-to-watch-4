@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {Link} from 'react-router-dom';
-import {AppRoute} from '@/const';
+import {AppRoute, filmObjectPropTypes} from '@/const';
 
 import {MoviesList} from '@/components/movies-list/movies-list';
 import {GenresList} from '@/components/genres-list/genres-list';
@@ -125,27 +125,9 @@ const Main = ({promoMovie, movies, filteredMovies, titleClickHandler, authorizat
 };
 
 Main.propTypes = {
-  promoMovie: PropTypes.shape({
-    id: PropTypes.number.isRequired,
-    title: PropTypes.string.isRequired,
-    year: PropTypes.number.isRequired,
-    genre: PropTypes.string.isRequired,
-    isFavorite: PropTypes.bool.isRequired,
-  }).isRequired,
-  movies: PropTypes.arrayOf(PropTypes.shape({
-    id: PropTypes.number.isRequired,
-    title: PropTypes.string.isRequired,
-    imageSrc: PropTypes.string.isRequired,
-    movieLink: PropTypes.string.isRequired,
-    preview: PropTypes.string.isRequired,
-  }).isRequired).isRequired,
-  filteredMovies: PropTypes.arrayOf(PropTypes.shape({
-    id: PropTypes.number.isRequired,
-    title: PropTypes.string.isRequired,
-    imageSrc: PropTypes.string.isRequired,
-    movieLink: PropTypes.string.isRequired,
-    preview: PropTypes.string.isRequired,
-  }).isRequired).isRequired,
+  promoMovie: PropTypes.shape(filmObjectPropTypes).isRequired,
+  movies: PropTypes.arrayOf(PropTypes.shape(filmObjectPropTypes).isRequired).isRequired,
+  filteredMovies: PropTypes.arrayOf(PropTypes.shape(filmObjectPropTypes).isRequired).isRequired,
   titleClickHandler: PropTypes.func.isRequired,
   authorizationStatus: PropTypes.oneOf(Object.values(AuthorizationStatus)),
   onToggleFavorite: PropTypes.func.isRequired,

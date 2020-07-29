@@ -33,10 +33,7 @@ const GenresList = ({movies, renderItem, setActiveItem, titleClickHandler}) => {
 GenresList.propTypes = {
   movies: PropTypes.arrayOf(PropTypes.shape({
     id: PropTypes.number.isRequired,
-    title: PropTypes.string.isRequired,
-    imageSrc: PropTypes.string.isRequired,
-    movieLink: PropTypes.string.isRequired,
-    preview: PropTypes.string.isRequired,
+    genre: PropTypes.string.isRequired,
   }).isRequired).isRequired,
   renderItem: PropTypes.func.isRequired,
   setActiveItem: PropTypes.func.isRequired,

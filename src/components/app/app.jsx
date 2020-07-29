@@ -4,7 +4,7 @@ import {connect} from 'react-redux';
 
 import {Router, Route, Switch} from 'react-router-dom';
 import {history} from '@/history';
-import {AppRoute} from '@/const';
+import {AppRoute, filmObjectPropTypes} from '@/const';
 
 import {getMovies, getMoviesOfCurrentGenre, getPromoMovie, getFavoriteMovies} from '@/reducer/data/selectors';
 import {getCurrentGenre} from '@/reducer/app/selectors';
@@ -60,32 +60,10 @@ const App = ({
 };
 
 App.propTypes = {
-  promoMovie: PropTypes.shape({
-    title: PropTypes.string.isRequired,
-    genre: PropTypes.string.isRequired,
-    year: PropTypes.number.isRequired,
-  }).isRequired,
-  movies: PropTypes.arrayOf(PropTypes.shape({
-    id: PropTypes.number.isRequired,
-    title: PropTypes.string.isRequired,
-    imageSrc: PropTypes.string.isRequired,
-    movieLink: PropTypes.string.isRequired,
-    preview: PropTypes.string.isRequired,
-  }).isRequired).isRequired,
-  filteredMovies: PropTypes.arrayOf(PropTypes.shape({
-    id: PropTypes.number.isRequired,
-    title: PropTypes.string.isRequired,
-    imageSrc: PropTypes.string.isRequired,
-    movieLink: PropTypes.string.isRequired,
-    preview: PropTypes.string.isRequired,
-  }).isRequired).isRequired,
-  favoriteMovies: PropTypes.arrayOf(PropTypes.shape({
-    id: PropTypes.number.isRequired,
-    title: PropTypes.string.isRequired,
-    imageSrc: PropTypes.string.isRequired,
-    movieLink: PropTypes.string.isRequired,
-    preview: PropTypes.string.isRequired,
-  }).isRequired).isRequired,
+  promoMovie: PropTypes.shape(filmObjectPropTypes).isRequired,
+  movies: PropTypes.arrayOf(PropTypes.shape(filmObjectPropTypes).isRequired).isRequired,
+  filteredMovies: PropTypes.arrayOf(PropTypes.shape(filmObjectPropTypes).isRequired).isRequired,
+  favoriteMovies: PropTypes.arrayOf(PropTypes.shape(filmObjectPropTypes).isRequired).isRequired,
   currentGenre: PropTypes.string.isRequired,
   titleClickHandler: PropTypes.func.isRequired,
   authorizationStatus: PropTypes.oneOf(Object.values(AuthorizationStatus)),
