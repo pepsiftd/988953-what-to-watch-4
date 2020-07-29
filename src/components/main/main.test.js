@@ -6,6 +6,8 @@ const promoMovie = {
   title: `I Am the Movie`,
   genre: `Thriller`,
   year: 2001,
+  id: 0,
+  isFavorite: false,
 };
 const movies = [
   {
@@ -72,8 +74,10 @@ it(`Main should render correctly`, () => {
         promoMovie={promoMovie}
         movies={movies}
         filteredMovies={movies}
+        favoriteMovies={[]}
         currentGenre={`All genres`}
         titleClickHandler={titleClickHandler}
+        onToggleFavorite={() => {}}
       />,
       {
         createNodeMock: () => {

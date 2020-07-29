@@ -18,7 +18,17 @@ import {Main} from '@/components/main/main';
 import {SignIn} from '@/components/sign-in/sign-in';
 import {MyList} from '@/components/my-list/my-list';
 
-const App = ({promoMovie, movies, filteredMovies, favoriteMovies, currentGenre, titleClickHandler, authorizationStatus, onSignIn, isBadRequest}) => {
+const App = ({
+  promoMovie,
+  movies,
+  filteredMovies,
+  favoriteMovies,
+  currentGenre,
+  titleClickHandler,
+  authorizationStatus,
+  onSignIn,
+  isBadRequest,
+  onToggleFavorite}) => {
   return (
     <Router history={history}>
       <Switch>
@@ -30,6 +40,7 @@ const App = ({promoMovie, movies, filteredMovies, favoriteMovies, currentGenre, 
             currentGenre={currentGenre}
             titleClickHandler={titleClickHandler}
             authorizationStatus={authorizationStatus}
+            onToggleFavorite={onToggleFavorite}
           />
         </Route>
         <Route path={AppRoute.LOGIN} exact>
@@ -80,6 +91,7 @@ App.propTypes = {
   authorizationStatus: PropTypes.oneOf(Object.values(AuthorizationStatus)),
   onSignIn: PropTypes.func.isRequired,
   isBadRequest: PropTypes.bool.isRequired,
+  onToggleFavorite: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({
@@ -101,6 +113,9 @@ const mapDispatchToProps = (dispatch) => ({
       dispatch(DataOperation.loadFavorite());
       history.push(AppRoute.ROOT);
     }));
+  },
+  onToggleFavorite: (id) => {
+    dispatch(DataOperation.toggleFavorite(id));
   },
 });
 

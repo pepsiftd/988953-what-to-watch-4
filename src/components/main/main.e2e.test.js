@@ -7,6 +7,8 @@ const promoMovie = {
   title: `I Am the Movie`,
   genre: `Thriller`,
   year: 2001,
+  id: 0,
+  isFavorite: false,
 };
 const movies = [
   {
@@ -67,6 +69,7 @@ it(`Should titles be pressed`, () => {
         filteredMovies={movies}
         currentGenre={`All genres`}
         titleClickHandler={titleClickHandler}
+        onToggleFavorite={() => {}}
       />
   );
 

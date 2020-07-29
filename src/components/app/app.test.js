@@ -9,6 +9,8 @@ const promoMovie = {
   title: `I Am the Movie`,
   genre: `Thriller`,
   year: 2001,
+  id: 0,
+  isFavorite: false,
 };
 const movies = [
   {
@@ -74,6 +76,7 @@ it(`App should render correctly`, () => {
     [NameSpace.DATA]: {
       movies,
       promoMovie,
+      favoriteMovies: [],
     },
     [NameSpace.APP]: {
       currentGenre: `All genres`
@@ -87,6 +90,7 @@ it(`App should render correctly`, () => {
       <Provider store={store}>
         <App
           titleClickHandler={() => {}}
+          favoriteMovies={[]}
         />
       </Provider>,
       {

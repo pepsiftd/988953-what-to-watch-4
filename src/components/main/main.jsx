@@ -14,7 +14,7 @@ const INITIAL_GENRE_FILTER = `All genres`;
 const MoviesListWrapped = withActiveItem(MoviesList);
 const GenresListWrapped = withActiveItem(GenresList);
 
-const Main = ({promoMovie, movies, filteredMovies, titleClickHandler, authorizationStatus}) => {
+const Main = ({promoMovie, movies, filteredMovies, titleClickHandler, authorizationStatus, onToggleFavorite}) => {
 
   return (
     <React.Fragment>
@@ -69,12 +69,18 @@ const Main = ({promoMovie, movies, filteredMovies, titleClickHandler, authorizat
                   </svg>
                   <span>Play</span>
                 </button>
-                <button className="btn btn--list movie-card__button" type="button">
+                <button
+                  className="btn btn--list movie-card__button"
+                  type="button"
+                  onClick={() => {
+                    onToggleFavorite(promoMovie.id);
+                  }}>
                   <svg viewBox="0 0 19 20" width="19" height="20">
-                    <use xlinkHref="#add"></use>
+                    <use xlinkHref={promoMovie.isFavorite ? `#in-list` : `#add`}></use>
                   </svg>
                   <span>My list</span>
                 </button>
+                {promoMovie.isFavorite && <a href="add-review.html" className="btn movie-card__button">Add review</a>}
               </div>
             </div>
           </div>
@@ -120,9 +126,11 @@ const Main = ({promoMovie, movies, filteredMovies, titleClickHandler, authorizat
 
 Main.propTypes = {
   promoMovie: PropTypes.shape({
+    id: PropTypes.number.isRequired,
     title: PropTypes.string.isRequired,
-    genre: PropTypes.string.isRequired,
     year: PropTypes.number.isRequired,
+    genre: PropTypes.string.isRequired,
+    isFavorite: PropTypes.bool.isRequired,
   }).isRequired,
   movies: PropTypes.arrayOf(PropTypes.shape({
     id: PropTypes.number.isRequired,
@@ -140,6 +148,7 @@ Main.propTypes = {
   }).isRequired).isRequired,
   titleClickHandler: PropTypes.func.isRequired,
   authorizationStatus: PropTypes.oneOf(Object.values(AuthorizationStatus)),
+  onToggleFavorite: PropTypes.func.isRequired,
 };
 
 export {Main};

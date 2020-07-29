@@ -1,5 +1,6 @@
 import {extend} from '@/utils';
 import {FilmModel} from '@/models/film-model';
+import {getMovies} from './selectors';
 
 const initialState = {
   movies: [],
@@ -78,6 +79,20 @@ const Operation = {
       .then((response) => {
         const favoriteMovies = FilmModel.parseFilms(response.data);
         dispatch(ActionCreator.loadFavorite(favoriteMovies));
+      })
+      .catch((err) => {
+        throw err;
+      });
+  },
+  toggleFavorite: (id) => (dispatch, getState, api) => {
+    const state = getState();
+    const film = getMovies(state).find((movie) => movie.id === id);
+
+    return api.post(`/favorite/${id}/${film.isFavorite ? `0` : `1`}`)
+      .then(() => {
+        dispatch(Operation.loadFilms());
+        dispatch(Operation.loadFavorite());
+        dispatch(Operation.loadPromo());
       })
       .catch((err) => {
         throw err;
