@@ -61,20 +61,19 @@ const Operation = {
       });
   },
 
-  login: (authorizationData) => (dispatch, getState, api) => {
+  login: (authorizationData, onSuccess = () => {}, onFail = () => {}) => (dispatch, getState, api) => {
     return api.post(`/login`, {
       email: authorizationData.email,
       password: authorizationData.password,
     })
       .then(() => {
         dispatch(ActionCreator.setAuthorizationStatus(AuthorizationStatus.AUTHORIZED));
+        dispatch(ActionCreator.setAuthorizationError(AuthorizationError.NO_ERROR));
+        onSuccess();
       })
       .catch((err) => {
-        if (err.response.status === AuthorizationError.BAD_REQUEST) {
-          dispatch(ActionCreator.setAuthorizationError(AuthorizationError.BAD_REQUEST));
-        } else {
-          throw err;
-        }
+        dispatch(ActionCreator.setAuthorizationError(err.response.status));
+        onFail(err);
       });
   },
 };

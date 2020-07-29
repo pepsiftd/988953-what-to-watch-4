@@ -15,6 +15,7 @@ import {AuthorizationStatus} from '@/reducer/user/user';
 
 import {Main} from '@/components/main/main';
 import {SignIn} from '@/components/sign-in/sign-in';
+import {MyList} from '@/components/my-list/my-list';
 
 const App = ({promoMovie, movies, filteredMovies, currentGenre, titleClickHandler, authorizationStatus, onSignIn, isBadRequest}) => {
   return (
@@ -34,6 +35,11 @@ const App = ({promoMovie, movies, filteredMovies, currentGenre, titleClickHandle
           <SignIn
             onSignIn={onSignIn}
             isBadRequest={isBadRequest}
+          />
+        </Route>
+        <Route path={AppRoute.MY_LIST} exact>
+          <MyList
+            favoriteMovies={movies}
           />
         </Route>
       </Switch>
@@ -82,10 +88,9 @@ const mapDispatchToProps = (dispatch) => ({
     dispatch(AppActionCreator.setCurrentGenre(genre));
   },
   onSignIn: (authorizationData) => {
-    dispatch(UserOperation.login(authorizationData))
-      .then(() => {
-        history.push(AppRoute.ROOT);
-      });
+    dispatch(UserOperation.login(authorizationData, () => {
+      history.push(AppRoute.ROOT);
+    }));
   },
 });
 
