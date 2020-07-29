@@ -1,4 +1,4 @@
-import {getMovies, getMoviesOfCurrentGenre, getPromoMovie} from './selectors';
+import {getMovies, getMoviesOfCurrentGenre, getPromoMovie, getFavoriteMovies} from './selectors';
 import {NameSpace} from '@/reducer/name-space';
 
 describe(`Selector`, () => {
@@ -10,6 +10,16 @@ describe(`Selector`, () => {
     };
 
     expect(getMovies(state)).toEqual([{id: 1}, {id: 2}]);
+  });
+
+  it(`should return favorite movies`, () => {
+    const state = {
+      [NameSpace.DATA]: {
+        favoriteMovies: [{id: 1}, {id: 2}],
+      },
+    };
+
+    expect(getFavoriteMovies(state)).toEqual([{id: 1}, {id: 2}]);
   });
 
   it(`should return promo movie`, () => {

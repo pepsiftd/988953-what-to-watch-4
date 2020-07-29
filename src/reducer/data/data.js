@@ -4,11 +4,13 @@ import {FilmModel} from '@/models/film-model';
 const initialState = {
   movies: [],
   promoMovie: {},
+  favoriteMovies: [],
 };
 
 const ActionType = {
   LOAD_FILMS: `LOAD_FILMS`,
   LOAD_PROMO: `LOAD_PROMO`,
+  LOAD_FAVORITE: `LOAD_FAVORITE`,
 };
 
 const ActionCreator = {
@@ -25,6 +27,13 @@ const ActionCreator = {
       payload: promoMovie,
     };
   },
+
+  loadFavorite: (favoriteMovies) => {
+    return {
+      type: ActionType.LOAD_FAVORITE,
+      payload: favoriteMovies,
+    };
+  },
 };
 
 const reducer = (state = initialState, action) => {
@@ -36,6 +45,10 @@ const reducer = (state = initialState, action) => {
     case ActionType.LOAD_PROMO:
       return extend(state, {
         promoMovie: action.payload,
+      });
+    case ActionType.LOAD_FAVORITE:
+      return extend(state, {
+        favoriteMovies: action.payload,
       });
   }
 
@@ -59,7 +72,17 @@ const Operation = {
         const promoMovie = FilmModel.parseFilm(response.data);
         dispatch(ActionCreator.loadPromo(promoMovie));
       });
-  }
+  },
+  loadFavorite: () => (dispatch, getState, api) => {
+    return api.get(`/favorite`)
+      .then((response) => {
+        const favoriteMovies = FilmModel.parseFilms(response.data);
+        dispatch(ActionCreator.loadFavorite(favoriteMovies));
+      })
+      .catch((err) => {
+        throw err;
+      });
+  },
 };
 
 export {reducer, ActionType, ActionCreator, Operation};

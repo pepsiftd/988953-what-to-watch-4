@@ -6,10 +6,11 @@ import {Router, Route, Switch} from 'react-router-dom';
 import {history} from '@/history';
 import {AppRoute} from '@/const';
 
-import {getMovies, getMoviesOfCurrentGenre, getPromoMovie} from '@/reducer/data/selectors';
+import {getMovies, getMoviesOfCurrentGenre, getPromoMovie, getFavoriteMovies} from '@/reducer/data/selectors';
 import {getCurrentGenre} from '@/reducer/app/selectors';
 import {getAuthorizationStatus, getBadRequestStatus} from '@/reducer/user/selectors';
 import {Operation as UserOperation} from '@/reducer/user/user';
+import {Operation as DataOperation} from '@/reducer/data/data';
 import {ActionCreator as AppActionCreator} from '@/reducer/app/app';
 import {AuthorizationStatus} from '@/reducer/user/user';
 
@@ -17,7 +18,7 @@ import {Main} from '@/components/main/main';
 import {SignIn} from '@/components/sign-in/sign-in';
 import {MyList} from '@/components/my-list/my-list';
 
-const App = ({promoMovie, movies, filteredMovies, currentGenre, titleClickHandler, authorizationStatus, onSignIn, isBadRequest}) => {
+const App = ({promoMovie, movies, filteredMovies, favoriteMovies, currentGenre, titleClickHandler, authorizationStatus, onSignIn, isBadRequest}) => {
   return (
     <Router history={history}>
       <Switch>
@@ -39,7 +40,7 @@ const App = ({promoMovie, movies, filteredMovies, currentGenre, titleClickHandle
         </Route>
         <Route path={AppRoute.MY_LIST} exact>
           <MyList
-            favoriteMovies={movies}
+            favoriteMovies={favoriteMovies}
           />
         </Route>
       </Switch>
@@ -67,6 +68,13 @@ App.propTypes = {
     movieLink: PropTypes.string.isRequired,
     preview: PropTypes.string.isRequired,
   }).isRequired).isRequired,
+  favoriteMovies: PropTypes.arrayOf(PropTypes.shape({
+    id: PropTypes.number.isRequired,
+    title: PropTypes.string.isRequired,
+    imageSrc: PropTypes.string.isRequired,
+    movieLink: PropTypes.string.isRequired,
+    preview: PropTypes.string.isRequired,
+  }).isRequired).isRequired,
   currentGenre: PropTypes.string.isRequired,
   titleClickHandler: PropTypes.func.isRequired,
   authorizationStatus: PropTypes.oneOf(Object.values(AuthorizationStatus)),
@@ -78,6 +86,7 @@ const mapStateToProps = (state) => ({
   movies: getMovies(state),
   currentGenre: getCurrentGenre(state),
   filteredMovies: getMoviesOfCurrentGenre(state),
+  favoriteMovies: getFavoriteMovies(state),
   promoMovie: getPromoMovie(state),
   authorizationStatus: getAuthorizationStatus(state),
   isBadRequest: getBadRequestStatus(state),
@@ -89,6 +98,7 @@ const mapDispatchToProps = (dispatch) => ({
   },
   onSignIn: (authorizationData) => {
     dispatch(UserOperation.login(authorizationData, () => {
+      dispatch(DataOperation.loadFavorite());
       history.push(AppRoute.ROOT);
     }));
   },

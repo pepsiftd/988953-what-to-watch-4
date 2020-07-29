@@ -41,6 +41,11 @@ it(`Data ActionCreator works correctly`, () => {
     payload: movies,
   });
 
+  expect(ActionCreator.loadFavorite(movies)).toEqual({
+    type: ActionType.LOAD_FAVORITE,
+    payload: movies,
+  });
+
   expect(ActionCreator.loadPromo({id: 0, title: `M`, genre: `O`, year: 1984})).toEqual({
     type: ActionType.LOAD_PROMO,
     payload: {id: 0, title: `M`, genre: `O`, year: 1984},
@@ -52,6 +57,7 @@ describe(`Data Reducer`, () => {
     expect(reducer(undefined, {})).toEqual({
       movies: [],
       promoMovie: {},
+      favoriteMovies: [],
     });
   });
 
@@ -76,6 +82,17 @@ describe(`Data Reducer`, () => {
       promoMovie: movies[0],
     });
   });
+
+  it(`loads favorite movies correctly`, () => {
+    expect(reducer({
+      favoriteMovies: [],
+    }, {
+      type: ActionType.LOAD_FAVORITE,
+      payload: movies,
+    })).toEqual({
+      favoriteMovies: movies,
+    });
+  });
 });
 
 describe(`Data Operation`, () => {
@@ -87,6 +104,9 @@ describe(`Data Operation`, () => {
   apiMock
       .onGet(`/films/promo`)
       .reply(200, {name: `I`, genre: `AM`, year: 2000});
+  apiMock
+      .onGet(`/favorite`)
+      .reply(200, [{fake: true}]);
 
   it(`should make a correct api-request to /films`, function () {
     const dispatch = jest.fn();
@@ -102,7 +122,7 @@ describe(`Data Operation`, () => {
       });
   });
 
-  it(`should make a correct api-request to /films`, function () {
+  it(`should make a correct api-request to /films/promo`, function () {
     const dispatch = jest.fn();
     const promoLoader = Operation.loadPromo();
 
@@ -112,6 +132,20 @@ describe(`Data Operation`, () => {
         expect(dispatch).toHaveBeenNthCalledWith(1, {
           type: ActionType.LOAD_PROMO,
           payload: (new FilmModel({name: `I`, genre: `AM`, year: 2000})),
+        });
+      });
+  });
+
+  it(`should make a correct api-request to /favorite`, function () {
+    const dispatch = jest.fn();
+    const filmsLoader = Operation.loadFavorite();
+
+    return filmsLoader(dispatch, () => {}, api)
+      .then(() => {
+        expect(dispatch).toHaveBeenCalledTimes(1);
+        expect(dispatch).toHaveBeenNthCalledWith(1, {
+          type: ActionType.LOAD_FAVORITE,
+          payload: ([new FilmModel({fake: true})]),
         });
       });
   });
