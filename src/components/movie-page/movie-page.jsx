@@ -1,17 +1,26 @@
 import React from 'react';
+import {connect} from 'react-redux';
 import PropTypes from 'prop-types';
 import {filmObjectPropTypes} from '@/const';
+import {getMoviesByGenre} from '@/utils';
+
+import {Operation as DataOperation} from '@/reducer/data/data';
 import {AuthorizationStatus} from '@/reducer/user/user';
+import {getAuthorizationStatus} from '@/reducer/user/selectors';
+import {getMovies} from '@/reducer/data/selectors';
 
 import {Overview} from '@/components/overview/overview';
 import {Details} from '@/components/details/details';
 import {Reviews} from '@/components/reviews/reviews';
 import {UserBlock} from '@/components/user-block/user-block';
+import {MoviesList} from '@/components/movies-list/movies-list';
+import {withActiveItem} from '@/hocs/with-active-item/with-active-item';
 
-const MoviePage = ({movie, onToggleFavorite, authorizationStatus, setActiveItem, activeItemId}) => {
+const MoviesListWithActiveItem = withActiveItem(MoviesList);
+
+const MoviePage = ({movies, id, onToggleFavorite, authorizationStatus, setActiveItem, activeItemId}) => {
+  const movie = movies[id];
   const {
-    id,
-
     title,
     genre,
     year,
@@ -157,43 +166,11 @@ const MoviePage = ({movie, onToggleFavorite, authorizationStatus, setActiveItem,
         <section className="catalog catalog--like-this">
           <h2 className="catalog__title">More like this</h2>
 
-          <div className="catalog__movies-list">
-            <article className="small-movie-card catalog__movies-card">
-              <div className="small-movie-card__image">
-                <img src="img/fantastic-beasts-the-crimes-of-grindelwald.jpg" alt="Fantastic Beasts: The Crimes of Grindelwald" width="280" height="175" />
-              </div>
-              <h3 className="small-movie-card__title">
-                <a className="small-movie-card__link" href="movie-page.html">Fantastic Beasts: The Crimes of Grindelwald</a>
-              </h3>
-            </article>
-
-            <article className="small-movie-card catalog__movies-card">
-              <div className="small-movie-card__image">
-                <img src="img/bohemian-rhapsody.jpg" alt="Bohemian Rhapsody" width="280" height="175" />
-              </div>
-              <h3 className="small-movie-card__title">
-                <a className="small-movie-card__link" href="movie-page.html">Bohemian Rhapsody</a>
-              </h3>
-            </article>
-
-            <article className="small-movie-card catalog__movies-card">
-              <div className="small-movie-card__image">
-                <img src="img/macbeth.jpg" alt="Macbeth" width="280" height="175" />
-              </div>
-              <h3 className="small-movie-card__title">
-                <a className="small-movie-card__link" href="movie-page.html">Macbeth</a>
-              </h3>
-            </article>
-
-            <article className="small-movie-card catalog__movies-card">
-              <div className="small-movie-card__image">
-                <img src="img/aviator.jpg" alt="Aviator" width="280" height="175" />
-              </div>
-              <h3 className="small-movie-card__title">
-                <a className="small-movie-card__link" href="movie-page.html">Aviator</a>
-              </h3>
-            </article>
-          </div>
+          {// ПЕРЕПИСАТЬ С ИСПОЛЬЗОВАНИЕМ STORE
+          }
+          <MoviesListWithActiveItem
+            movies={getMoviesByGenre(movies, genre)}
+          />
         </section>
 
         <footer className="page-footer">
@@ -215,11 +192,24 @@ const MoviePage = ({movie, onToggleFavorite, authorizationStatus, setActiveItem,
 };
 
 MoviePage.propTypes = {
-  movie: PropTypes.shape(filmObjectPropTypes).isRequired,
+  id: PropTypes.number.isRequired,
+  movies: PropTypes.arrayOf(PropTypes.shape(filmObjectPropTypes)).isRequired,
   onToggleFavorite: PropTypes.func.isRequired,
   authorizationStatus: PropTypes.oneOf(Object.values(AuthorizationStatus)).isRequired,
   activeItemId: PropTypes.string.isRequired,
   setActiveItem: PropTypes.func.isRequired,
 };
 
+const mapStateToProps = (state) => ({
+  movies: getMovies(state),
+  authorizationStatus: getAuthorizationStatus(state),
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  onToggleFavorite: (id) => {
+    dispatch(DataOperation.toggleFavorite(id));
+  },
+});
+
 export {MoviePage};
+export default connect(mapStateToProps, mapDispatchToProps)(MoviePage);
