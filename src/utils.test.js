@@ -1,4 +1,4 @@
-import {extend, getMoviesByGenre, getUniqueItems, getGenresFromMovies} from './utils';
+import {extend, getMoviesByGenre, getUniqueItems, getGenresFromMovies, humanizeRunTime} from './utils';
 
 const movies = [
   {
@@ -74,4 +74,10 @@ it(`getUniqueItems works correctly`, () => {
 
 it(`getGenresFromMovies works correctly`, () => {
   expect(getGenresFromMovies(movies)).toEqual([`drama`, `antiutopia`]);
+});
+
+it(`humanizeRunTime works correctly`, () => {
+  expect(humanizeRunTime(15)).toEqual(`15m`);
+  expect(humanizeRunTime(120)).toEqual(`2h`);
+  expect(humanizeRunTime(189)).toEqual(`3h 9m`);
 });

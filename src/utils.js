@@ -16,4 +16,20 @@ const getGenresFromMovies = (movies) => {
   return getUniqueItems(movies.map((movie) => movie.genre));
 };
 
-export {extend, getMoviesByGenre, getUniqueItems, getGenresFromMovies};
+const humanizeRunTime = (timeInMinutes) => {
+  const hrs = Math.floor(timeInMinutes / 60);
+  const mins = timeInMinutes - hrs * 60;
+  const buff = [];
+
+  if (hrs > 0) {
+    buff.push(`${hrs}h`);
+  }
+
+  if (mins > 0) {
+    buff.push(`${mins}m`);
+  }
+
+  return buff.join(` `);
+};
+
+export {extend, getMoviesByGenre, getUniqueItems, getGenresFromMovies, humanizeRunTime};
