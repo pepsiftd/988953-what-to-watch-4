@@ -16,6 +16,7 @@ const withActiveItem = (Component) => {
       return (
         <Component
           {...this.props}
+          activeItemId={currentItemId}
           renderItem={(ItemComponent, itemId, itemProps) => {
             return (
               <ItemComponent

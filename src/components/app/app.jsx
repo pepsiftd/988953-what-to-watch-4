@@ -17,6 +17,10 @@ import {AuthorizationStatus} from '@/reducer/user/user';
 import {Main} from '@/components/main/main';
 import {SignIn} from '@/components/sign-in/sign-in';
 import {MyList} from '@/components/my-list/my-list';
+import {MoviePage} from '@/components/movie-page/movie-page';
+import {withActiveItem} from '@/hocs/with-active-item/with-active-item';
+
+const MoviePageWithActiveItem = withActiveItem(MoviePage);
 
 const App = ({
   promoMovie,
@@ -52,6 +56,14 @@ const App = ({
         <Route path={AppRoute.MY_LIST} exact>
           <MyList
             favoriteMovies={favoriteMovies}
+          />
+        </Route>
+        <Route path="/dev-movie-page" exact>
+          <MoviePageWithActiveItem
+            movie={movies[0]}
+            onToggleFavorite={onToggleFavorite}
+            authorizationStatus={authorizationStatus}
+            initialItemId={`Overview`}
           />
         </Route>
       </Switch>
