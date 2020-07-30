@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import {filmObjectPropTypes} from '@/const';
 
-import {MovieCard} from '@/components/movie-card/movie-card';
+import {PromoMovieCard} from '@/components/promo-movie-card/promo-movie-card';
 import {MoviesList} from '@/components/movies-list/movies-list';
 import {GenresList} from '@/components/genres-list/genres-list';
 import {withActiveItem} from '@/hocs/with-active-item/with-active-item';
@@ -18,7 +18,7 @@ const Main = ({promoMovie, movies, filteredMovies, titleClickHandler, authorizat
 
   return (
     <React.Fragment>
-      <MovieCard
+      <PromoMovieCard
         movie={promoMovie}
         onToggleFavorite={onToggleFavorite}
         authorizationStatus={authorizationStatus}

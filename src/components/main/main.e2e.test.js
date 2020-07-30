@@ -163,6 +163,7 @@ it(`Should titles be pressed`, () => {
         currentGenre={`All genres`}
         titleClickHandler={titleClickHandler}
         onToggleFavorite={() => {}}
+        authorizationStatus="AUTHORIZED"
       />
   );
 

@@ -1,4 +1,6 @@
 import React from 'react';
+import {Router} from 'react-router-dom';
+import {history} from '@/history';
 import renderer from 'react-test-renderer';
 import {Main} from './main';
 
@@ -151,15 +153,18 @@ const titleClickHandler = jest.fn();
 
 it(`Main should render correctly`, () => {
   const tree = renderer.create(
-      <Main
-        promoMovie={promoMovie}
-        movies={movies}
-        filteredMovies={movies}
-        favoriteMovies={[]}
-        currentGenre={`All genres`}
-        titleClickHandler={titleClickHandler}
-        onToggleFavorite={() => {}}
-      />,
+      <Router history={history}>
+        <Main
+          promoMovie={promoMovie}
+          movies={movies}
+          filteredMovies={movies}
+          favoriteMovies={[]}
+          currentGenre={`All genres`}
+          titleClickHandler={titleClickHandler}
+          onToggleFavorite={() => {}}
+          authorizationStatus="AUTHORIZED"
+        />
+      </Router>,
       {
         createNodeMock: () => {
           return {};

@@ -1,10 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {Link} from 'react-router-dom';
 import {AuthorizationStatus} from '@/reducer/user/user';
-import {AppRoute, filmObjectPropTypes} from '@/const';
+import {filmObjectPropTypes} from '@/const';
 
-const MovieCard = ({movie, onToggleFavorite, authorizationStatus}) => {
+import {UserBlock} from '@/components/user-block/user-block';
+
+const PromoMovieCard = ({movie, onToggleFavorite, authorizationStatus}) => {
   const {
     id,
 
@@ -33,19 +34,10 @@ const MovieCard = ({movie, onToggleFavorite, authorizationStatus}) => {
           </a>
         </div>
 
-        <div className="user-block">
-          {authorizationStatus === AuthorizationStatus.AUTHORIZED &&
-            <div className="user-block__avatar">
-              <Link to={AppRoute.MY_LIST}>
-                <img src="img/avatar.jpg" alt="User avatar" width="63" height="63" />
-              </Link>
-            </div>
-          }
-          {authorizationStatus === AuthorizationStatus.UNAUTHORIZED &&
-            <Link to={AppRoute.LOGIN} className="user-block__link">Sign in</Link>
-          }
-
-        </div>
+        <UserBlock
+          authorizationStatus={authorizationStatus}
+          avatarImageSrc="img/avatar.jpg"
+        />
       </header>
 
       <div className="movie-card__wrap">
@@ -88,10 +80,10 @@ const MovieCard = ({movie, onToggleFavorite, authorizationStatus}) => {
   );
 };
 
-MovieCard.propTypes = {
+PromoMovieCard.propTypes = {
   movie: PropTypes.shape(filmObjectPropTypes).isRequired,
   onToggleFavorite: PropTypes.func.isRequired,
-  authorizationStatus: PropTypes.oneOf(Object.values(AuthorizationStatus)),
+  authorizationStatus: PropTypes.oneOf(Object.values(AuthorizationStatus)).isRequired,
 };
 
-export {MovieCard};
+export {PromoMovieCard};

@@ -3,7 +3,7 @@ import renderer from 'react-test-renderer';
 import {Router} from 'react-router-dom';
 import {history} from '@/history';
 
-import {MovieCard} from './movie-card';
+import {PromoMovieCard} from './promo-movie-card';
 
 const movie = {
   id: 15,
@@ -28,10 +28,10 @@ const movie = {
   isFavorite: false,
 };
 
-it(`MovieCard should render correctly`, () => {
+it(`PromoMovieCard should render correctly`, () => {
   const tree = renderer.create(
       <Router history={history}>
-        <MovieCard
+        <PromoMovieCard
           movie={movie}
           onToggleFavorite={() => {}}
           authorizationStatus={`AUTHORIZED`}

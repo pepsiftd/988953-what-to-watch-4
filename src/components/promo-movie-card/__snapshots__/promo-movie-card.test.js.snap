@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`MovieCard should render correctly 1`] = `
+exports[`PromoMovieCard should render correctly 1`] = `
 <section
   className="movie-card"
 >
