@@ -1,7 +1,8 @@
 import React from 'react';
 import {connect} from 'react-redux';
+import {Link} from 'react-router-dom';
 import PropTypes from 'prop-types';
-import {filmObjectPropTypes} from '@/const';
+import {AppRoute, filmObjectPropTypes} from '@/const';
 import {getMoviesByGenre} from '@/utils';
 
 import {Operation as DataOperation} from '@/reducer/data/data';
@@ -19,7 +20,7 @@ import {withActiveItem} from '@/hocs/with-active-item/with-active-item';
 const MoviesListWithActiveItem = withActiveItem(MoviesList);
 
 const MoviePage = ({movies, id, onToggleFavorite, authorizationStatus, setActiveItem, activeItemId}) => {
-  const movie = movies[id];
+  const movie = movies.find((it) => it.id === id);
   const {
     title,
     genre,
@@ -42,23 +43,23 @@ const MoviePage = ({movies, id, onToggleFavorite, authorizationStatus, setActive
       <section className="movie-card movie-card--full">
         <div className="movie-card__hero">
           <div className="movie-card__bg">
-            <img src={backgroundImage} alt="The Grand Budapest Hotel" />
+            <img src={backgroundImage} alt={title} />
           </div>
 
           <h1 className="visually-hidden">WTW</h1>
 
           <header className="page-header movie-card__head">
             <div className="logo">
-              <a href="main.html" className="logo__link">
+              <Link to={AppRoute.ROOT} className="logo__link">
                 <span className="logo__letter logo__letter--1">W</span>
                 <span className="logo__letter logo__letter--2">T</span>
                 <span className="logo__letter logo__letter--3">W</span>
-              </a>
+              </Link>
             </div>
 
             <UserBlock
               authorizationStatus={authorizationStatus}
-              avatarImageSrc="img/avatar.jpg"
+              avatarImageSrc="/img/avatar.jpg"
             />
           </header>
 
@@ -107,7 +108,8 @@ const MoviePage = ({movies, id, onToggleFavorite, authorizationStatus, setActive
                     <a
                       href="#"
                       className="movie-nav__link"
-                      onClick={() => {
+                      onClick={(evt) => {
+                        evt.preventDefault();
                         setActiveItem(`Overview`);
                       }}
                     >Overview</a>
@@ -116,7 +118,8 @@ const MoviePage = ({movies, id, onToggleFavorite, authorizationStatus, setActive
                     <a
                       href="#"
                       className="movie-nav__link"
-                      onClick={() => {
+                      onClick={(evt) => {
+                        evt.preventDefault();
                         setActiveItem(`Details`);
                       }}
                     >Details</a>
@@ -125,7 +128,8 @@ const MoviePage = ({movies, id, onToggleFavorite, authorizationStatus, setActive
                     <a
                       href="#"
                       className="movie-nav__link"
-                      onClick={() => {
+                      onClick={(evt) => {
+                        evt.preventDefault();
                         setActiveItem(`Reviews`);
                       }}
                     >Reviews</a>
@@ -166,10 +170,10 @@ const MoviePage = ({movies, id, onToggleFavorite, authorizationStatus, setActive
         <section className="catalog catalog--like-this">
           <h2 className="catalog__title">More like this</h2>
 
-          {// ПЕРЕПИСАТЬ С ИСПОЛЬЗОВАНИЕМ STORE
+          {// TODO ПЕРЕПИСАТЬ С ИСПОЛЬЗОВАНИЕМ STORE
           }
           <MoviesListWithActiveItem
-            movies={getMoviesByGenre(movies, genre)}
+            movies={getMoviesByGenre(movies, genre).slice(0, 4)}
           />
         </section>
 

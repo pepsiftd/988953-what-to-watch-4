@@ -39,6 +39,7 @@ const render = () => {
 Promise.all([
   store.dispatch(DataOperation.loadFilms()),
   store.dispatch(DataOperation.loadPromo()),
+  store.dispatch(DataOperation.loadFavorite()),
 ])
   .then(render);
 store.dispatch(UserOperation.checkAuth());

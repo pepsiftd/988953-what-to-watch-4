@@ -36,6 +36,18 @@ const App = ({
   return (
     <Router history={history}>
       <Switch>
+        <Route path="/films/:id" exact render={({match}) => (
+          <MoviePageWithActiveItem
+            id={parseInt(match.params.id, 10)}
+            initialItemId={`Overview`}
+          />)}
+        />
+        <Route path="/dev-movie-page" exact render={() => (
+          <MoviePageWithActiveItem
+            id={15}
+            initialItemId={`Overview`}
+          />)}
+        />
         <Route path={AppRoute.ROOT} exact>
           <Main
             promoMovie={promoMovie}
@@ -58,10 +70,10 @@ const App = ({
             favoriteMovies={favoriteMovies}
           />
         </Route>
-        <Route path="/dev-movie-page" exact>
-          <MoviePageWithActiveItem
-            id={1}
-            initialItemId={`Overview`}
+        <Route>
+          <SignIn
+            onSignIn={onSignIn}
+            isBadRequest={isBadRequest}
           />
         </Route>
       </Switch>

@@ -4,6 +4,7 @@ const AppRoute = {
   ROOT: `/`,
   LOGIN: `/login`,
   MY_LIST: `/mylist`,
+  MOVIE_PAGE: `/films/:id`,
 };
 
 const filmObjectPropTypes = {

@@ -5,7 +5,7 @@ import {AuthorizationStatus} from '@/reducer/user/user';
 import {AppRoute} from '@/const';
 
 
-const UserBlock = ({authorizationStatus, avatarImageSrc = `img/avatar.jpg`}) => {
+const UserBlock = ({authorizationStatus, avatarImageSrc = `/img/avatar.jpg`}) => {
   return (
     <div className="user-block">
       {authorizationStatus === AuthorizationStatus.AUTHORIZED &&

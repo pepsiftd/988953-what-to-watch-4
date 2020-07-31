@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import {history} from '@/history';
 
 const PREVIEW_START_TIMEOUT = 1000;
 
@@ -19,6 +20,9 @@ const SmallMovieCard = ({movie, onMouseEnter, onMouseLeave, children}) => {
           clearTimeout(timeout);
         }
         onMouseLeave();
+      }}
+      onClick={() => {
+        history.push(`/films/${movie.id}`);
       }}
     >
       <div className="small-movie-card__image">
