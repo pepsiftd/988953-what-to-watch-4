@@ -65,6 +65,7 @@ exports[`MyList should render correctly 1`] = `
     >
       <article
         className="small-movie-card catalog__movies-card"
+        onClick={[Function]}
         onMouseEnter={[Function]}
         onMouseLeave={[Function]}
       >
@@ -78,7 +79,8 @@ exports[`MyList should render correctly 1`] = `
         >
           <a
             className="small-movie-card__link"
-            href="movie-page.html"
+            href="/films/1"
+            onClick={[Function]}
           >
             I, Robot
           </a>
@@ -86,6 +88,7 @@ exports[`MyList should render correctly 1`] = `
       </article>
       <article
         className="small-movie-card catalog__movies-card"
+        onClick={[Function]}
         onMouseEnter={[Function]}
         onMouseLeave={[Function]}
       >
@@ -99,7 +102,8 @@ exports[`MyList should render correctly 1`] = `
         >
           <a
             className="small-movie-card__link"
-            href="movie-page.html"
+            href="/films/2"
+            onClick={[Function]}
           >
             Brave new world
           </a>
@@ -107,6 +111,7 @@ exports[`MyList should render correctly 1`] = `
       </article>
       <article
         className="small-movie-card catalog__movies-card"
+        onClick={[Function]}
         onMouseEnter={[Function]}
         onMouseLeave={[Function]}
       >
@@ -120,7 +125,8 @@ exports[`MyList should render correctly 1`] = `
         >
           <a
             className="small-movie-card__link"
-            href="movie-page.html"
+            href="/films/3"
+            onClick={[Function]}
           >
             1984
           </a>
@@ -128,6 +134,7 @@ exports[`MyList should render correctly 1`] = `
       </article>
       <article
         className="small-movie-card catalog__movies-card"
+        onClick={[Function]}
         onMouseEnter={[Function]}
         onMouseLeave={[Function]}
       >
@@ -141,7 +148,8 @@ exports[`MyList should render correctly 1`] = `
         >
           <a
             className="small-movie-card__link"
-            href="movie-page.html"
+            href="/films/4"
+            onClick={[Function]}
           >
             Dune
           </a>
@@ -149,6 +157,7 @@ exports[`MyList should render correctly 1`] = `
       </article>
       <article
         className="small-movie-card catalog__movies-card"
+        onClick={[Function]}
         onMouseEnter={[Function]}
         onMouseLeave={[Function]}
       >
@@ -162,7 +171,8 @@ exports[`MyList should render correctly 1`] = `
         >
           <a
             className="small-movie-card__link"
-            href="movie-page.html"
+            href="/films/5"
+            onClick={[Function]}
           >
             Cloverfeld
           </a>
@@ -170,6 +180,7 @@ exports[`MyList should render correctly 1`] = `
       </article>
       <article
         className="small-movie-card catalog__movies-card"
+        onClick={[Function]}
         onMouseEnter={[Function]}
         onMouseLeave={[Function]}
       >
@@ -183,7 +194,8 @@ exports[`MyList should render correctly 1`] = `
         >
           <a
             className="small-movie-card__link"
-            href="movie-page.html"
+            href="/films/6"
+            onClick={[Function]}
           >
             Jumanji: The new level
           </a>

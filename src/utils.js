@@ -1,3 +1,5 @@
+import {RatingEstimate} from '@/const';
+
 const getUniqueItems = (list) => {
   return list.filter((it, i, array) => {
     return array.indexOf(it) === i;
@@ -32,4 +34,28 @@ const humanizeRunTime = (timeInMinutes) => {
   return buff.join(` `);
 };
 
-export {extend, getMoviesByGenre, getUniqueItems, getGenresFromMovies, humanizeRunTime};
+const getRatingEstimate = (rating) => {
+  let estimate = ``;
+
+  switch (true) {
+    case rating < 3:
+      estimate = RatingEstimate.BAD;
+      break;
+    case rating >= 3 && rating < 5:
+      estimate = RatingEstimate.NORMAL;
+      break;
+    case rating >= 5 && rating < 8:
+      estimate = RatingEstimate.GOOD;
+      break;
+    case rating >= 8 && rating < 10:
+      estimate = RatingEstimate.VERY_GOOD;
+      break;
+    case rating === 10:
+      estimate = RatingEstimate.AWESOME;
+      break;
+  }
+
+  return estimate;
+};
+
+export {extend, getMoviesByGenre, getUniqueItems, getGenresFromMovies, humanizeRunTime, getRatingEstimate};

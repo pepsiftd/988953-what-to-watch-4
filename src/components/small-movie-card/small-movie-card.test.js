@@ -1,6 +1,8 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
 import {SmallMovieCard} from './small-movie-card';
+import {Router} from 'react-router-dom';
+import {history} from '@/history';
 
 const movie = {
   id: 152,
@@ -12,13 +14,15 @@ const movie = {
 
 it(`SmallMovieCard should render correct movie name`, () => {
   const tree = renderer.create(
-      <SmallMovieCard
-        movie={movie}
-        onMouseEnter={() => {}}
-        onMouseLeave={() => {}}
-      >
-        <video />
-      </SmallMovieCard>
+      <Router history={history}>
+        <SmallMovieCard
+          movie={movie}
+          onMouseEnter={() => {}}
+          onMouseLeave={() => {}}
+        >
+          <video />
+        </SmallMovieCard>
+      </Router>
   );
 
   expect(tree).toMatchSnapshot();

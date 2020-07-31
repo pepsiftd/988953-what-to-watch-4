@@ -1,18 +1,20 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {history} from '@/history';
+import {AppRoute} from '@/const';
+import {Link} from 'react-router-dom';
 
 const PREVIEW_START_TIMEOUT = 1000;
 
 const SmallMovieCard = ({movie, onMouseEnter, onMouseLeave, children}) => {
-  const {title, movieLink} = movie;
+  const {title, id} = movie;
   let timeout = null;
 
   return (
     <article className="small-movie-card catalog__movies-card"
       onMouseEnter={() => {
         timeout = setTimeout(() => {
-          onMouseEnter(movie.id);
+          onMouseEnter(id);
         }, PREVIEW_START_TIMEOUT);
       }}
       onMouseLeave={() => {
@@ -22,14 +24,14 @@ const SmallMovieCard = ({movie, onMouseEnter, onMouseLeave, children}) => {
         onMouseLeave();
       }}
       onClick={() => {
-        history.push(`/films/${movie.id}`);
+        history.push(`${AppRoute.MOVIE_PAGE}/${id}`);
       }}
     >
       <div className="small-movie-card__image">
         {children}
       </div>
       <h3 className="small-movie-card__title">
-        <a className="small-movie-card__link" href={movieLink}>{title}</a>
+        <Link className="small-movie-card__link" to={`${AppRoute.MOVIE_PAGE}/${id}`}>{title}</Link>
       </h3>
     </article>
   );
@@ -40,7 +42,6 @@ SmallMovieCard.propTypes = {
     id: PropTypes.number.isRequired,
     title: PropTypes.string.isRequired,
     imageSrc: PropTypes.string.isRequired,
-    movieLink: PropTypes.string.isRequired,
     preview: PropTypes.string.isRequired,
   }).isRequired,
   children: PropTypes.element.isRequired,

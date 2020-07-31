@@ -4,7 +4,15 @@ const AppRoute = {
   ROOT: `/`,
   LOGIN: `/login`,
   MY_LIST: `/mylist`,
-  MOVIE_PAGE: `/films/:id`,
+  MOVIE_PAGE: `/films`,
+};
+
+const RatingEstimate = {
+  BAD: `Bad`,
+  NORMAL: `Normal`,
+  GOOD: `Good`,
+  VERY_GOOD: `Very good`,
+  AWESOME: `Awesome`,
 };
 
 const filmObjectPropTypes = {
@@ -30,4 +38,4 @@ const filmObjectPropTypes = {
   isFavorite: PropTypes.bool.isRequired,
 };
 
-export {AppRoute, filmObjectPropTypes};
+export {AppRoute, RatingEstimate, filmObjectPropTypes};

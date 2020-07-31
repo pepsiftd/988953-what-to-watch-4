@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import {getRatingEstimate} from '@/utils';
 
 const Overview = ({ratingScore, ratingCount, description, director, starring}) => {
   const starringShort = starring.slice(0, 4);
@@ -10,7 +11,7 @@ const Overview = ({ratingScore, ratingCount, description, director, starring}) =
       <div className="movie-rating">
         <div className="movie-rating__score">{score}</div>
         <p className="movie-rating__meta">
-          <span className="movie-rating__level">Very good</span>
+          <span className="movie-rating__level">{getRatingEstimate(ratingScore)}</span>
           <span className="movie-rating__count">{ratingCount} ratings</span>
         </p>
       </div>

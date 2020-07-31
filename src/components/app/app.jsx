@@ -36,7 +36,7 @@ const App = ({
   return (
     <Router history={history}>
       <Switch>
-        <Route path="/films/:id" exact render={({match}) => (
+        <Route path={`${AppRoute.MOVIE_PAGE}/:id`} exact render={({match}) => (
           <MoviePageWithActiveItem
             id={parseInt(match.params.id, 10)}
             initialItemId={`Overview`}
@@ -71,10 +71,8 @@ const App = ({
           />
         </Route>
         <Route>
-          <SignIn
-            onSignIn={onSignIn}
-            isBadRequest={isBadRequest}
-          />
+          <h1>Error 404</h1>
+          <p>Route unknown</p>
         </Route>
       </Switch>
     </Router>

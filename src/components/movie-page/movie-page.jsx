@@ -173,7 +173,7 @@ const MoviePage = ({movies, id, onToggleFavorite, authorizationStatus, setActive
           {// TODO ПЕРЕПИСАТЬ С ИСПОЛЬЗОВАНИЕМ STORE
           }
           <MoviesListWithActiveItem
-            movies={getMoviesByGenre(movies, genre).slice(0, 4)}
+            movies={getMoviesByGenre(movies, genre).filter((it) => it.id !== id).slice(0, 4)}
           />
         </section>
 

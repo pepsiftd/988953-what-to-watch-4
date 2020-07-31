@@ -1,4 +1,4 @@
-import {extend, getMoviesByGenre, getUniqueItems, getGenresFromMovies, humanizeRunTime} from './utils';
+import {extend, getMoviesByGenre, getUniqueItems, getGenresFromMovies, humanizeRunTime, getRatingEstimate} from './utils';
 
 const movies = [
   {
@@ -80,4 +80,15 @@ it(`humanizeRunTime works correctly`, () => {
   expect(humanizeRunTime(15)).toEqual(`15m`);
   expect(humanizeRunTime(120)).toEqual(`2h`);
   expect(humanizeRunTime(189)).toEqual(`3h 9m`);
+});
+
+it(`getRatingEstimate works correctly`, () => {
+  expect(getRatingEstimate(1.3)).toEqual(`Bad`);
+  expect(getRatingEstimate(3)).toEqual(`Normal`);
+  expect(getRatingEstimate(4.5)).toEqual(`Normal`);
+  expect(getRatingEstimate(5)).toEqual(`Good`);
+  expect(getRatingEstimate(7.5)).toEqual(`Good`);
+  expect(getRatingEstimate(8)).toEqual(`Very good`);
+  expect(getRatingEstimate(9.5)).toEqual(`Very good`);
+  expect(getRatingEstimate(10)).toEqual(`Awesome`);
 });
