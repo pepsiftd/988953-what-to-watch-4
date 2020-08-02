@@ -1,10 +1,18 @@
 import PropTypes from 'prop-types';
 
+const videoPlayerSettings = {
+  isMute: false,
+  width: `1000`,
+  height: `1000`,
+  autoplay: true,
+};
+
 const AppRoute = {
   ROOT: `/`,
   LOGIN: `/login`,
   MY_LIST: `/mylist`,
   MOVIE_PAGE: `/films`,
+  PLAYER: `/player`,
 };
 
 const RatingEstimate = {
@@ -38,4 +46,4 @@ const filmObjectPropTypes = {
   isFavorite: PropTypes.bool.isRequired,
 };
 
-export {AppRoute, RatingEstimate, filmObjectPropTypes};
+export {AppRoute, RatingEstimate, filmObjectPropTypes, videoPlayerSettings};

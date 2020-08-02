@@ -4,7 +4,7 @@ import {connect} from 'react-redux';
 
 import {Router, Route, Switch} from 'react-router-dom';
 import {history} from '@/history';
-import {AppRoute, filmObjectPropTypes} from '@/const';
+import {AppRoute, filmObjectPropTypes, videoPlayerSettings} from '@/const';
 
 import {getMovies, getMoviesOfCurrentGenre, getPromoMovie, getFavoriteMovies} from '@/reducer/data/selectors';
 import {getCurrentGenre} from '@/reducer/app/selectors';
@@ -18,9 +18,12 @@ import {Main} from '@/components/main/main';
 import {SignIn} from '@/components/sign-in/sign-in';
 import {MyList} from '@/components/my-list/my-list';
 import MoviePage from '@/components/movie-page/movie-page';
+import {VideoPlayer} from '@/components/video-player/video-player';
 import {withActiveItem} from '@/hocs/with-active-item/with-active-item';
+import {withVideoPlayer} from '@/hocs/with-video-player/with-video-player';
 
 const MoviePageWithActiveItem = withActiveItem(MoviePage);
+const VideoPlayerWrapped = withVideoPlayer(VideoPlayer);
 
 const App = ({
   promoMovie,
@@ -69,6 +72,23 @@ const App = ({
           <MyList
             favoriteMovies={favoriteMovies}
           />
+        </Route>
+        <Route path={`${AppRoute.PLAYER}/:id`} exact render={({match}) => {
+          const id = parseInt(match.params.id, 10);
+          const movie = movies.find((it) => it.id === id);
+          const videoSettings = Object.assign({}, videoPlayerSettings, {
+            src: movie.fullVideo,
+            poster: movie.poster,
+          });
+
+          return (
+            <VideoPlayerWrapped
+              title={movie.title}
+              videoSettings={videoSettings}
+              isActive={true}
+            />
+          );
+        }}>
         </Route>
         <Route>
           <h1>Error 404</h1>

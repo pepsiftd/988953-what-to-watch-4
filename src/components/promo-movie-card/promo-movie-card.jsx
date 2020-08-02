@@ -1,7 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {AuthorizationStatus} from '@/reducer/user/user';
-import {filmObjectPropTypes} from '@/const';
+import {filmObjectPropTypes, AppRoute} from '@/const';
+import {history} from '@/history';
 
 import {UserBlock} from '@/components/user-block/user-block';
 
@@ -54,7 +55,13 @@ const PromoMovieCard = ({movie, onToggleFavorite, authorizationStatus}) => {
             </p>
 
             <div className="movie-card__buttons">
-              <button className="btn btn--play movie-card__button" type="button">
+              <button
+                className="btn btn--play movie-card__button"
+                type="button"
+                onClick={() => {
+                  history.push(`${AppRoute.PLAYER}/${id}`);
+                }}
+              >
                 <svg viewBox="0 0 19 19" width="19" height="19">
                   <use xlinkHref="#play-s"></use>
                 </svg>
