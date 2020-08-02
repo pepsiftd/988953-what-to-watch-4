@@ -6,12 +6,15 @@ import {PromoMovieCard} from '@/components/promo-movie-card/promo-movie-card';
 import {MoviesList} from '@/components/movies-list/movies-list';
 import {GenresList} from '@/components/genres-list/genres-list';
 import {withActiveItem} from '@/hocs/with-active-item/with-active-item';
+import {withShowMoreButton} from '@/hocs/with-show-more-button/with-show-more-button';
 
 import {AuthorizationStatus} from '@/reducer/user/user';
 
 const INITIAL_GENRE_FILTER = `All genres`;
+const INITIAL_CARDS_COUNT = 8;
+const ADD_CARDS_ON_SHOW_MORE = 8;
 
-const MoviesListWrapped = withActiveItem(MoviesList);
+const MoviesListWrapped = withShowMoreButton(withActiveItem(MoviesList));
 const GenresListWrapped = withActiveItem(GenresList);
 
 const Main = ({promoMovie, movies, filteredMovies, titleClickHandler, authorizationStatus, onToggleFavorite}) => {
@@ -36,11 +39,9 @@ const Main = ({promoMovie, movies, filteredMovies, titleClickHandler, authorizat
 
           <MoviesListWrapped
             movies={filteredMovies}
+            initialCardsCount={INITIAL_CARDS_COUNT}
+            addCardsOnShowMore={ADD_CARDS_ON_SHOW_MORE}
           />
-
-          <div className="catalog__more">
-            <button className="catalog__button" type="button">Show more</button>
-          </div>
         </section>
 
         <footer className="page-footer">

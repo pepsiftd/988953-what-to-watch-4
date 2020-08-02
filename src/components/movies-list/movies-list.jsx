@@ -12,27 +12,31 @@ const VIDEO_SETTINGS = {
   height: `175`,
 };
 
-const MoviesList = ({movies, renderItem, setActiveItem, clearActiveItem}) => {
+const MoviesList = ({movies, renderItem, setActiveItem, clearActiveItem, cardsShowing, renderShowMore = () => {}}) => {
+  const cardsShowingCount = cardsShowing ? cardsShowing : movies.length;
   return (
-    <div className="catalog__movies-list">
-      {
-        movies.map((movie) => {
-          const videoSettings = Object.assign({}, {
-            src: movie.preview,
-            poster: movie.imageSrc,
-          }, VIDEO_SETTINGS);
+    <React.Fragment>
+      <div className="catalog__movies-list">
+        {
+          movies.slice(0, cardsShowingCount).map((movie) => {
+            const videoSettings = Object.assign({}, {
+              src: movie.preview,
+              poster: movie.imageSrc,
+            }, VIDEO_SETTINGS);
 
-          return renderItem(SmallMovieCardWithVideo, movie.id, {
-            key: movie.id,
-            movie,
-            onMouseEnter: setActiveItem,
-            onMouseLeave: clearActiveItem,
+            return renderItem(SmallMovieCardWithVideo, movie.id, {
+              key: movie.id,
+              movie,
+              onMouseEnter: setActiveItem,
+              onMouseLeave: clearActiveItem,
 
-            videoSettings,
-          });
-        })
-      }
-    </div>
+              videoSettings,
+            });
+          })
+        }
+      </div>
+      {renderShowMore()}
+    </React.Fragment>
   );
 };
 
@@ -47,6 +51,8 @@ MoviesList.propTypes = {
   renderItem: PropTypes.func.isRequired,
   setActiveItem: PropTypes.func.isRequired,
   clearActiveItem: PropTypes.func.isRequired,
+  cardsShowing: PropTypes.number,
+  renderShowMore: PropTypes.func,
 };
 
 export {MoviesList};
