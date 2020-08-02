@@ -10,17 +10,24 @@ const withVideoPlayer = (Component) => {
       this.state = {
         isPlaying: this._videoSettings.autoplay,
         progress: 0,
+        isFullscreen: false,
       };
 
       this._videoRef = createRef();
+      this.duration = 0;
 
       this.onPlayClick = this.onPlayClick.bind(this);
+      this.onFullscreenClick = this.onFullscreenClick.bind(this);
     }
 
     onPlayClick() {
       this.setState((prevState) => ({
         isPlaying: !prevState.isPlaying,
       }));
+    }
+
+    onFullscreenClick() {
+      this._videoRef.current.requestFullscreen();
     }
 
     componentDidMount() {
@@ -32,10 +39,27 @@ const withVideoPlayer = (Component) => {
       video.poster = poster;
       video.muted = isMute;
 
+      video.oncanplaythrough = () => {
+        this.duration = parseInt(video.duration, 10);
+      };
+
       video.ontimeupdate = () => {
         this.setState({
           progress: parseInt(video.currentTime, 10),
         });
+      };
+
+      video.onfullscreenchange = () => {
+        if (document.fullscreenElement) {
+          this.setState({
+            isFullscreen: true,
+          });
+        } else {
+          this.setState({
+            isFullscreen: false,
+            isPlaying: !video.paused,
+          });
+        }
       };
     }
 
@@ -49,15 +73,18 @@ const withVideoPlayer = (Component) => {
       video.onpause = null;
       video.muted = null;
       video.ontimeupdate = null;
+      video.onfullscreenchange = null;
     }
 
     componentDidUpdate() {
       const video = this._videoRef.current;
 
-      if (this.state.isPlaying) {
-        video.play();
-      } else {
-        video.pause();
+      if (!this.state.isFullscreen) {
+        if (this.state.isPlaying) {
+          video.play();
+        } else {
+          video.pause();
+        }
       }
     }
 
@@ -67,9 +94,10 @@ const withVideoPlayer = (Component) => {
         <Component
           {...this.props}
           isPlaying={this.state.isPlaying}
+          duration={this.duration}
           timeElapsed={this.state.progress}
           onPlayClick={this.onPlayClick}
-          onFullscreenClick={() => {}}
+          onFullscreenClick={this.onFullscreenClick}
         >
           <video
             width="100%"

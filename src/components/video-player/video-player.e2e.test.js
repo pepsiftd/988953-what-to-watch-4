@@ -16,7 +16,8 @@ it(`VideoPlayer calls right functions when clicked buttons`, () => {
       <VideoPlayer
         isPlaying={true}
         title={`Movie Title`}
-        timeElapsed="1:30:29"
+        timeElapsed={553}
+        duration={3695}
         onPlayClick={onPlayClick}
         onFullscreenClick={onFullscreenClick}
       >

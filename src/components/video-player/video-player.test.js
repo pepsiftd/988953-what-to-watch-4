@@ -8,7 +8,8 @@ it(`VideoPlayer renders correctly`, () => {
       <VideoPlayer
         isPlaying={true}
         title="Movie Title"
-        timeElapsed="1:30:29"
+        timeElapsed={553}
+        duration={3695}
         onPlayClick={() => {}}
         onFullscreenClick={() => {}}
         onExitClick={() => {}}

@@ -1,9 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {history} from '@/history';
+import {humanizeTimeElapsed} from '@/utils';
 
-const VideoPlayer = ({children, isPlaying, title, timeElapsed, onPlayClick, onFullscreenClick}) => {
-  const timeElapsedString = `${timeElapsed}`;
+const VideoPlayer = ({children, isPlaying, title, duration, timeElapsed, onPlayClick, onFullscreenClick}) => {
+  const timeElapsedString = humanizeTimeElapsed(timeElapsed);
+  const progress = timeElapsed / duration * 100;
   return (
     <div className="player">
       {children}
@@ -19,8 +21,8 @@ const VideoPlayer = ({children, isPlaying, title, timeElapsed, onPlayClick, onFu
       <div className="player__controls">
         <div className="player__controls-row">
           <div className="player__time">
-            <progress className="player__progress" value="30" max="100"></progress>
-            <div className="player__toggler" style={{left: `30%`}}>Toggler</div>
+            <progress className="player__progress" value={timeElapsed} max={duration}></progress>
+            <div className="player__toggler" style={{left: `${progress}%`}}>Toggler</div>
           </div>
           <div className="player__time-value">{timeElapsedString}</div>
         </div>
@@ -73,6 +75,7 @@ VideoPlayer.propTypes = {
   children: PropTypes.element.isRequired,
   isPlaying: PropTypes.bool.isRequired,
   title: PropTypes.string.isRequired,
+  duration: PropTypes.number.isRequired,
   timeElapsed: PropTypes.number.isRequired,
   onPlayClick: PropTypes.func.isRequired,
   onFullscreenClick: PropTypes.func.isRequired,

@@ -23,14 +23,14 @@ exports[`VideoPlayer renders correctly 1`] = `
       >
         <progress
           className="player__progress"
-          max="100"
-          value="30"
+          max={3695}
+          value={553}
         />
         <div
           className="player__toggler"
           style={
             Object {
-              "left": "30%",
+              "left": "14.96617050067659%",
             }
           }
         >
@@ -40,7 +40,7 @@ exports[`VideoPlayer renders correctly 1`] = `
       <div
         className="player__time-value"
       >
-        1:30:29
+        00:09:13
       </div>
     </div>
     <div
