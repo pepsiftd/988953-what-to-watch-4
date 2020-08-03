@@ -4,6 +4,10 @@ const MINUTES_IN_AN_HOUR = 60;
 const SECONDS_IN_AN_HOUR = 3600;
 const SECONDS_IN_A_MINUTE = 60;
 
+const monthNames = ["January", "February", "March", "April", "May", "June",
+  "July", "August", "September", "October", "November", "December"
+];
+
 const getUniqueItems = (list) => {
   return list.filter((it, i, array) => {
     return array.indexOf(it) === i;
@@ -74,6 +78,21 @@ const getRatingEstimate = (rating) => {
   return estimate;
 };
 
+const getRatingString = (rating) => {
+  const temp = `${String(rating).replace(`.`, `,`)},0`;
+  const indexOfComma = temp.indexOf(`,`);
+
+  return temp.slice(0, indexOfComma + 2);
+};
+
+const getFormattedDate = (date) => {
+  const month = monthNames[date.getMonth()];
+  const day = date.getDate();
+  const year = date.getFullYear();
+
+  return `${month} ${day}, ${year}`;
+};
+
 export {
   extend,
   getMoviesByGenre,
@@ -81,5 +100,7 @@ export {
   getGenresFromMovies,
   humanizeRunTime,
   getRatingEstimate,
-  humanizeTimeElapsed
+  humanizeTimeElapsed,
+  getRatingString,
+  getFormattedDate,
 };

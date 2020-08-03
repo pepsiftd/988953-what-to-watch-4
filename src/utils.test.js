@@ -6,6 +6,8 @@ import {
   humanizeRunTime,
   getRatingEstimate,
   humanizeTimeElapsed,
+  getRatingString,
+  getFormattedDate,
 } from './utils';
 
 const movies = [
@@ -101,4 +103,17 @@ it(`humanizeTimeElapsed works correctly`, () => {
   expect(humanizeTimeElapsed(330)).toEqual(`00:05:30`);
   expect(humanizeTimeElapsed(3930)).toEqual(`01:05:30`);
   expect(humanizeTimeElapsed(36600)).toEqual(`10:10:00`);
+});
+
+it(`getRatingString works correctly`, () => {
+  expect(getRatingString(8.9)).toEqual(`8,9`);
+  expect(getRatingString(3.54)).toEqual(`3,5`);
+  expect(getRatingString(5.0)).toEqual(`5,0`);
+  expect(getRatingString(8)).toEqual(`8,0`);
+  expect(getRatingString(10)).toEqual(`10,0`);
+});
+
+it(`getFormattedDate works correctly`, () => {
+  expect(getFormattedDate(new Date(`December 17, 1995`))).toEqual(`December 17, 1995`);
+  expect(getFormattedDate(new Date(`February 5, 2018`))).toEqual(`February 5, 2018`);
 });
