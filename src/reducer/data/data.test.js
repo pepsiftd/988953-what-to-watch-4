@@ -1,5 +1,6 @@
 import {reducer, ActionType, ActionCreator, Operation} from './data';
 import {FilmModel} from '@/models/film-model';
+import {ReviewModel} from '@/models/review-model';
 import MockAdapter from 'axios-mock-adapter';
 import {createAPI} from '@/api.js';
 
@@ -12,7 +13,6 @@ const movies = [
     genre: `drama`,
     year: `2001`,
     imageSrc: `http://placehold.it/280x175`,
-    movieLink: `movie-page.html`,
     preview: `https://upload.wikimedia.org/wikipedia/commons/transcoded/b/b3/Big_Buck_Bunny_Trailer_400p.ogv/Big_Buck_Bunny_Trailer_400p.ogv.360p.webm`,
   },
   {
@@ -21,7 +21,6 @@ const movies = [
     genre: `antiutopia`,
     year: `1966`,
     imageSrc: `http://placehold.it/280x175`,
-    movieLink: `movie-page.html`,
     preview: `https://upload.wikimedia.org/wikipedia/commons/transcoded/b/b3/Big_Buck_Bunny_Trailer_400p.ogv/Big_Buck_Bunny_Trailer_400p.ogv.360p.webm`,
   },
   {
@@ -30,8 +29,40 @@ const movies = [
     genre: `antiutopia`,
     year: `2002`,
     imageSrc: `http://placehold.it/280x175`,
-    movieLink: `movie-page.html`,
     preview: `https://upload.wikimedia.org/wikipedia/commons/transcoded/b/b3/Big_Buck_Bunny_Trailer_400p.ogv/Big_Buck_Bunny_Trailer_400p.ogv.360p.webm`,
+  },
+];
+
+const reviews = [
+  {
+    'id': 1,
+    'user': {
+      'id': 4,
+      'name': `Kate Muir`
+    },
+    'rating': 8.9,
+    'comment': `Discerning travellers and Wes Anderson fans will luxuriate in the glorious Mittel-European kitsch of one of the director's funniest and most exquisitely designed movies in years.`,
+    'date': `2019-05-08T14:13:56.569Z`
+  },
+  {
+    'id': 2,
+    'user': {
+      'id': 52,
+      'name': `John Doe`
+    },
+    'rating': 3.2,
+    'comment': `Boring, not worth the time spent on watching it`,
+    'date': `2019-02-10T20:00:07.569Z`
+  },
+  {
+    'id': 3,
+    'user': {
+      'id': 444,
+      'name': `Jack Smith`
+    },
+    'rating': 10.0,
+    'comment': `Brilliant masterpiece, perfect from every point of view.`,
+    'date': `2019-09-03T04:38:01.569Z`
   },
 ];
 
@@ -50,6 +81,11 @@ it(`Data ActionCreator works correctly`, () => {
     type: ActionType.LOAD_PROMO,
     payload: {id: 0, title: `M`, genre: `O`, year: 1984},
   });
+
+  expect(ActionCreator.loadReviews(reviews)).toEqual({
+    type: ActionType.LOAD_REVIEWS,
+    payload: reviews,
+  });
 });
 
 describe(`Data Reducer`, () => {
@@ -58,6 +94,7 @@ describe(`Data Reducer`, () => {
       movies: [],
       promoMovie: {},
       favoriteMovies: [],
+      reviews: [],
     });
   });
 
@@ -93,6 +130,17 @@ describe(`Data Reducer`, () => {
       favoriteMovies: movies,
     });
   });
+
+  it(`loads reviews correctly`, () => {
+    expect(reducer({
+      reviews: [],
+    }, {
+      type: ActionType.LOAD_REVIEWS,
+      payload: reviews,
+    })).toEqual({
+      reviews,
+    });
+  });
 });
 
 describe(`Data Operation`, () => {
@@ -107,6 +155,9 @@ describe(`Data Operation`, () => {
   apiMock
       .onGet(`/favorite`)
       .reply(200, [{fake: true}]);
+  apiMock
+      .onGet(`/comments/1`)
+      .reply(200, reviews);
 
   it(`should make a correct api-request to /films`, function () {
     const dispatch = jest.fn();
@@ -146,6 +197,21 @@ describe(`Data Operation`, () => {
         expect(dispatch).toHaveBeenNthCalledWith(1, {
           type: ActionType.LOAD_FAVORITE,
           payload: ([new FilmModel({fake: true})]),
+        });
+      });
+  });
+
+  it(`should make a correct api-request to /comments/:id`, function () {
+    const dispatch = jest.fn();
+    const id = 1;
+    const reviewsLoader = Operation.loadReviews(id);
+
+    return reviewsLoader(dispatch, () => {}, api)
+      .then(() => {
+        expect(dispatch).toHaveBeenCalledTimes(1);
+        expect(dispatch).toHaveBeenNthCalledWith(1, {
+          type: ActionType.LOAD_REVIEWS,
+          payload: ReviewModel.parseReviews(reviews),
         });
       });
   });

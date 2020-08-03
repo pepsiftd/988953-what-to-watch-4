@@ -1,17 +1,20 @@
 import {extend} from '@/utils';
 import {FilmModel} from '@/models/film-model';
+import {ReviewModel} from '@/models/review-model';
 import {getMovies} from './selectors';
 
 const initialState = {
   movies: [],
   promoMovie: {},
   favoriteMovies: [],
+  reviews: [],
 };
 
 const ActionType = {
   LOAD_FILMS: `LOAD_FILMS`,
   LOAD_PROMO: `LOAD_PROMO`,
   LOAD_FAVORITE: `LOAD_FAVORITE`,
+  LOAD_REVIEWS: `LOAD_REVIEWS`,
 };
 
 const ActionCreator = {
@@ -35,6 +38,13 @@ const ActionCreator = {
       payload: favoriteMovies,
     };
   },
+
+  loadReviews: (reviews) => {
+    return {
+      type: ActionType.LOAD_REVIEWS,
+      payload: reviews,
+    };
+  },
 };
 
 const reducer = (state = initialState, action) => {
@@ -50,6 +60,10 @@ const reducer = (state = initialState, action) => {
     case ActionType.LOAD_FAVORITE:
       return extend(state, {
         favoriteMovies: action.payload,
+      });
+    case ActionType.LOAD_REVIEWS:
+      return extend(state, {
+        reviews: action.payload,
       });
   }
 
@@ -96,6 +110,13 @@ const Operation = {
       })
       .catch((err) => {
         throw err;
+      });
+  },
+  loadReviews: (id) => (dispatch, getState, api) => {
+    return api.get(`/comments/${id}`)
+      .then((response) => {
+        const reviews = ReviewModel.parseReviews(response.data);
+        dispatch(ActionCreator.loadReviews(reviews));
       });
   },
 };

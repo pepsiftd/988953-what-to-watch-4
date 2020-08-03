@@ -22,4 +22,8 @@ const getMoviesOfCurrentGenre = createSelector(
     getMoviesByGenre
 );
 
-export {getMovies, getMoviesOfCurrentGenre, getFavoriteMovies, getPromoMovie};
+const getReviews = (state) => {
+  return state[NameSpace.DATA].reviews;
+};
+
+export {getMovies, getMoviesOfCurrentGenre, getFavoriteMovies, getPromoMovie, getReviews};
