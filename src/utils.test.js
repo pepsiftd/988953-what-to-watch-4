@@ -15,7 +15,6 @@ const movies = [
     genre: `drama`,
     year: `2001`,
     imageSrc: `http://placehold.it/280x175`,
-    movieLink: `movie-page.html`,
     preview: `https://upload.wikimedia.org/wikipedia/commons/transcoded/b/b3/Big_Buck_Bunny_Trailer_400p.ogv/Big_Buck_Bunny_Trailer_400p.ogv.360p.webm`,
   },
   {
@@ -24,7 +23,6 @@ const movies = [
     genre: `antiutopia`,
     year: `1966`,
     imageSrc: `http://placehold.it/280x175`,
-    movieLink: `movie-page.html`,
     preview: `https://upload.wikimedia.org/wikipedia/commons/transcoded/b/b3/Big_Buck_Bunny_Trailer_400p.ogv/Big_Buck_Bunny_Trailer_400p.ogv.360p.webm`,
   },
   {
@@ -33,7 +31,6 @@ const movies = [
     genre: `antiutopia`,
     year: `2002`,
     imageSrc: `http://placehold.it/280x175`,
-    movieLink: `movie-page.html`,
     preview: `https://upload.wikimedia.org/wikipedia/commons/transcoded/b/b3/Big_Buck_Bunny_Trailer_400p.ogv/Big_Buck_Bunny_Trailer_400p.ogv.360p.webm`,
   },
 ];
@@ -59,7 +56,6 @@ describe(`getMoviesByGenre returns`, () => {
         genre: `antiutopia`,
         year: `1966`,
         imageSrc: `http://placehold.it/280x175`,
-        movieLink: `movie-page.html`,
         preview: `https://upload.wikimedia.org/wikipedia/commons/transcoded/b/b3/Big_Buck_Bunny_Trailer_400p.ogv/Big_Buck_Bunny_Trailer_400p.ogv.360p.webm`,
       },
       {
@@ -68,7 +64,6 @@ describe(`getMoviesByGenre returns`, () => {
         genre: `antiutopia`,
         year: `2002`,
         imageSrc: `http://placehold.it/280x175`,
-        movieLink: `movie-page.html`,
         preview: `https://upload.wikimedia.org/wikipedia/commons/transcoded/b/b3/Big_Buck_Bunny_Trailer_400p.ogv/Big_Buck_Bunny_Trailer_400p.ogv.360p.webm`,
       },
     ]);

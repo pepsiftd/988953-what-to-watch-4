@@ -30,7 +30,6 @@ const filmObjectPropTypes = {
   genre: PropTypes.string.isRequired,
   year: PropTypes.number.isRequired,
   imageSrc: PropTypes.string.isRequired,
-  movieLink: PropTypes.string.isRequired,
   preview: PropTypes.string.isRequired,
   fullVideo: PropTypes.string.isRequired,
 

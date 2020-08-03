@@ -45,7 +45,6 @@ MoviesList.propTypes = {
     id: PropTypes.number.isRequired,
     title: PropTypes.string.isRequired,
     imageSrc: PropTypes.string.isRequired,
-    movieLink: PropTypes.string.isRequired,
     preview: PropTypes.string.isRequired,
   }).isRequired).isRequired,
   renderItem: PropTypes.func.isRequired,

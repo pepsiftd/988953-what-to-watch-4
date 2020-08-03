@@ -12,7 +12,6 @@ const movie = {
   id: 152,
   title: `Some movie: Revenge`,
   imageSrc: `img/some-movie-revenge.jpg`,
-  movieLink: `movie-page.html`,
   preview: `preview-link.mp4`,
 };
 

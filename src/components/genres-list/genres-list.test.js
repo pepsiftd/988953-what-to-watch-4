@@ -10,7 +10,6 @@ const movies = [
     genre: `drama`,
     year: `1994`,
     imageSrc: `img/i-robot.jpg`,
-    movieLink: `movie-page.html`,
     preview: `preview-video.mp4`,
   },
   {
@@ -19,7 +18,6 @@ const movies = [
     genre: `antiutopia`,
     year: `1994`,
     imageSrc: `img/brave-new-world.jpg`,
-    movieLink: `movie-page.html`,
     preview: `preview-video.mp4`,
   },
   {
@@ -28,7 +26,6 @@ const movies = [
     genre: `antiutopia`,
     year: `1994`,
     imageSrc: `img/1984.jpg`,
-    movieLink: `movie-page.html`,
     preview: `preview-video.mp4`,
   },
   {
@@ -37,7 +34,6 @@ const movies = [
     genre: `sci-fi`,
     year: `1994`,
     imageSrc: `img/dune.jpg`,
-    movieLink: `movie-page.html`,
     preview: `preview-video.mp4`,
   },
   {
@@ -46,7 +42,6 @@ const movies = [
     genre: `thriller`,
     year: `1994`,
     imageSrc: `img/cloverfeld.jpg`,
-    movieLink: `movie-page.html`,
     preview: `preview-video.mp4`,
   },
   {
@@ -55,7 +50,6 @@ const movies = [
     genre: `Adventures`,
     year: `1994`,
     imageSrc: `img/jumanji-the-new-level.jpg`,
-    movieLink: `movie-page.html`,
     preview: `preview-video.mp4`,
   }
 ];

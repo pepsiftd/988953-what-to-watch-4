@@ -12,7 +12,6 @@ const movie = {
   genre: `Horror`,
   year: 15345,
   imageSrc: `image.jpg`,
-  movieLink: `mlink.html`,
   preview: `preview`,
   fullVideo: `fullvideo.mp4`,
 
