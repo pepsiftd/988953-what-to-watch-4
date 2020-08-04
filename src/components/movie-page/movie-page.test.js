@@ -129,6 +129,8 @@ it(`MoviePage should render correctly`, () => {
           movies={movies}
           id={1}
           onToggleFavorite={() => {}}
+          loadReviews={() => {}}
+          reviews={[]}
           authorizationStatus={`AUTHORIZED`}
           setActiveItem={() => {}}
           activeItemId={`Overview`}

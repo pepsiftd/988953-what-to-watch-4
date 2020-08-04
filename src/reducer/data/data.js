@@ -119,6 +119,13 @@ const Operation = {
         dispatch(ActionCreator.loadReviews(reviews));
       });
   },
+  postReview: (id, review) => (dispatch, getState, api) => {
+    return api.post(`/comments/${id}`, review)
+      .then((response) => {
+        const reviews = ReviewModel.parseReviews(response.data);
+        dispatch(ActionCreator.loadReviews(reviews));
+      });
+  },
 };
 
 export {reducer, ActionType, ActionCreator, Operation};

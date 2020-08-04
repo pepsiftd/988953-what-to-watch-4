@@ -113,8 +113,6 @@ const withVideoPlayer = (Component) => {
     videoSettings: PropTypes.shape({
       src: PropTypes.string.isRequired,
       isMute: PropTypes.bool.isRequired,
-      width: PropTypes.string.isRequired,
-      height: PropTypes.string.isRequired,
     }),
     isActive: PropTypes.bool.isRequired,
   };

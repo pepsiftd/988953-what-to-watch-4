@@ -2,8 +2,6 @@ import PropTypes from 'prop-types';
 
 const videoPlayerSettings = {
   isMute: false,
-  width: `1000`,
-  height: `1000`,
   autoplay: true,
 };
 
