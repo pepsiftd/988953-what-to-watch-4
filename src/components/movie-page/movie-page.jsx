@@ -55,6 +55,8 @@ class MoviePage extends PureComponent {
       runTime,
     } = movie;
 
+    const isAuthorized = authorizationStatus === AuthorizationStatus.AUTHORIZED;
+
     return (
       <React.Fragment>
         <section className="movie-card movie-card--full">
@@ -112,7 +114,7 @@ class MoviePage extends PureComponent {
                     </svg>
                     <span>My list</span>
                   </button>
-                  <a href="add-review.html" className="btn movie-card__button">Add review</a>
+                  {isAuthorized && <Link to={`${AppRoute.MOVIE_PAGE}/${id}/review`} className="btn movie-card__button">Add review</Link>}
                 </div>
               </div>
             </div>
