@@ -3,10 +3,8 @@ import ReactDOM from 'react-dom';
 import {createStore, applyMiddleware, compose} from 'redux';
 import {Provider} from 'react-redux';
 import thunk from 'redux-thunk';
-import {history} from '@/history';
 
 import App from '@/components/app/app';
-import {AppRoute} from '@/const';
 import {createAPI} from '@/api';
 import {combined as reducer} from '@/reducer/reducer';
 import {AuthorizationStatus, ActionCreator as UserActionCreator, Operation as UserOperation} from '@/reducer/user/user';
@@ -14,7 +12,6 @@ import {Operation as DataOperation} from '@/reducer/data/data';
 
 const onUnauthorized = () => {
   store.dispatch(UserActionCreator.setAuthorizationStatus(AuthorizationStatus.UNAUTHORIZED));
-  history.push(AppRoute.LOGIN);
 };
 
 const api = createAPI(onUnauthorized);

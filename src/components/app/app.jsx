@@ -20,6 +20,7 @@ import {MyList} from '@/components/my-list/my-list';
 import MoviePage from '@/components/movie-page/movie-page';
 import {VideoPlayer} from '@/components/video-player/video-player';
 import {AddReview} from '@/components/add-review/add-review';
+import {PrivateRoute} from '@/components/private-route/private-route';
 
 import {withActiveItem} from '@/hocs/with-active-item/with-active-item';
 import {withVideoPlayer} from '@/hocs/with-video-player/with-video-player';
@@ -44,17 +45,21 @@ const App = ({
   return (
     <Router history={history}>
       <Switch>
-        <Route path={`${AppRoute.MOVIE_PAGE}/:id/review`} exact render={({match}) => {
-          const id = parseInt(match.params.id, 10);
-          const movie = movies.find((it) => it.id === id);
-          return (
-            <AddReviewWrapped
-              movie={movie}
-              authorizationStatus={authorizationStatus}
-              onSendReview={onSendReview}
-            />
-          );
-        }}/>
+        <PrivateRoute
+          authorizationStatus={authorizationStatus}
+          path={`${AppRoute.MOVIE_PAGE}/:id/review`} exact
+          render={({match}) => {
+            const id = parseInt(match.params.id, 10);
+            const movie = movies.find((it) => it.id === id);
+            return (
+              <AddReviewWrapped
+                movie={movie}
+                authorizationStatus={authorizationStatus}
+                onSendReview={onSendReview}
+              />
+            );
+          }}
+        />
 
         <Route path={`${AppRoute.MOVIE_PAGE}/:id`} exact render={({match}) => (
           <MoviePageWithActiveItem
@@ -63,7 +68,7 @@ const App = ({
           />)}
         />
 
-        <Route path="/dev-movie-page" exact render={() => (
+        <PrivateRoute authorizationStatus={authorizationStatus} path="/dev-movie-page" exact render={() => (
           <MoviePageWithActiveItem
             id={15}
             initialItemId={`Overview`}
@@ -89,11 +94,14 @@ const App = ({
           />
         </Route>
 
-        <Route path={AppRoute.MY_LIST} exact>
+        <PrivateRoute
+          authorizationStatus={authorizationStatus}
+          path={AppRoute.MY_LIST} exact
+        >
           <MyList
             favoriteMovies={favoriteMovies}
           />
-        </Route>
+        </PrivateRoute>
 
         <Route path={`${AppRoute.PLAYER}/:id`} exact render={({match}) => {
           const id = parseInt(match.params.id, 10);
@@ -152,7 +160,7 @@ const mapDispatchToProps = (dispatch) => ({
   onSignIn: (authorizationData) => {
     dispatch(UserOperation.login(authorizationData, () => {
       dispatch(DataOperation.loadFavorite());
-      history.push(AppRoute.ROOT);
+      history.go(-1);
     }));
   },
   onToggleFavorite: (id) => {

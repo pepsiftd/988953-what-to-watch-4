@@ -1,8 +1,6 @@
 import React from 'react';
 import Enzyme, {shallow} from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
-import {Router} from 'react-router-dom';
-import {history} from '@/history';
 
 import {AddReview} from './add-review';
 
@@ -36,14 +34,14 @@ it(`AddReview calls callback functions onInput and onSubmit`, () => {
   const onInput = jest.fn();
 
   const component = shallow(
-    <AddReview
-      movie={movie}
-      errors={[]}
-      onSubmit={onSubmit}
-      onInput={onInput}
-      authorizationStatus={`AUTHORIZED`}
-      isSubmitButtonDisabled={false}
-    />
+      <AddReview
+        movie={movie}
+        errors={[]}
+        onSubmit={onSubmit}
+        onInput={onInput}
+        authorizationStatus={`AUTHORIZED`}
+        isSubmitButtonDisabled={false}
+      />
   );
 
   const form = component.find(`form`);
