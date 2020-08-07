@@ -180,8 +180,15 @@ const mapDispatchToProps = (dispatch) => ({
   onToggleFavorite: (id) => {
     dispatch(DataOperation.toggleFavorite(id));
   },
-  onSendReview: (id, review) => {
-    dispatch(DataOperation.postReview(id, review));
+  onSendReview: (id, review, onSuccess, onError) => {
+    dispatch(DataOperation.postReview(id, review))
+      .then(() => {
+        onSuccess();
+        history.push(`${AppRoute.MOVIE_PAGE}/${id}`);
+      })
+      .catch((err) => {
+        onError(err);
+      });
   }
 });
 

@@ -124,6 +124,9 @@ const Operation = {
       .then((response) => {
         const reviews = ReviewModel.parseReviews(response.data);
         dispatch(ActionCreator.loadReviews(reviews));
+      })
+      .catch((err) => {
+        throw err;
       });
   },
 };

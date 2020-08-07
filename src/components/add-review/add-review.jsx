@@ -7,7 +7,7 @@ import {AuthorizationStatus} from '@/reducer/user/user';
 
 import {UserBlock} from '@/components/user-block/user-block';
 
-const AddReview = ({movie, errors, onSubmit, onInput, authorizationStatus, authorizationInfo, isSubmitButtonDisabled}) => {
+const AddReview = ({movie, errors, onSubmit, isFormDisabled, onInput, authorizationStatus, authorizationInfo, isSubmitButtonDisabled}) => {
   const {id, title, backgroundImage, poster} = movie;
   return (
     <section className="movie-card movie-card--full">
@@ -58,6 +58,7 @@ const AddReview = ({movie, errors, onSubmit, onInput, authorizationStatus, autho
             evt.preventDefault();
             onSubmit();
           }}
+          disabled={isFormDisabled}
         >
           {errors.map((error) => {
             return <p key={error}>{error}</p>;
@@ -108,6 +109,7 @@ AddReview.propTypes = {
     avatar: PropTypes.string,
   }).isRequired,
   isSubmitButtonDisabled: PropTypes.bool.isRequired,
+  isFormDisabled: PropTypes.bool.isRequired,
 };
 
 export {AddReview};

@@ -32,13 +32,16 @@ const withAddReviewForm = (Component) => {
       this.onInput = this.onInput.bind(this);
     }
 
-    _setError() {
+    _setError(errorText) {
       const errors = [];
       if (this.state.rating === null) {
         errors.push(Error.NO_RATING);
       }
       if (this.state.comment.length < 50 || this.state.comment.length > 400) {
         errors.push(Error.COMMENT_OUT_OF_RANGE);
+      }
+      if (errorText) {
+        errors.push(errorText);
       }
       return this.setState({
         errors,
@@ -71,9 +74,24 @@ const withAddReviewForm = (Component) => {
         .then(() => {
           const id = this.props.movie.id;
           const review = ReviewModel.toRAW(this.state.rating, this.state.comment);
+          const handleSendReviewError = (err) => {
+            this._setError(err.message);
+            this.setState({
+              isFormDisabled: false,
+            });
+          };
+
+          const handleSendReviewSuccess = () => {
+            this.setState({
+              isFormDisabled: false,
+            });
+          };
 
           if (this.state.errors.length === 0) {
-            this.props.onSendReview(id, review);
+            this.setState({
+              isFormDisabled: true,
+            });
+            this.props.onSendReview(id, review, handleSendReviewSuccess, handleSendReviewError);
           }
         });
     }
