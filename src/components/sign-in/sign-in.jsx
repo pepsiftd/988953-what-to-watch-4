@@ -1,8 +1,8 @@
 import React, {PureComponent, createRef} from 'react';
 import PropTypes from 'prop-types';
-import {Link} from 'react-router-dom';
+import {Link, Redirect} from 'react-router-dom';
 import {AppRoute} from '@/const';
-
+import {AuthorizationStatus} from '@/reducer/user/user';
 
 const checkEmail = (email) => {
   const pattern = new RegExp(`^([A-z0-9_.-]{1,})@([A-z0-9_.-]{1,})([.]{1,})([A-z]{2,8})$`);
@@ -36,6 +36,12 @@ class SignIn extends PureComponent {
   }
 
   render() {
+    const isAuthorized = this.props.authorizationStatus === AuthorizationStatus.AUTHORIZED;
+
+    if (isAuthorized) {
+      return <Redirect to={AppRoute.ROOT} />;
+    }
+
     const isBadRequest = this.props.isBadRequest;
     const isError = !this.state.isValidEmail || isBadRequest;
     const wrongEmailClass = this.state.isValidEmail ? `` : `sign-in__field--error`;
@@ -131,6 +137,7 @@ class SignIn extends PureComponent {
 SignIn.propTypes = {
   onSignIn: PropTypes.func.isRequired,
   isBadRequest: PropTypes.bool.isRequired,
+  authorizationStatus: PropTypes.oneOf(Object.values(AuthorizationStatus)).isRequired,
 };
 
 export {SignIn, checkEmail};

@@ -93,6 +93,7 @@ const App = ({
           <SignIn
             onSignIn={onSignIn}
             isBadRequest={isBadRequest}
+            authorizationStatus={authorizationStatus}
           />
         </Route>
 
