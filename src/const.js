@@ -2,6 +2,7 @@ import PropTypes from 'prop-types';
 
 const BASE_URL = `https://4.react.pages.academy/wtw`;
 const FILES_STORAGE_URL = `https://4.react.pages.academy`;
+const MAX_GENRES_AMOUNT = 9;
 
 const videoPlayerSettings = {
   isMute: false,
@@ -46,4 +47,12 @@ const filmObjectPropTypes = {
   isFavorite: PropTypes.bool.isRequired,
 };
 
-export {AppRoute, RatingEstimate, filmObjectPropTypes, videoPlayerSettings, BASE_URL, FILES_STORAGE_URL};
+export {
+  AppRoute,
+  RatingEstimate,
+  filmObjectPropTypes,
+  videoPlayerSettings,
+  BASE_URL,
+  FILES_STORAGE_URL,
+  MAX_GENRES_AMOUNT,
+};

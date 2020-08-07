@@ -3,9 +3,10 @@ import PropTypes from 'prop-types';
 
 import {GenresListItem} from '@/components/genres-list-item/genres-list-item';
 import {getGenresFromMovies} from '@/utils';
+import {MAX_GENRES_AMOUNT} from '@/const';
 
 const GenresList = ({movies, renderItem, setActiveItem, titleClickHandler}) => {
-  const genres = [`All genres`, ...getGenresFromMovies(movies)];
+  const genres = [`All genres`, ...getGenresFromMovies(movies).slice(0, MAX_GENRES_AMOUNT)];
 
   return (
     <ul className="catalog__genres-list">
