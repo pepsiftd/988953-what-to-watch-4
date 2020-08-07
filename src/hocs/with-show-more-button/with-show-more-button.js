@@ -23,10 +23,17 @@ const withShowMoreButton = (Component) => {
       }));
     }
 
-    componentDidUpdate() {
-      this.setState({
-        isButtonShowing: this.props.movies.length > this.state.cardsShowing,
-      });
+    componentDidUpdate(prevProps) {
+      if (this.props.movies !== prevProps.movies) {
+        this.setState({
+          cardsShowing: this.props.initialCardsCount,
+          isButtonShowing: this.props.movies.length > this.props.initialCardsCount,
+        });
+      } else {
+        this.setState({
+          isButtonShowing: this.props.movies.length > this.state.cardsShowing,
+        });
+      }
     }
 
     render() {
