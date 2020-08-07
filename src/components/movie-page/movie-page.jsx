@@ -8,7 +8,7 @@ import {history} from '@/history';
 
 import {Operation as DataOperation} from '@/reducer/data/data';
 import {AuthorizationStatus} from '@/reducer/user/user';
-import {getAuthorizationStatus} from '@/reducer/user/selectors';
+import {getAuthorizationStatus, getAuthorizationInfo} from '@/reducer/user/selectors';
 import {getMovies, getReviews} from '@/reducer/data/selectors';
 
 import {Overview} from '@/components/overview/overview';
@@ -36,7 +36,16 @@ class MoviePage extends PureComponent {
   }
 
   render() {
-    const {movies, id, onToggleFavorite, authorizationStatus, reviews, setActiveItem, activeItemId} = this.props;
+    const {
+      movies,
+      id,
+      onToggleFavorite,
+      authorizationStatus,
+      authorizationInfo,
+      reviews,
+      setActiveItem,
+      activeItemId
+    } = this.props;
     const movie = movies.find((it) => it.id === id);
     const {
       title,
@@ -78,7 +87,7 @@ class MoviePage extends PureComponent {
 
               <UserBlock
                 authorizationStatus={authorizationStatus}
-                avatarImageSrc="/img/avatar.jpg"
+                authorizationInfo={authorizationInfo}
               />
             </header>
 
@@ -226,6 +235,12 @@ MoviePage.propTypes = {
   movies: PropTypes.arrayOf(PropTypes.shape(filmObjectPropTypes)).isRequired,
   onToggleFavorite: PropTypes.func.isRequired,
   authorizationStatus: PropTypes.oneOf(Object.values(AuthorizationStatus)).isRequired,
+  authorizationInfo: PropTypes.shape({
+    id: PropTypes.number,
+    email: PropTypes.string,
+    name: PropTypes.string,
+    avatar: PropTypes.string,
+  }).isRequired,
   reviews: PropTypes.arrayOf(PropTypes.shape({
     id: PropTypes.number.isRequired,
     user: PropTypes.shape({
@@ -244,6 +259,7 @@ MoviePage.propTypes = {
 const mapStateToProps = (state) => ({
   movies: getMovies(state),
   authorizationStatus: getAuthorizationStatus(state),
+  authorizationInfo: getAuthorizationInfo(state),
   reviews: getReviews(state),
 });
 

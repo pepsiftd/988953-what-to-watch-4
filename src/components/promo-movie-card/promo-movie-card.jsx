@@ -6,7 +6,7 @@ import {history} from '@/history';
 
 import {UserBlock} from '@/components/user-block/user-block';
 
-const PromoMovieCard = ({movie, onToggleFavorite, authorizationStatus}) => {
+const PromoMovieCard = ({movie, onToggleFavorite, authorizationStatus, authorizationInfo}) => {
   const {
     id,
 
@@ -37,7 +37,7 @@ const PromoMovieCard = ({movie, onToggleFavorite, authorizationStatus}) => {
 
         <UserBlock
           authorizationStatus={authorizationStatus}
-          avatarImageSrc="img/avatar.jpg"
+          authorizationInfo={authorizationInfo}
         />
       </header>
 
@@ -78,7 +78,6 @@ const PromoMovieCard = ({movie, onToggleFavorite, authorizationStatus}) => {
                 </svg>
                 <span>My list</span>
               </button>
-              {isFavorite && <a href="add-review.html" className="btn movie-card__button">Add review</a>}
             </div>
           </div>
         </div>
@@ -91,6 +90,12 @@ PromoMovieCard.propTypes = {
   movie: PropTypes.shape(filmObjectPropTypes).isRequired,
   onToggleFavorite: PropTypes.func.isRequired,
   authorizationStatus: PropTypes.oneOf(Object.values(AuthorizationStatus)).isRequired,
+  authorizationInfo: PropTypes.shape({
+    id: PropTypes.number,
+    email: PropTypes.string,
+    name: PropTypes.string,
+    avatar: PropTypes.string,
+  }).isRequired,
 };
 
 export {PromoMovieCard};

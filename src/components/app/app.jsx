@@ -8,7 +8,7 @@ import {AppRoute, filmObjectPropTypes, videoPlayerSettings} from '@/const';
 
 import {getMovies, getMoviesOfCurrentGenre, getPromoMovie, getFavoriteMovies} from '@/reducer/data/selectors';
 import {getCurrentGenre} from '@/reducer/app/selectors';
-import {getAuthorizationStatus, getBadRequestStatus} from '@/reducer/user/selectors';
+import {getAuthorizationStatus, getBadRequestStatus, getAuthorizationInfo} from '@/reducer/user/selectors';
 import {Operation as UserOperation} from '@/reducer/user/user';
 import {Operation as DataOperation} from '@/reducer/data/data';
 import {ActionCreator as AppActionCreator} from '@/reducer/app/app';
@@ -38,6 +38,7 @@ const App = ({
   currentGenre,
   titleClickHandler,
   authorizationStatus,
+  authorizationInfo,
   onSignIn,
   isBadRequest,
   onToggleFavorite,
@@ -83,6 +84,7 @@ const App = ({
             currentGenre={currentGenre}
             titleClickHandler={titleClickHandler}
             authorizationStatus={authorizationStatus}
+            authorizationInfo={authorizationInfo}
             onToggleFavorite={onToggleFavorite}
           />
         </Route>
@@ -96,10 +98,13 @@ const App = ({
 
         <PrivateRoute
           authorizationStatus={authorizationStatus}
+          authorizationInfo={authorizationInfo}
           path={AppRoute.MY_LIST} exact
         >
           <MyList
             favoriteMovies={favoriteMovies}
+            authorizationStatus={authorizationStatus}
+            authorizationInfo={authorizationInfo}
           />
         </PrivateRoute>
 
@@ -137,6 +142,12 @@ App.propTypes = {
   currentGenre: PropTypes.string.isRequired,
   titleClickHandler: PropTypes.func.isRequired,
   authorizationStatus: PropTypes.oneOf(Object.values(AuthorizationStatus)),
+  authorizationInfo: PropTypes.shape({
+    id: PropTypes.number,
+    email: PropTypes.string,
+    name: PropTypes.string,
+    avatar: PropTypes.string,
+  }).isRequired,
   onSignIn: PropTypes.func.isRequired,
   isBadRequest: PropTypes.bool.isRequired,
   onToggleFavorite: PropTypes.func.isRequired,
@@ -150,6 +161,7 @@ const mapStateToProps = (state) => ({
   favoriteMovies: getFavoriteMovies(state),
   promoMovie: getPromoMovie(state),
   authorizationStatus: getAuthorizationStatus(state),
+  authorizationInfo: getAuthorizationInfo(state),
   isBadRequest: getBadRequestStatus(state),
 });
 

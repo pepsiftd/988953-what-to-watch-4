@@ -5,13 +5,14 @@ import {AuthorizationStatus} from '@/reducer/user/user';
 import {AppRoute} from '@/const';
 
 
-const UserBlock = ({authorizationStatus, avatarImageSrc = `/img/avatar.jpg`}) => {
+const UserBlock = ({authorizationStatus, authorizationInfo}) => {
+  const {avatar} = authorizationInfo;
   return (
     <div className="user-block">
       {authorizationStatus === AuthorizationStatus.AUTHORIZED &&
         <div className="user-block__avatar">
           <Link to={AppRoute.MY_LIST}>
-            <img src={avatarImageSrc} alt="User avatar" width="63" height="63" />
+            <img src={avatar} alt="User avatar" width="63" height="63" />
           </Link>
         </div>
       }
@@ -25,7 +26,12 @@ const UserBlock = ({authorizationStatus, avatarImageSrc = `/img/avatar.jpg`}) =>
 
 UserBlock.propTypes = {
   authorizationStatus: PropTypes.oneOf(Object.values(AuthorizationStatus)).isRequired,
-  avatarImageSrc: PropTypes.string,
+  authorizationInfo: PropTypes.shape({
+    id: PropTypes.number,
+    email: PropTypes.string,
+    name: PropTypes.string,
+    avatar: PropTypes.string,
+  }).isRequired,
 };
 
 export {UserBlock};

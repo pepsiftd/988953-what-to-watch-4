@@ -1,9 +1,11 @@
+import {FILES_STORAGE_URL} from '@/const';
+
 class UserInfoModel {
   constructor(data) {
-    this.id = data[`id`];
+    this.id = parseInt(data[`id`], 10);
     this.email = data[`email`];
     this.name = data[`name`];
-    this.avatar = data[`avatar_url`];
+    this.avatar = `${FILES_STORAGE_URL}${data[`avatar_url`]}`;
   }
 
   static parseUserInfo(data) {

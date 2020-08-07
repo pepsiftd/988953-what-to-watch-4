@@ -17,7 +17,14 @@ const ADD_CARDS_ON_SHOW_MORE = 8;
 const MoviesListWrapped = withShowMoreButton(withActiveItem(MoviesList));
 const GenresListWrapped = withActiveItem(GenresList);
 
-const Main = ({promoMovie, movies, filteredMovies, titleClickHandler, authorizationStatus, onToggleFavorite}) => {
+const Main = ({
+  promoMovie,
+  movies,
+  filteredMovies,
+  titleClickHandler,
+  authorizationStatus,
+  authorizationInfo,
+  onToggleFavorite}) => {
 
   return (
     <React.Fragment>
@@ -25,6 +32,7 @@ const Main = ({promoMovie, movies, filteredMovies, titleClickHandler, authorizat
         movie={promoMovie}
         onToggleFavorite={onToggleFavorite}
         authorizationStatus={authorizationStatus}
+        authorizationInfo={authorizationInfo}
       />
 
       <div className="page-content">
@@ -68,6 +76,12 @@ Main.propTypes = {
   filteredMovies: PropTypes.arrayOf(PropTypes.shape(filmObjectPropTypes).isRequired).isRequired,
   titleClickHandler: PropTypes.func.isRequired,
   authorizationStatus: PropTypes.oneOf(Object.values(AuthorizationStatus)),
+  authorizationInfo: PropTypes.shape({
+    id: PropTypes.number,
+    email: PropTypes.string,
+    name: PropTypes.string,
+    avatar: PropTypes.string,
+  }).isRequired,
   onToggleFavorite: PropTypes.func.isRequired,
 };
 

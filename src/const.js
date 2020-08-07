@@ -1,5 +1,8 @@
 import PropTypes from 'prop-types';
 
+const BASE_URL = `https://4.react.pages.academy/wtw`;
+const FILES_STORAGE_URL = `https://4.react.pages.academy`;
+
 const videoPlayerSettings = {
   isMute: false,
   autoplay: true,
@@ -43,4 +46,4 @@ const filmObjectPropTypes = {
   isFavorite: PropTypes.bool.isRequired,
 };
 
-export {AppRoute, RatingEstimate, filmObjectPropTypes, videoPlayerSettings};
+export {AppRoute, RatingEstimate, filmObjectPropTypes, videoPlayerSettings, BASE_URL, FILES_STORAGE_URL};

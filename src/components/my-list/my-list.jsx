@@ -2,13 +2,15 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import {Link} from 'react-router-dom';
 import {AppRoute} from '@/const';
+import {AuthorizationStatus} from '@/reducer/user/user';
 
 import {withActiveItem} from '@/hocs/with-active-item/with-active-item';
 import {MoviesList} from '@/components/movies-list/movies-list';
+import {UserBlock} from '@/components/user-block/user-block';
 
 const MoviesListWrapped = withActiveItem(MoviesList);
 
-const MyList = ({favoriteMovies}) => {
+const MyList = ({favoriteMovies, authorizationStatus, authorizationInfo}) => {
   return (
     <div className="user-page">
       <header className="page-header user-page__head">
@@ -22,11 +24,10 @@ const MyList = ({favoriteMovies}) => {
 
         <h1 className="page-title user-page__title">My list</h1>
 
-        <div className="user-block">
-          <div className="user-block__avatar">
-            <img src="img/avatar.jpg" alt="User avatar" width="63" height="63" />
-          </div>
-        </div>
+        <UserBlock
+          authorizationStatus={authorizationStatus}
+          authorizationInfo={authorizationInfo}
+        />
       </header>
 
       <section className="catalog">
@@ -55,6 +56,13 @@ const MyList = ({favoriteMovies}) => {
 };
 
 MyList.propTypes = {
+  authorizationStatus: PropTypes.oneOf(Object.values(AuthorizationStatus)),
+  authorizationInfo: PropTypes.shape({
+    id: PropTypes.number,
+    email: PropTypes.string,
+    name: PropTypes.string,
+    avatar: PropTypes.string,
+  }).isRequired,
   favoriteMovies: PropTypes.arrayOf(PropTypes.shape({
     id: PropTypes.number.isRequired,
     title: PropTypes.string.isRequired,
