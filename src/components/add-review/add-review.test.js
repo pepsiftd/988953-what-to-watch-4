@@ -26,6 +26,10 @@ const movie = {
   isFavorite: false,
 };
 
+const authInfo = {
+  avatar: `img/avatar.jpg`,
+};
+
 it(`AddReview renders correctly`, () => {
   const tree = renderer.create(
       <Router history={history}>
@@ -35,6 +39,7 @@ it(`AddReview renders correctly`, () => {
           onSubmit={() => {}}
           onInput={() => {}}
           authorizationStatus={`AUTHORIZED`}
+          authorizationInfo={authInfo}
           isSubmitButtonDisabled={false}
         />
       </Router>

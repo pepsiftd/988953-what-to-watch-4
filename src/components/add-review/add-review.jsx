@@ -7,7 +7,7 @@ import {AuthorizationStatus} from '@/reducer/user/user';
 
 import {UserBlock} from '@/components/user-block/user-block';
 
-const AddReview = ({movie, errors, onSubmit, onInput, authorizationStatus, isSubmitButtonDisabled}) => {
+const AddReview = ({movie, errors, onSubmit, onInput, authorizationStatus, authorizationInfo, isSubmitButtonDisabled}) => {
   const {id, title, backgroundImage, poster} = movie;
   return (
     <section className="movie-card movie-card--full">
@@ -40,7 +40,7 @@ const AddReview = ({movie, errors, onSubmit, onInput, authorizationStatus, isSub
 
           <UserBlock
             authorizationStatus={authorizationStatus}
-            avatarImageSrc="/img/avatar.jpg"
+            authorizationInfo={authorizationInfo}
           />
         </header>
 
@@ -101,6 +101,12 @@ AddReview.propTypes = {
   onInput: PropTypes.func.isRequired,
   onSubmit: PropTypes.func.isRequired,
   authorizationStatus: PropTypes.oneOf(Object.values(AuthorizationStatus)).isRequired,
+  authorizationInfo: PropTypes.shape({
+    id: PropTypes.number,
+    email: PropTypes.string,
+    name: PropTypes.string,
+    avatar: PropTypes.string,
+  }).isRequired,
   isSubmitButtonDisabled: PropTypes.bool.isRequired,
 };
 

@@ -29,6 +29,10 @@ const movie = {
   isFavorite: false,
 };
 
+const authInfo = {
+  avatar: `img/avatar.jpg`,
+};
+
 it(`AddReview calls callback functions onInput and onSubmit`, () => {
   const onSubmit = jest.fn();
   const onInput = jest.fn();
@@ -40,6 +44,7 @@ it(`AddReview calls callback functions onInput and onSubmit`, () => {
         onSubmit={onSubmit}
         onInput={onInput}
         authorizationStatus={`AUTHORIZED`}
+        authorizationInfo={authInfo}
         isSubmitButtonDisabled={false}
       />
   );

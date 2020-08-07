@@ -141,6 +141,10 @@ const movies = [
   }
 ];
 
+const authInfo = {
+  avatar: `img/avatar.jpg`,
+};
+
 Enzyme.configure({
   adapter: new Adapter(),
 });
@@ -157,6 +161,7 @@ it(`Should titles be pressed`, () => {
         titleClickHandler={titleClickHandler}
         onToggleFavorite={() => {}}
         authorizationStatus="AUTHORIZED"
+        authorizationInfo={authInfo}
       />
   );
 

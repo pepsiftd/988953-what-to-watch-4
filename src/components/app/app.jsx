@@ -56,6 +56,7 @@ const App = ({
               <AddReviewWrapped
                 movie={movie}
                 authorizationStatus={authorizationStatus}
+                authorizationInfo={authorizationInfo}
                 onSendReview={onSendReview}
               />
             );

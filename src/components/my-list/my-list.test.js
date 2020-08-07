@@ -44,11 +44,17 @@ const favoriteMovies = [
   }
 ];
 
+const authInfo = {
+  avatar: `img/avatar.jpg`,
+};
+
 it(`MyList should render correctly`, () => {
   const tree = renderer.create(
       <Router history={history}>
         <MyList
           favoriteMovies={favoriteMovies}
+          authorizationStatus={`AUTHORIZED`}
+          authorizationInfo={authInfo}
         />
       </Router>
       , {

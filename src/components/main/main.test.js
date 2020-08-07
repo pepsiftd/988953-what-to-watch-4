@@ -144,6 +144,10 @@ const movies = [
 
 const titleClickHandler = jest.fn();
 
+const authInfo = {
+  avatar: `img/avatar.jpg`,
+};
+
 it(`Main should render correctly`, () => {
   const tree = renderer.create(
       <Router history={history}>
@@ -156,6 +160,7 @@ it(`Main should render correctly`, () => {
           titleClickHandler={titleClickHandler}
           onToggleFavorite={() => {}}
           authorizationStatus="AUTHORIZED"
+          authorizationInfo={authInfo}
         />
       </Router>,
       {

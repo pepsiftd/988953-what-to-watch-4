@@ -27,6 +27,10 @@ const movie = {
   isFavorite: false,
 };
 
+const authInfo = {
+  avatar: `img/avatar.jpg`,
+};
+
 it(`PromoMovieCard should render correctly`, () => {
   const tree = renderer.create(
       <Router history={history}>
@@ -34,6 +38,7 @@ it(`PromoMovieCard should render correctly`, () => {
           movie={movie}
           onToggleFavorite={() => {}}
           authorizationStatus={`AUTHORIZED`}
+          authorizationInfo={authInfo}
         />
       </Router>
   );

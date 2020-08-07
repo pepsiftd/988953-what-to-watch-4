@@ -11,6 +11,7 @@ it(`SignIn screen should render correctly`, () => {
         <SignIn
           onSignIn={() => {}}
           isBadRequest={false}
+          authorizationStatus={`UNAUTHORIZED`}
         />
       </Router>
   );

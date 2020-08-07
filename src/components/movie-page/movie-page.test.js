@@ -122,6 +122,10 @@ const movies = [
   }
 ];
 
+const authInfo = {
+  avatar: `img/avatar.jpg`,
+};
+
 it(`MoviePage should render correctly`, () => {
   const tree = renderer.create(
       <Router history={history}>
@@ -132,6 +136,7 @@ it(`MoviePage should render correctly`, () => {
           loadReviews={() => {}}
           reviews={[]}
           authorizationStatus={`AUTHORIZED`}
+          authorizationInfo={authInfo}
           setActiveItem={() => {}}
           activeItemId={`Overview`}
         />

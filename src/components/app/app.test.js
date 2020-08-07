@@ -143,6 +143,10 @@ const movies = [
   }
 ];
 
+const authInfo = {
+  avatar: `img/avatar.jpg`,
+};
+
 const mockStore = configureStore([]);
 
 it(`App should render correctly`, () => {
@@ -156,7 +160,8 @@ it(`App should render correctly`, () => {
       currentGenre: `All genres`
     },
     [NameSpace.USER]: {
-      authorizationStatus: `AUTHORIZED`
+      authorizationStatus: `AUTHORIZED`,
+      authorizationInfo: authInfo,
     },
   });
 

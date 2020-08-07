@@ -5,12 +5,17 @@ import {history} from '@/history';
 
 import {UserBlock} from './user-block';
 
+const authInfo = {
+  avatar: `img/avatar.jpg`,
+};
+
 describe(`UserBlock`, () => {
   it(`should render a login link when unauthorized`, () => {
     const tree = renderer.create(
         <Router history={history}>
           <UserBlock
             authorizationStatus="UNAUTHORIZED"
+            authorizationInfo={{}}
           />
         </Router>
     );
@@ -23,7 +28,7 @@ describe(`UserBlock`, () => {
         <Router history={history}>
           <UserBlock
             authorizationStatus="AUTHORIZED"
-            avatarImageSrc="img/avatar.jpg"
+            authorizationInfo={authInfo}
           />
         </Router>
     );
