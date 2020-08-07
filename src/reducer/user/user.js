@@ -1,4 +1,5 @@
 import {extend} from '@/utils';
+import {UserInfoModel} from '@/models/user-info-model';
 
 const AuthorizationStatus = {
   AUTHORIZED: `AUTHORIZED`,
@@ -13,11 +14,13 @@ const AuthorizationError = {
 const initialState = {
   authorizationStatus: AuthorizationStatus.AUTHORIZED,
   authorizationError: AuthorizationError.NO_ERROR,
+  authorizationInfo: {},
 };
 
 const ActionType = {
   SET_AUTHORIZATION_STATUS: `SET_AUTHORIZATION_STATUS`,
   SET_AUTHORIZATION_ERROR: `SET_AUTHORIZATION_ERROR`,
+  SET_AUTHORIZATION_INFO: `SET_AUTHORIZATION_INFO`,
 };
 
 const ActionCreator = {
@@ -33,6 +36,12 @@ const ActionCreator = {
       payload: status,
     };
   },
+  setAuthorizationInfo: (authorizationInfo) => {
+    return {
+      type: ActionType.SET_AUTHORIZATION_INFO,
+      payload: authorizationInfo,
+    };
+  },
 };
 
 const reducer = (state = initialState, action) => {
@@ -45,6 +54,10 @@ const reducer = (state = initialState, action) => {
       return extend(state, {
         authorizationError: action.payload,
       });
+    case ActionType.SET_AUTHORIZATION_INFO:
+      return extend(state, {
+        authorizationInfo: action.payload,
+      });
   }
 
   return state;
@@ -53,8 +66,9 @@ const reducer = (state = initialState, action) => {
 const Operation = {
   checkAuth: () => (dispatch, getState, api) => {
     return api.get(`/login`)
-      .then(() => {
+      .then((response) => {
         dispatch(ActionCreator.setAuthorizationStatus(AuthorizationStatus.AUTHORIZED));
+        dispatch(ActionCreator.setAuthorizationInfo(UserInfoModel.parseUserInfo(response.data)));
       })
       .catch((err) => {
         throw err;
@@ -66,9 +80,10 @@ const Operation = {
       email: authorizationData.email,
       password: authorizationData.password,
     })
-      .then(() => {
+      .then((response) => {
         dispatch(ActionCreator.setAuthorizationStatus(AuthorizationStatus.AUTHORIZED));
         dispatch(ActionCreator.setAuthorizationError(AuthorizationError.NO_ERROR));
+        dispatch(ActionCreator.setAuthorizationInfo(UserInfoModel.parseUserInfo(response.data)));
         onSuccess();
       })
       .catch((err) => {

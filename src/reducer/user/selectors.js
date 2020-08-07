@@ -5,8 +5,12 @@ const getAuthorizationStatus = (state) => {
   return state[NameSpace.USER].authorizationStatus;
 };
 
+const getAuthorizationInfo = (state) => {
+  return state[NameSpace.USER].authorizationInfo;
+};
+
 const getBadRequestStatus = (state) => {
   return state[NameSpace.USER].authorizationError === AuthorizationError.BAD_REQUEST;
 };
 
-export {getAuthorizationStatus, getBadRequestStatus};
+export {getAuthorizationStatus, getBadRequestStatus, getAuthorizationInfo};
