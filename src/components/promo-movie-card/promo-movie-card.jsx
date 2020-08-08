@@ -19,6 +19,9 @@ const PromoMovieCard = ({movie, onToggleFavorite, authorizationStatus, authoriza
     backgroundImage,
     isFavorite,
   } = movie;
+
+  const isAuthorized = authorizationStatus === AuthorizationStatus.AUTHORIZED;
+
   return (
     <section className="movie-card">
       <div className="movie-card__bg">
@@ -66,7 +69,11 @@ const PromoMovieCard = ({movie, onToggleFavorite, authorizationStatus, authoriza
                 className="btn btn--list movie-card__button"
                 type="button"
                 onClick={() => {
-                  onToggleFavorite(id);
+                  if (!isAuthorized) {
+                    history.push(AppRoute.LOGIN);
+                  } else {
+                    onToggleFavorite(id);
+                  }
                 }}>
                 <svg viewBox="0 0 19 20" width="19" height="20">
                   <use xlinkHref={isFavorite ? `#in-list` : `#add`}></use>

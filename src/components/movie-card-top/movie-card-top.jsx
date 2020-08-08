@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import {history} from '@/history';
 import {AppRoute} from '@/const';
 import {Link} from 'react-router-dom';
 
@@ -30,7 +31,11 @@ const MovieCardTop = ({id, title, year, genre, isFavorite, isAuthorized, onToggl
             className="btn btn--list movie-card__button"
             type="button"
             onClick={() => {
-              onToggleFavorite(id);
+              if (!isAuthorized) {
+                history.push(AppRoute.LOGIN);
+              } else {
+                onToggleFavorite(id);
+              }
             }}>
             <svg viewBox="0 0 19 20" width="19" height="20">
               <use xlinkHref={isFavorite ? `#in-list` : `#add`}></use>
