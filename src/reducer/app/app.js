@@ -1,7 +1,8 @@
 import {extend} from '@/utils';
+import {ALL_GENRES_FILTER} from '@/const';
 
 const initialState = {
-  currentGenre: `All genres`,
+  currentGenre: ALL_GENRES_FILTER,
 };
 
 const ActionType = {

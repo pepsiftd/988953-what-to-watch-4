@@ -12,7 +12,6 @@ import {withShowMoreButton} from '@/hocs/with-show-more-button/with-show-more-bu
 
 import {AuthorizationStatus} from '@/reducer/user/user';
 
-const INITIAL_GENRE_FILTER = ALL_GENRES_FILTER;
 const INITIAL_CARDS_COUNT = 8;
 const ADD_CARDS_ON_SHOW_MORE = 8;
 
@@ -22,6 +21,7 @@ const GenresListWrapped = withActiveItem(GenresList);
 const Main = ({
   promoMovie,
   movies,
+  currentGenre,
   filteredMovies,
   titleClickHandler,
   authorizationStatus,
@@ -42,7 +42,7 @@ const Main = ({
           <h2 className="catalog__title visually-hidden">Catalog</h2>
 
           <GenresListWrapped
-            initialItemId={INITIAL_GENRE_FILTER}
+            initialItemId={currentGenre}
             movies={movies}
             titleClickHandler={titleClickHandler}
           />
@@ -63,6 +63,7 @@ const Main = ({
 Main.propTypes = {
   promoMovie: PropTypes.shape(filmObjectPropTypes).isRequired,
   movies: PropTypes.arrayOf(PropTypes.shape(filmObjectPropTypes).isRequired).isRequired,
+  currentGenre: PropTypes.string.isRequired,
   filteredMovies: PropTypes.arrayOf(PropTypes.shape(filmObjectPropTypes).isRequired).isRequired,
   titleClickHandler: PropTypes.func.isRequired,
   authorizationStatus: PropTypes.oneOf(Object.values(AuthorizationStatus)),

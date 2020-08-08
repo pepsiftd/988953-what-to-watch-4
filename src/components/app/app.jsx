@@ -76,6 +76,7 @@ const App = ({
           <Main
             promoMovie={promoMovie}
             movies={movies}
+            currentGenre={currentGenre}
             filteredMovies={filteredMovies}
             currentGenre={currentGenre}
             titleClickHandler={titleClickHandler}
