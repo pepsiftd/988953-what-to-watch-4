@@ -1,5 +1,5 @@
 import axios from 'axios';
-import {BASE_URL, API_REQUEST_TIMEOUT_IN_MS} from '@/const';
+import {URL, API_REQUEST_TIMEOUT_IN_MS} from '@/const';
 
 const Error = {
   UNAUTHORIZED: 401,
@@ -7,7 +7,7 @@ const Error = {
 
 const createAPI = (onUnauthorized) => {
   const api = axios.create({
-    baseURL: BASE_URL,
+    baseURL: URL.BASE,
     timeout: API_REQUEST_TIMEOUT_IN_MS,
     withCredentials: true,
   });

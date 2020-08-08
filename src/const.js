@@ -1,12 +1,15 @@
 import PropTypes from 'prop-types';
 
-const BASE_URL = `https://4.react.pages.academy/wtw`;
-const FILES_STORAGE_URL = `https://4.react.pages.academy`;
 const MAX_GENRES_AMOUNT = 9;
 const MAX_CARDS_ON_MOVIE_PAGE = 4;
 const ALL_GENRES_FILTER = `All genres`;
 const MAX_ACTORS_IN_SHORT_DETAILS = 4;
 const API_REQUEST_TIMEOUT_IN_MS = 1000 * 5;
+
+const URL = {
+  BASE: `https://4.react.pages.academy/wtw`,
+  FILES_STORAGE: `https://4.react.pages.academy`,
+};
 
 const MovieInfoTab = {
   OVERVIEW: `Overview`,
@@ -76,8 +79,7 @@ export {
   RatingEstimate,
   filmObjectPropTypes,
   videoPlayerSettings,
-  BASE_URL,
-  FILES_STORAGE_URL,
+  URL,
   MAX_GENRES_AMOUNT,
   ALL_GENRES_FILTER,
   MAX_CARDS_ON_MOVIE_PAGE,

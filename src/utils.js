@@ -4,7 +4,7 @@ const MINUTES_IN_AN_HOUR = 60;
 const SECONDS_IN_AN_HOUR = 3600;
 const SECONDS_IN_A_MINUTE = 60;
 
-const monthNames = [`January`, `February`, `March`, `April`, `May`, `June`,
+const MONTH_NAMES = [`January`, `February`, `March`, `April`, `May`, `June`,
   `July`, `August`, `September`, `October`, `November`, `December`
 ];
 
@@ -86,7 +86,7 @@ const getRatingString = (rating) => {
 };
 
 const getFormattedDate = (date) => {
-  const month = monthNames[date.getMonth()];
+  const month = MONTH_NAMES[date.getMonth()];
   const day = date.getDate();
   const year = date.getFullYear();
 
