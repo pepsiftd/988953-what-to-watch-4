@@ -10,7 +10,7 @@ exports[`withAddReviewForm renders correctly 1`] = `
     type="text"
   />
   <input
-    disabled={false}
+    disabled={true}
     type="submit"
   />
 </form>

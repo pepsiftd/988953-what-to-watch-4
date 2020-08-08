@@ -24,7 +24,7 @@ const withAddReviewForm = (Component) => {
         rating: null,
         comment: ``,
         isFormDisabled: false,
-        isSubmitButtonDisabled: false,
+        isSubmitButtonDisabled: true,
         errors: [],
       };
 
@@ -62,10 +62,8 @@ const withAddReviewForm = (Component) => {
       this.setState({
         [InputName[name]]: value
       }, () => {
-        if (this.state.isSubmitButtonDisabled) {
-          this._validateForm();
-          this._setError();
-        }
+        this._validateForm();
+        this._setError();
       });
     }
 
