@@ -22,7 +22,7 @@ exports[`Review renders correctly 1`] = `
       </cite>
       <time
         className="review__date"
-        dateTime="2020-08-02T21:00:00.000Z"
+        dateTime="2020-08-03T00:00:00.000Z"
       >
         August 3, 2020
       </time>

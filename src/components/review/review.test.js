@@ -11,7 +11,7 @@ const review = {
   },
   rating: 5.1,
   comment: `I don't know what to say but I can't help posting`,
-  date: new Date(`August 3, 2020`),
+  date: new Date(Date.parse(`August 3, 2020 UTC`)),
 };
 
 it(`Review renders correctly`, () => {
