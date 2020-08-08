@@ -2,7 +2,7 @@ import React, {PureComponent} from 'react';
 import {connect} from 'react-redux';
 import {Link} from 'react-router-dom';
 import PropTypes from 'prop-types';
-import {AppRoute, filmObjectPropTypes} from '@/const';
+import {AppRoute, filmObjectPropTypes, MovieInfoTab, MAX_CARDS_ON_MOVIE_PAGE} from '@/const';
 import {getMoviesByGenre} from '@/utils';
 import {history} from '@/history';
 
@@ -138,40 +138,40 @@ class MoviePage extends PureComponent {
               <div className="movie-card__desc">
                 <nav className="movie-nav movie-card__nav">
                   <ul className="movie-nav__list">
-                    <li className={`movie-nav__item ${activeItemId === `Overview` ? `movie-nav__item--active` : ``}`}>
+                    <li className={`movie-nav__item ${activeItemId === MovieInfoTab.OVERVIEW ? `movie-nav__item--active` : ``}`}>
                       <a
                         href="#"
                         className="movie-nav__link"
                         onClick={(evt) => {
                           evt.preventDefault();
-                          setActiveItem(`Overview`);
+                          setActiveItem(MovieInfoTab.OVERVIEW);
                         }}
                       >Overview</a>
                     </li>
-                    <li className={`movie-nav__item ${activeItemId === `Details` ? `movie-nav__item--active` : ``}`}>
+                    <li className={`movie-nav__item ${activeItemId === MovieInfoTab.DETAILS ? `movie-nav__item--active` : ``}`}>
                       <a
                         href="#"
                         className="movie-nav__link"
                         onClick={(evt) => {
                           evt.preventDefault();
-                          setActiveItem(`Details`);
+                          setActiveItem(MovieInfoTab.DETAILS);
                         }}
                       >Details</a>
                     </li>
-                    <li className={`movie-nav__item ${activeItemId === `Reviews` ? `movie-nav__item--active` : ``}`}>
+                    <li className={`movie-nav__item ${activeItemId === MovieInfoTab.REVIEWS ? `movie-nav__item--active` : ``}`}>
                       <a
                         href="#"
                         className="movie-nav__link"
                         onClick={(evt) => {
                           evt.preventDefault();
-                          setActiveItem(`Reviews`);
+                          setActiveItem(MovieInfoTab.REVIEWS);
                         }}
                       >Reviews</a>
                     </li>
                   </ul>
                 </nav>
 
-                {activeItemId === `Overview` &&
+                {activeItemId === MovieInfoTab.OVERVIEW &&
                   <Overview
                     ratingScore={rating}
                     ratingCount={scoresCount}
@@ -181,7 +181,7 @@ class MoviePage extends PureComponent {
                   />
                 }
 
-                {activeItemId === `Details` &&
+                {activeItemId === MovieInfoTab.DETAILS &&
                   <Details
                     director={director}
                     starring={starring}
@@ -191,7 +191,7 @@ class MoviePage extends PureComponent {
                   />
                 }
 
-                {activeItemId === `Reviews` &&
+                {activeItemId === MovieInfoTab.REVIEWS &&
                   <Reviews
                     reviews={reviews}
                   />
@@ -205,10 +205,8 @@ class MoviePage extends PureComponent {
           <section className="catalog catalog--like-this">
             <h2 className="catalog__title">More like this</h2>
 
-            {// TODO ПЕРЕПИСАТЬ С ИСПОЛЬЗОВАНИЕМ STORE
-            }
             <MoviesListWithActiveItem
-              movies={getMoviesByGenre(movies, genre).filter((it) => it.id !== id).slice(0, 4)}
+              movies={getMoviesByGenre(movies, genre).filter((it) => it.id !== id).slice(0, MAX_CARDS_ON_MOVIE_PAGE)}
             />
           </section>
 

@@ -223,8 +223,7 @@ Array [
               <span
                 className="movie-rating__count"
               >
-                5
-                 ratings
+                5 ratings
               </span>
             </p>
           </div>

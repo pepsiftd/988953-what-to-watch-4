@@ -21,8 +21,7 @@ Array [
       <span
         className="movie-rating__count"
       >
-        31337
-         ratings
+        31337 ratings
       </span>
     </p>
   </div>,
@@ -69,8 +68,7 @@ Array [
       <span
         className="movie-rating__count"
       >
-        31337
-         ratings
+        31337 ratings
       </span>
     </p>
   </div>,

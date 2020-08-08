@@ -3,8 +3,10 @@ import PropTypes from 'prop-types';
 
 import {Review} from '@/components/review/review';
 
+const COLUMNS_AMOUNT = 2;
+
 const Reviews = ({reviews}) => {
-  const columnHeight = Math.ceil(reviews.length / 2);
+  const columnHeight = Math.ceil(reviews.length / COLUMNS_AMOUNT);
   return (
     <div className="movie-card__reviews movie-card__row">
       <div className="movie-card__reviews-col">

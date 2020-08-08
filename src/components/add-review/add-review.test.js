@@ -41,6 +41,7 @@ it(`AddReview renders correctly`, () => {
           authorizationStatus={`AUTHORIZED`}
           authorizationInfo={authInfo}
           isSubmitButtonDisabled={false}
+          isFormDisabled={false}
         />
       </Router>
   );

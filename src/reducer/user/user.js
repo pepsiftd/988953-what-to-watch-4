@@ -1,5 +1,6 @@
 import {extend} from '@/utils';
 import {UserInfoModel} from '@/models/user-info-model';
+import {RequestRoute} from '@/const';
 
 const AuthorizationStatus = {
   AUTHORIZED: `AUTHORIZED`,
@@ -65,7 +66,7 @@ const reducer = (state = initialState, action) => {
 
 const Operation = {
   checkAuth: () => (dispatch, getState, api) => {
-    return api.get(`/login`)
+    return api.get(RequestRoute.LOGIN)
       .then((response) => {
         dispatch(ActionCreator.setAuthorizationStatus(AuthorizationStatus.AUTHORIZED));
         dispatch(ActionCreator.setAuthorizationInfo(UserInfoModel.parseUserInfo(response.data)));
@@ -76,7 +77,7 @@ const Operation = {
   },
 
   login: (authorizationData, onSuccess = () => {}, onFail = () => {}) => (dispatch, getState, api) => {
-    return api.post(`/login`, {
+    return api.post(RequestRoute.LOGIN, {
       email: authorizationData.email,
       password: authorizationData.password,
     })

@@ -3,10 +3,26 @@ import PropTypes from 'prop-types';
 const BASE_URL = `https://4.react.pages.academy/wtw`;
 const FILES_STORAGE_URL = `https://4.react.pages.academy`;
 const MAX_GENRES_AMOUNT = 9;
+const MAX_CARDS_ON_MOVIE_PAGE = 4;
+const ALL_GENRES_FILTER = `All genres`;
+const MAX_ACTORS_IN_SHORT_DETAILS = 4;
+const API_REQUEST_TIMEOUT_IN_MS = 1000 * 5;
+
+const MovieInfoTab = {
+  OVERVIEW: `Overview`,
+  DETAILS: `Details`,
+  REVIEWS: `Reviews`,
+};
 
 const videoPlayerSettings = {
   isMute: false,
   autoplay: true,
+};
+
+const SMALL_CARD_VIDEO_SETTINGS = {
+  isMute: true,
+  width: `280`,
+  height: `175`,
 };
 
 const AppRoute = {
@@ -15,6 +31,14 @@ const AppRoute = {
   MY_LIST: `/mylist`,
   MOVIE_PAGE: `/films`,
   PLAYER: `/player`,
+};
+
+const RequestRoute = {
+  LOGIN: `/login`,
+  FILMS: `/films`,
+  FAVORITE: `/favorite`,
+  PROMO: `/films/promo`,
+  COMMENTS: `/comments`,
 };
 
 const RatingEstimate = {
@@ -55,4 +79,11 @@ export {
   BASE_URL,
   FILES_STORAGE_URL,
   MAX_GENRES_AMOUNT,
+  ALL_GENRES_FILTER,
+  MAX_CARDS_ON_MOVIE_PAGE,
+  MovieInfoTab,
+  SMALL_CARD_VIDEO_SETTINGS,
+  MAX_ACTORS_IN_SHORT_DETAILS,
+  API_REQUEST_TIMEOUT_IN_MS,
+  RequestRoute,
 };

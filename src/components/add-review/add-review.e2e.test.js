@@ -46,6 +46,7 @@ it(`AddReview calls callback functions onInput and onSubmit`, () => {
         authorizationStatus={`AUTHORIZED`}
         authorizationInfo={authInfo}
         isSubmitButtonDisabled={false}
+        isFormDisabled={false}
       />
   );
 

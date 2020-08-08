@@ -2,6 +2,7 @@ import {extend} from '@/utils';
 import {FilmModel} from '@/models/film-model';
 import {ReviewModel} from '@/models/review-model';
 import {getMovies} from './selectors';
+import {RequestRoute} from '@/const';
 
 const initialState = {
   movies: [],
@@ -72,7 +73,7 @@ const reducer = (state = initialState, action) => {
 
 const Operation = {
   loadFilms: () => (dispatch, getState, api) => {
-    return api.get(`/films`)
+    return api.get(RequestRoute.FILMS)
       .then((response) => {
         const movies = FilmModel.parseFilms(response.data);
         dispatch(ActionCreator.loadFilms(movies));
@@ -82,14 +83,14 @@ const Operation = {
       });
   },
   loadPromo: () => (dispatch, getState, api) => {
-    return api.get(`/films/promo`)
+    return api.get(RequestRoute.PROMO)
       .then((response) => {
         const promoMovie = FilmModel.parseFilm(response.data);
         dispatch(ActionCreator.loadPromo(promoMovie));
       });
   },
   loadFavorite: () => (dispatch, getState, api) => {
-    return api.get(`/favorite`)
+    return api.get(RequestRoute.FAVORITE)
       .then((response) => {
         const favoriteMovies = FilmModel.parseFilms(response.data);
         dispatch(ActionCreator.loadFavorite(favoriteMovies));
@@ -102,7 +103,7 @@ const Operation = {
     const state = getState();
     const film = getMovies(state).find((movie) => movie.id === id);
 
-    return api.post(`/favorite/${id}/${film.isFavorite ? `0` : `1`}`)
+    return api.post(`${RequestRoute.FAVORITE}/${id}/${film.isFavorite ? `0` : `1`}`)
       .then(() => {
         dispatch(Operation.loadFilms());
         dispatch(Operation.loadFavorite());
@@ -113,14 +114,14 @@ const Operation = {
       });
   },
   loadReviews: (id) => (dispatch, getState, api) => {
-    return api.get(`/comments/${id}`)
+    return api.get(`${RequestRoute.COMMENTS}/${id}`)
       .then((response) => {
         const reviews = ReviewModel.parseReviews(response.data);
         dispatch(ActionCreator.loadReviews(reviews));
       });
   },
   postReview: (id, review) => (dispatch, getState, api) => {
-    return api.post(`/comments/${id}`, review)
+    return api.post(`${RequestRoute.COMMENTS}/${id}`, review)
       .then((response) => {
         const reviews = ReviewModel.parseReviews(response.data);
         dispatch(ActionCreator.loadReviews(reviews));

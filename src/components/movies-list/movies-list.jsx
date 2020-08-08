@@ -3,14 +3,9 @@ import PropTypes from 'prop-types';
 
 import {SmallMovieCard} from '@/components/small-movie-card/small-movie-card';
 import {withVideo} from '@/hocs/with-video/with-video';
+import {SMALL_CARD_VIDEO_SETTINGS} from '@/const';
 
 const SmallMovieCardWithVideo = withVideo(SmallMovieCard);
-
-const VIDEO_SETTINGS = {
-  isMute: true,
-  width: `280`,
-  height: `175`,
-};
 
 const MoviesList = ({movies, renderItem, setActiveItem, clearActiveItem, cardsShowing, renderShowMore = () => {}}) => {
   const cardsShowingCount = cardsShowing ? cardsShowing : movies.length;
@@ -22,7 +17,7 @@ const MoviesList = ({movies, renderItem, setActiveItem, clearActiveItem, cardsSh
             const videoSettings = Object.assign({}, {
               src: movie.preview,
               poster: movie.imageSrc,
-            }, VIDEO_SETTINGS);
+            }, SMALL_CARD_VIDEO_SETTINGS);
 
             return renderItem(SmallMovieCardWithVideo, movie.id, {
               key: movie.id,

@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {filmObjectPropTypes} from '@/const';
+import {filmObjectPropTypes, ALL_GENRES_FILTER} from '@/const';
 
 import {PromoMovieCard} from '@/components/promo-movie-card/promo-movie-card';
 import {MoviesList} from '@/components/movies-list/movies-list';
@@ -10,7 +10,7 @@ import {withShowMoreButton} from '@/hocs/with-show-more-button/with-show-more-bu
 
 import {AuthorizationStatus} from '@/reducer/user/user';
 
-const INITIAL_GENRE_FILTER = `All genres`;
+const INITIAL_GENRE_FILTER = ALL_GENRES_FILTER;
 const INITIAL_CARDS_COUNT = 8;
 const ADD_CARDS_ON_SHOW_MORE = 8;
 
