@@ -1,4 +1,4 @@
-import {RatingEstimate} from '@/const';
+import {RATING_LEVEL_MAP} from '@/const';
 
 const MINUTES_IN_AN_HOUR = 60;
 const SECONDS_IN_AN_HOUR = 3600;
@@ -55,27 +55,13 @@ const humanizeTimeElapsed = (timeInSeconds) => {
 };
 
 const getRatingEstimate = (rating) => {
-  let estimate = ``;
-
-  switch (true) {
-    case rating < 3:
-      estimate = RatingEstimate.BAD;
-      break;
-    case rating >= 3 && rating < 5:
-      estimate = RatingEstimate.NORMAL;
-      break;
-    case rating >= 5 && rating < 8:
-      estimate = RatingEstimate.GOOD;
-      break;
-    case rating >= 8 && rating < 10:
-      estimate = RatingEstimate.VERY_GOOD;
-      break;
-    case rating === 10:
-      estimate = RatingEstimate.AWESOME;
-      break;
+  for (const level of Object.keys(RATING_LEVEL_MAP).reverse()) {
+    if (rating >= level) {
+      return RATING_LEVEL_MAP[level];
+    }
   }
 
-  return estimate;
+  return null;
 };
 
 const getRatingString = (rating) => {

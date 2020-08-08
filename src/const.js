@@ -44,12 +44,12 @@ const RequestRoute = {
   COMMENTS: `/comments`,
 };
 
-const RatingEstimate = {
-  BAD: `Bad`,
-  NORMAL: `Normal`,
-  GOOD: `Good`,
-  VERY_GOOD: `Very good`,
-  AWESOME: `Awesome`,
+const RATING_LEVEL_MAP = {
+  0: `Bad`,
+  3: `Normal`,
+  5: `Good`,
+  8: `Very good`,
+  10: `Awesome`,
 };
 
 const filmObjectPropTypes = {
@@ -76,7 +76,7 @@ const filmObjectPropTypes = {
 
 export {
   AppRoute,
-  RatingEstimate,
+  RATING_LEVEL_MAP,
   filmObjectPropTypes,
   videoPlayerSettings,
   URL,

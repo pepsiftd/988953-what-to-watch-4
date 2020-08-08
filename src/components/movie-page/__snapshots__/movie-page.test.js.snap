@@ -218,7 +218,7 @@ Array [
               <span
                 className="movie-rating__level"
               >
-                
+                Awesome
               </span>
               <span
                 className="movie-rating__count"
