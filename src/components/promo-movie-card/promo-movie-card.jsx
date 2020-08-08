@@ -5,6 +5,7 @@ import {filmObjectPropTypes, AppRoute} from '@/const';
 import {history} from '@/history';
 
 import {UserBlock} from '@/components/user-block/user-block';
+import {Logo} from '@/components/logo/logo';
 
 const PromoMovieCard = ({movie, onToggleFavorite, authorizationStatus, authorizationInfo}) => {
   const {
@@ -27,13 +28,7 @@ const PromoMovieCard = ({movie, onToggleFavorite, authorizationStatus, authoriza
       <h1 className="visually-hidden">WTW</h1>
 
       <header className="page-header movie-card__head">
-        <div className="logo">
-          <a className="logo__link">
-            <span className="logo__letter logo__letter--1">W</span>
-            <span className="logo__letter logo__letter--2">T</span>
-            <span className="logo__letter logo__letter--3">W</span>
-          </a>
-        </div>
+        <Logo />
 
         <UserBlock
           authorizationStatus={authorizationStatus}

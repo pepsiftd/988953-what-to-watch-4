@@ -16,6 +16,9 @@ import {Details} from '@/components/details/details';
 import {Reviews} from '@/components/reviews/reviews';
 import {UserBlock} from '@/components/user-block/user-block';
 import {MoviesList} from '@/components/movies-list/movies-list';
+import {PageFooter} from '@/components/page-footer/page-footer';
+import {Logo} from '@/components/logo/logo';
+
 import {withActiveItem} from '@/hocs/with-active-item/with-active-item';
 
 const MoviesListWithActiveItem = withActiveItem(MoviesList);
@@ -77,13 +80,7 @@ class MoviePage extends PureComponent {
             <h1 className="visually-hidden">WTW</h1>
 
             <header className="page-header movie-card__head">
-              <div className="logo">
-                <Link to={AppRoute.ROOT} className="logo__link">
-                  <span className="logo__letter logo__letter--1">W</span>
-                  <span className="logo__letter logo__letter--2">T</span>
-                  <span className="logo__letter logo__letter--3">W</span>
-                </Link>
-              </div>
+              <Logo />
 
               <UserBlock
                 authorizationStatus={authorizationStatus}
@@ -210,19 +207,7 @@ class MoviePage extends PureComponent {
             />
           </section>
 
-          <footer className="page-footer">
-            <div className="logo">
-              <a href="main.html" className="logo__link logo__link--light">
-                <span className="logo__letter logo__letter--1">W</span>
-                <span className="logo__letter logo__letter--2">T</span>
-                <span className="logo__letter logo__letter--3">W</span>
-              </a>
-            </div>
-
-            <div className="copyright">
-              <p>© 2019 What to watch Ltd.</p>
-            </div>
-          </footer>
+          <PageFooter />
         </div>
       </React.Fragment>
     );
