@@ -1,0 +1,24 @@
+import React from 'react';
+import renderer from 'react-test-renderer';
+import {Router} from 'react-router-dom';
+import {history} from '@/history';
+
+import {MovieCardTop} from './movie-card-top';
+
+it(`MovieCardTop renders correctly`, () => {
+  const tree = renderer.create(
+      <Router history={history}>
+        <MovieCardTop
+          id={1}
+          title={`MovieTitle`}
+          year={1995}
+          genre={`Thriller`}
+          isFavorite={true}
+          isAuthorized={true}
+          onToggleFavorite={() => {}}
+        />
+      </Router>
+  );
+
+  expect(tree).toMatchSnapshot();
+});
