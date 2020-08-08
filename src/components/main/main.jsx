@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {filmObjectPropTypes, ALL_GENRES_FILTER} from '@/const';
+import {filmObjectPropTypes} from '@/const';
 
 import {PromoMovieCard} from '@/components/promo-movie-card/promo-movie-card';
 import {MoviesList} from '@/components/movies-list/movies-list';
