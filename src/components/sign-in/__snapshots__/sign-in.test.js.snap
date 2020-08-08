@@ -52,14 +52,6 @@ exports[`SignIn screen should render correctly 1`] = `
         <div
           className="sign-in__field "
         >
-          <input
-            className="sign-in__input"
-            id="user-email"
-            name="user-email"
-            onInput={[Function]}
-            placeholder="Email address"
-            type="email"
-          />
           <label
             className="sign-in__label visually-hidden"
             htmlFor="user-email"
@@ -70,13 +62,6 @@ exports[`SignIn screen should render correctly 1`] = `
         <div
           className="sign-in__field"
         >
-          <input
-            className="sign-in__input"
-            id="user-password"
-            name="user-password"
-            placeholder="Password"
-            type="password"
-          />
           <label
             className="sign-in__label visually-hidden"
             htmlFor="user-password"

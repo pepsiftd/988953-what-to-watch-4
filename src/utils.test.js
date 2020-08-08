@@ -8,6 +8,7 @@ import {
   humanizeTimeElapsed,
   getRatingString,
   getFormattedDate,
+  checkEmail,
 } from './utils';
 
 const movies = [
@@ -116,4 +117,31 @@ it(`getRatingString works correctly`, () => {
 it(`getFormattedDate works correctly`, () => {
   expect(getFormattedDate(new Date(`December 17, 1995`))).toEqual(`December 17, 1995`);
   expect(getFormattedDate(new Date(`February 5, 2018`))).toEqual(`February 5, 2018`);
+});
+
+describe(`checkEmail`, () => {
+  it(`should return false when passed empty string`, () => {
+    expect(checkEmail(``)).toEqual(false);
+  });
+  it(`should return false when passed a string without @`, () => {
+    expect(checkEmail(`yapochta.ru`)).toEqual(false);
+  });
+  it(`should return false when passed a string without .`, () => {
+    expect(checkEmail(`yapo@chtaru`)).toEqual(false);
+  });
+  it(`should return false when passed only spaces`, () => {
+    expect(checkEmail(`       `)).toEqual(false);
+  });
+  it(`should return false when passed a string without @`, () => {
+    expect(checkEmail(`yapochta.ru`)).toEqual(false);
+  });
+  it(`should return false when passed a string with spaces`, () => {
+    expect(checkEmail(`ya@pochta.ru mail`)).toEqual(false);
+  });
+  it(`should return true when passed example@microsoft.com`, () => {
+    expect(checkEmail(`example@microsoft.com`)).toEqual(true);
+  });
+  it(`should return true when passed example.server@edu.nist.gov`, () => {
+    expect(checkEmail(`example.server@edu.nist.gov`)).toEqual(true);
+  });
 });

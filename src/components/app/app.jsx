@@ -25,10 +25,12 @@ import {PrivateRoute} from '@/components/private-route/private-route';
 import {withActiveItem} from '@/hocs/with-active-item/with-active-item';
 import {withVideoPlayer} from '@/hocs/with-video-player/with-video-player';
 import {withAddReviewForm} from '@/hocs/with-add-review-form/with-add-review-form';
+import {withSignInForm} from '@/hocs/with-sign-in-form/with-sign-in-form';
 
 const MoviePageWithActiveItem = withActiveItem(MoviePage);
 const VideoPlayerWrapped = withVideoPlayer(VideoPlayer);
 const AddReviewWrapped = withAddReviewForm(AddReview);
+const SignInWrapped = withSignInForm(SignIn);
 
 const App = ({
   promoMovie,
@@ -70,13 +72,6 @@ const App = ({
           />)}
         />
 
-        <PrivateRoute authorizationStatus={authorizationStatus} path="/dev-movie-page" exact render={() => (
-          <MoviePageWithActiveItem
-            id={15}
-            initialItemId={`Overview`}
-          />)}
-        />
-
         <Route path={AppRoute.ROOT} exact>
           <Main
             promoMovie={promoMovie}
@@ -91,7 +86,7 @@ const App = ({
         </Route>
 
         <Route path={AppRoute.LOGIN} exact>
-          <SignIn
+          <SignInWrapped
             onSignIn={onSignIn}
             isBadRequest={isBadRequest}
             authorizationStatus={authorizationStatus}

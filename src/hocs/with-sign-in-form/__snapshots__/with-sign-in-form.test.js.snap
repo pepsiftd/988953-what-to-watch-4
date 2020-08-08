@@ -1,0 +1,26 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`withSignInForm renders inputs correctly 1`] = `
+<form
+  onSubmit={[Function]}
+>
+  <p>
+    Email is valid
+  </p>
+  <input
+    className="sign-in__input"
+    id="user-email"
+    name="user-email"
+    onInput={[Function]}
+    placeholder="Email address"
+    type="email"
+  />
+  <input
+    className="sign-in__input"
+    id="user-password"
+    name="user-password"
+    placeholder="Password"
+    type="password"
+  />
+</form>
+`;

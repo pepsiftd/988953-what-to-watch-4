@@ -93,6 +93,12 @@ const getFormattedDate = (date) => {
   return `${month} ${day}, ${year}`;
 };
 
+const checkEmail = (email) => {
+  const pattern = new RegExp(`^([A-z0-9_.-]{1,})@([A-z0-9_.-]{1,})([.]{1,})([A-z]{2,8})$`);
+
+  return pattern.test(email.trim());
+};
+
 export {
   extend,
   getMoviesByGenre,
@@ -103,4 +109,5 @@ export {
   humanizeTimeElapsed,
   getRatingString,
   getFormattedDate,
+  checkEmail,
 };
