@@ -1,0 +1,17 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`withAddReviewForm renders correctly 1`] = `
+<form
+  disabled={false}
+  onSubmit={[Function]}
+>
+  <input
+    onInput={[Function]}
+    type="text"
+  />
+  <input
+    disabled={false}
+    type="submit"
+  />
+</form>
+`;
