@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {Link} from 'react-router-dom';
-import {filmObjectPropTypes, AppRoute} from '@/const';
+import {FILM_OBJECT_PROP_TYPES, AppRoute} from '@/const';
 
 import {AuthorizationStatus} from '@/reducer/user/user';
 
@@ -92,7 +92,7 @@ const AddReview = ({movie, errors, onSubmit, isFormDisabled, onInput, authorizat
 };
 
 AddReview.propTypes = {
-  movie: PropTypes.shape(filmObjectPropTypes),
+  movie: PropTypes.shape(FILM_OBJECT_PROP_TYPES),
   errors: PropTypes.arrayOf(PropTypes.string).isRequired,
   onInput: PropTypes.func.isRequired,
   onSubmit: PropTypes.func.isRequired,

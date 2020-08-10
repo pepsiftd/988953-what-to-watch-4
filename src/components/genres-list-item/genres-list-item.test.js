@@ -8,7 +8,7 @@ describe(`GenresListItem renders`, () => {
     const tree = renderer.create(
         <GenresListItem
           genre={`All genres`}
-          titleClickHandler={() => {}}
+          onTitleClick={() => {}}
           isActive={true}
         />
     );
@@ -20,7 +20,7 @@ describe(`GenresListItem renders`, () => {
     const tree = renderer.create(
         <GenresListItem
           genre={`All genres`}
-          titleClickHandler={() => {}}
+          onTitleClick={() => {}}
           isActive={false}
         />
     );

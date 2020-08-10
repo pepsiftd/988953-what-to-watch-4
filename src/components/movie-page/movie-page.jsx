@@ -1,7 +1,7 @@
 import React, {PureComponent} from 'react';
 import {connect} from 'react-redux';
 import PropTypes from 'prop-types';
-import {filmObjectPropTypes, MovieInfoTab, MAX_CARDS_ON_MOVIE_PAGE} from '@/const';
+import {FILM_OBJECT_PROP_TYPES, MovieInfoTab, MAX_CARDS_ON_MOVIE_PAGE} from '@/const';
 import {getMoviesByGenre} from '@/utils';
 
 import {Operation as DataOperation} from '@/reducer/data/data';
@@ -158,7 +158,7 @@ class MoviePage extends PureComponent {
 }
 MoviePage.propTypes = {
   id: PropTypes.number.isRequired,
-  movies: PropTypes.arrayOf(PropTypes.shape(filmObjectPropTypes)).isRequired,
+  movies: PropTypes.arrayOf(PropTypes.shape(FILM_OBJECT_PROP_TYPES)).isRequired,
   onToggleFavorite: PropTypes.func.isRequired,
   authorizationStatus: PropTypes.oneOf(Object.values(AuthorizationStatus)).isRequired,
   authorizationInfo: PropTypes.shape({

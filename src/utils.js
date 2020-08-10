@@ -1,4 +1,4 @@
-import {RATING_LEVEL_MAP} from '@/const';
+import {RATING_LEVEL_MAP, ALL_GENRES_FILTER} from '@/const';
 
 const MINUTES_IN_AN_HOUR = 60;
 const SECONDS_IN_AN_HOUR = 3600;
@@ -19,7 +19,7 @@ const extend = (a, b) => {
 };
 
 const getMoviesByGenre = (movies, genre) => {
-  return genre === `All genres` ? movies : movies.filter((movie) => movie.genre === genre);
+  return genre === ALL_GENRES_FILTER ? movies : movies.filter((movie) => movie.genre === genre);
 };
 
 const getGenresFromMovies = (movies) => {

@@ -168,7 +168,7 @@ it(`App should render correctly`, () => {
   const tree = renderer.create(
       <Provider store={store}>
         <App
-          titleClickHandler={() => {}}
+          onTitleClick={() => {}}
           favoriteMovies={[]}
         />
       </Provider>,

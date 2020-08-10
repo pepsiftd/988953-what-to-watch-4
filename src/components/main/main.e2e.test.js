@@ -150,7 +150,7 @@ Enzyme.configure({
 });
 
 it(`Should titles be pressed`, () => {
-  const titleClickHandler = jest.fn();
+  const onTitleClick = jest.fn();
 
   const main = shallow(
       <Main
@@ -158,7 +158,7 @@ it(`Should titles be pressed`, () => {
         movies={movies}
         filteredMovies={movies}
         currentGenre={`All genres`}
-        titleClickHandler={titleClickHandler}
+        onTitleClick={onTitleClick}
         onToggleFavorite={() => {}}
         authorizationStatus="AUTHORIZED"
         authorizationInfo={authInfo}
@@ -171,5 +171,5 @@ it(`Should titles be pressed`, () => {
     title.simulate(`click`);
   });
 
-  expect(titleClickHandler).toHaveBeenCalledTimes(titles.length);
+  expect(onTitleClick).toHaveBeenCalledTimes(titles.length);
 });

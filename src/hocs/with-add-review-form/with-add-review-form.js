@@ -37,7 +37,7 @@ const withAddReviewForm = (Component) => {
       if (this.state.rating === null) {
         errors.push(Error.NO_RATING);
       }
-      if (this.state.comment.length < 50 || this.state.comment.length > 400) {
+      if (this.state.comment.length < COMMENT_MIN_LENGTH || this.state.comment.length > COMMENT_MAX_LENGTH) {
         errors.push(Error.COMMENT_OUT_OF_RANGE);
       }
       if (errorText) {

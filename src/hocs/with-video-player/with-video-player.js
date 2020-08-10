@@ -89,6 +89,7 @@ const withVideoPlayer = (Component) => {
     }
 
     render() {
+      const {width, height} = this._videoSettings;
 
       return (
         <Component
@@ -100,8 +101,8 @@ const withVideoPlayer = (Component) => {
           onFullscreenClick={this.onFullscreenClick}
         >
           <video
-            width="100%"
-            height="100%"
+            width={width}
+            height={height}
             ref={this._videoRef}
           />
         </Component>

@@ -1,14 +1,14 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const GenresListItem = ({genre, titleClickHandler, isActive}) => {
+const GenresListItem = ({genre, onTitleClick, isActive}) => {
   const activeGenreClass = `catalog__genres-item--active`;
 
   return (
     <li className={`catalog__genres-item ${isActive ? activeGenreClass : ``}`}>
       <a href="#" className="catalog__genres-link" onClick={(evt) => {
         evt.preventDefault();
-        titleClickHandler(genre);
+        onTitleClick(genre);
       }}>{genre}</a>
     </li>
   );
@@ -16,7 +16,7 @@ const GenresListItem = ({genre, titleClickHandler, isActive}) => {
 
 GenresListItem.propTypes = {
   genre: PropTypes.string.isRequired,
-  titleClickHandler: PropTypes.func.isRequired,
+  onTitleClick: PropTypes.func.isRequired,
   isActive: PropTypes.bool.isRequired,
 };
 

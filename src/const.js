@@ -17,9 +17,11 @@ const MovieInfoTab = {
   REVIEWS: `Reviews`,
 };
 
-const videoPlayerSettings = {
+const VIDEO_PLAYER_SETTINGS = {
   isMute: false,
   autoplay: true,
+  width: `100%`,
+  height: `100%`,
 };
 
 const SMALL_CARD_VIDEO_SETTINGS = {
@@ -52,7 +54,7 @@ const RATING_LEVEL_MAP = {
   10: `Awesome`,
 };
 
-const filmObjectPropTypes = {
+const FILM_OBJECT_PROP_TYPES = {
   id: PropTypes.number.isRequired,
 
   title: PropTypes.string.isRequired,
@@ -77,8 +79,8 @@ const filmObjectPropTypes = {
 export {
   AppRoute,
   RATING_LEVEL_MAP,
-  filmObjectPropTypes,
-  videoPlayerSettings,
+  FILM_OBJECT_PROP_TYPES,
+  VIDEO_PLAYER_SETTINGS,
   Url,
   MAX_GENRES_AMOUNT,
   ALL_GENRES_FILTER,

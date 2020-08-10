@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {filmObjectPropTypes} from '@/const';
+import {FILM_OBJECT_PROP_TYPES} from '@/const';
 
 import {PromoMovieCard} from '@/components/promo-movie-card/promo-movie-card';
 import {MoviesList} from '@/components/movies-list/movies-list';
@@ -23,7 +23,7 @@ const Main = ({
   movies,
   currentGenre,
   filteredMovies,
-  titleClickHandler,
+  onTitleClick,
   authorizationStatus,
   authorizationInfo,
   onToggleFavorite}) => {
@@ -44,7 +44,7 @@ const Main = ({
           <GenresListWrapped
             initialItemId={currentGenre}
             movies={movies}
-            titleClickHandler={titleClickHandler}
+            onTitleClick={onTitleClick}
           />
 
           <MoviesListWrapped
@@ -61,11 +61,11 @@ const Main = ({
 };
 
 Main.propTypes = {
-  promoMovie: PropTypes.shape(filmObjectPropTypes).isRequired,
-  movies: PropTypes.arrayOf(PropTypes.shape(filmObjectPropTypes).isRequired).isRequired,
+  promoMovie: PropTypes.shape(FILM_OBJECT_PROP_TYPES).isRequired,
+  movies: PropTypes.arrayOf(PropTypes.shape(FILM_OBJECT_PROP_TYPES).isRequired).isRequired,
   currentGenre: PropTypes.string.isRequired,
-  filteredMovies: PropTypes.arrayOf(PropTypes.shape(filmObjectPropTypes).isRequired).isRequired,
-  titleClickHandler: PropTypes.func.isRequired,
+  filteredMovies: PropTypes.arrayOf(PropTypes.shape(FILM_OBJECT_PROP_TYPES).isRequired).isRequired,
+  onTitleClick: PropTypes.func.isRequired,
   authorizationStatus: PropTypes.oneOf(Object.values(AuthorizationStatus)),
   authorizationInfo: PropTypes.shape({
     id: PropTypes.number,

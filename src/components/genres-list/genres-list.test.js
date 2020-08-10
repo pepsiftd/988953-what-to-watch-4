@@ -60,7 +60,7 @@ it(`GenresList renders correctly`, () => {
         movies={movies}
         renderItem={() => {}}
         setActiveItem={() => {}}
-        titleClickHandler={() => {}}
+        onTitleClick={() => {}}
       />
   );
 

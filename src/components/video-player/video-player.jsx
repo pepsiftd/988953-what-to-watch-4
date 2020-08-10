@@ -3,9 +3,11 @@ import PropTypes from 'prop-types';
 import {history} from '@/history';
 import {humanizeTimeElapsed} from '@/utils';
 
+const PERCENTS = 100;
+
 const VideoPlayer = ({children, isPlaying, title, duration, timeElapsed, onPlayClick, onFullscreenClick}) => {
   const timeElapsedString = humanizeTimeElapsed(timeElapsed);
-  const progress = timeElapsed / duration * 100;
+  const progress = timeElapsed / duration * PERCENTS;
   return (
     <div className="player">
       {children}

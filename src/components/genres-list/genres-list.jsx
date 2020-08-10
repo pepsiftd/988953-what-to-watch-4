@@ -5,7 +5,7 @@ import {GenresListItem} from '@/components/genres-list-item/genres-list-item';
 import {getGenresFromMovies} from '@/utils';
 import {MAX_GENRES_AMOUNT, ALL_GENRES_FILTER} from '@/const';
 
-const GenresList = ({movies, renderItem, setActiveItem, titleClickHandler}) => {
+const GenresList = ({movies, renderItem, setActiveItem, onTitleClick}) => {
   const genres = [ALL_GENRES_FILTER, ...getGenresFromMovies(movies).slice(0, MAX_GENRES_AMOUNT)];
 
   return (
@@ -18,9 +18,9 @@ const GenresList = ({movies, renderItem, setActiveItem, titleClickHandler}) => {
               {
                 key: genre,
                 genre,
-                titleClickHandler: (...args) => {
+                onTitleClick: (...args) => {
                   setActiveItem(...args);
-                  titleClickHandler(...args);
+                  onTitleClick(...args);
                 },
               }
           )
@@ -38,7 +38,7 @@ GenresList.propTypes = {
   }).isRequired).isRequired,
   renderItem: PropTypes.func.isRequired,
   setActiveItem: PropTypes.func.isRequired,
-  titleClickHandler: PropTypes.func.isRequired,
+  onTitleClick: PropTypes.func.isRequired,
 };
 
 export {GenresList};

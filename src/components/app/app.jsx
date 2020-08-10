@@ -4,7 +4,7 @@ import {connect} from 'react-redux';
 
 import {Router, Route, Switch} from 'react-router-dom';
 import {history} from '@/history';
-import {AppRoute, filmObjectPropTypes, videoPlayerSettings} from '@/const';
+import {AppRoute, FILM_OBJECT_PROP_TYPES, VIDEO_PLAYER_SETTINGS, MovieInfoTab} from '@/const';
 
 import {getMovies, getMoviesOfCurrentGenre, getPromoMovie, getFavoriteMovies} from '@/reducer/data/selectors';
 import {getCurrentGenre} from '@/reducer/app/selectors';
@@ -38,7 +38,7 @@ const App = ({
   filteredMovies,
   favoriteMovies,
   currentGenre,
-  titleClickHandler,
+  onTitleClick,
   authorizationStatus,
   authorizationInfo,
   onSignIn,
@@ -68,7 +68,7 @@ const App = ({
         <Route path={`${AppRoute.MOVIE_PAGE}/:id`} exact render={({match}) => (
           <MoviePageWithActiveItem
             id={parseInt(match.params.id, 10)}
-            initialItemId={`Overview`}
+            initialItemId={MovieInfoTab.OVERVIEW}
           />)}
         />
 
@@ -78,7 +78,7 @@ const App = ({
             movies={movies}
             filteredMovies={filteredMovies}
             currentGenre={currentGenre}
-            titleClickHandler={titleClickHandler}
+            onTitleClick={onTitleClick}
             authorizationStatus={authorizationStatus}
             authorizationInfo={authorizationInfo}
             onToggleFavorite={onToggleFavorite}
@@ -108,7 +108,7 @@ const App = ({
         <Route path={`${AppRoute.PLAYER}/:id`} exact render={({match}) => {
           const id = parseInt(match.params.id, 10);
           const movie = movies.find((it) => it.id === id);
-          const videoSettings = Object.assign({}, videoPlayerSettings, {
+          const videoSettings = Object.assign({}, VIDEO_PLAYER_SETTINGS, {
             src: movie.fullVideo,
             poster: movie.poster,
           });
@@ -132,12 +132,12 @@ const App = ({
 };
 
 App.propTypes = {
-  promoMovie: PropTypes.shape(filmObjectPropTypes).isRequired,
-  movies: PropTypes.arrayOf(PropTypes.shape(filmObjectPropTypes).isRequired).isRequired,
-  filteredMovies: PropTypes.arrayOf(PropTypes.shape(filmObjectPropTypes).isRequired).isRequired,
-  favoriteMovies: PropTypes.arrayOf(PropTypes.shape(filmObjectPropTypes).isRequired).isRequired,
+  promoMovie: PropTypes.shape(FILM_OBJECT_PROP_TYPES).isRequired,
+  movies: PropTypes.arrayOf(PropTypes.shape(FILM_OBJECT_PROP_TYPES).isRequired).isRequired,
+  filteredMovies: PropTypes.arrayOf(PropTypes.shape(FILM_OBJECT_PROP_TYPES).isRequired).isRequired,
+  favoriteMovies: PropTypes.arrayOf(PropTypes.shape(FILM_OBJECT_PROP_TYPES).isRequired).isRequired,
   currentGenre: PropTypes.string.isRequired,
-  titleClickHandler: PropTypes.func.isRequired,
+  onTitleClick: PropTypes.func.isRequired,
   authorizationStatus: PropTypes.oneOf(Object.values(AuthorizationStatus)),
   authorizationInfo: PropTypes.shape({
     id: PropTypes.number,
@@ -163,7 +163,7 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  titleClickHandler: (genre) => {
+  onTitleClick: (genre) => {
     dispatch(AppActionCreator.setCurrentGenre(genre));
   },
   onSignIn: (authorizationData) => {

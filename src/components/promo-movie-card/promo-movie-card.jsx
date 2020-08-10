@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {AuthorizationStatus} from '@/reducer/user/user';
-import {filmObjectPropTypes, AppRoute} from '@/const';
+import {FILM_OBJECT_PROP_TYPES, AppRoute} from '@/const';
 import {history} from '@/history';
 
 import {UserBlock} from '@/components/user-block/user-block';
@@ -89,7 +89,7 @@ const PromoMovieCard = ({movie, onToggleFavorite, authorizationStatus, authoriza
 };
 
 PromoMovieCard.propTypes = {
-  movie: PropTypes.shape(filmObjectPropTypes).isRequired,
+  movie: PropTypes.shape(FILM_OBJECT_PROP_TYPES).isRequired,
   onToggleFavorite: PropTypes.func.isRequired,
   authorizationStatus: PropTypes.oneOf(Object.values(AuthorizationStatus)).isRequired,
   authorizationInfo: PropTypes.shape({

@@ -142,7 +142,7 @@ const movies = [
   }
 ];
 
-const titleClickHandler = jest.fn();
+const onTitleClick = jest.fn();
 
 const authInfo = {
   avatar: `img/avatar.jpg`,
@@ -157,7 +157,7 @@ it(`Main should render correctly`, () => {
           filteredMovies={movies}
           favoriteMovies={[]}
           currentGenre={`All genres`}
-          titleClickHandler={titleClickHandler}
+          onTitleClick={onTitleClick}
           onToggleFavorite={() => {}}
           authorizationStatus="AUTHORIZED"
           authorizationInfo={authInfo}
