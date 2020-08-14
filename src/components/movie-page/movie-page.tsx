@@ -1,7 +1,7 @@
 import React, {PureComponent} from 'react';
 import {connect} from 'react-redux';
-import PropTypes from 'prop-types';
-import {FILM_OBJECT_PROP_TYPES, MovieInfoTab, MAX_CARDS_ON_MOVIE_PAGE} from '@/const';
+import {MovieInfoTab, MAX_CARDS_ON_MOVIE_PAGE} from '@/const';
+import {FilmObject, AuthInfo, ReviewData} from '@/types';
 import {getMoviesByGenre} from '@/utils';
 
 import {Operation as DataOperation} from '@/reducer/data/data';
@@ -23,7 +23,19 @@ import {withActiveItem} from '@/hocs/with-active-item/with-active-item';
 
 const MoviesListWithActiveItem = withActiveItem(MoviesList);
 
-class MoviePage extends PureComponent {
+interface Props {
+  id: number;
+  movies: FilmObject[];
+  onToggleFavorite: (id: number) => void;
+  authorizationStatus: AuthorizationStatus;
+  authorizationInfo: AuthInfo;
+  reviews: ReviewData[];
+  loadReviews: (id: number) => void;
+  activeItemId: string;
+  setActiveItem: (id: string) => void;
+};
+
+class MoviePage extends PureComponent<Props> {
   componentDidMount() {
     const {id, loadReviews} = this.props;
     loadReviews(id);
@@ -156,31 +168,6 @@ class MoviePage extends PureComponent {
     );
   }
 }
-MoviePage.propTypes = {
-  id: PropTypes.number.isRequired,
-  movies: PropTypes.arrayOf(PropTypes.shape(FILM_OBJECT_PROP_TYPES)).isRequired,
-  onToggleFavorite: PropTypes.func.isRequired,
-  authorizationStatus: PropTypes.oneOf(Object.values(AuthorizationStatus)).isRequired,
-  authorizationInfo: PropTypes.shape({
-    id: PropTypes.number,
-    email: PropTypes.string,
-    name: PropTypes.string,
-    avatar: PropTypes.string,
-  }).isRequired,
-  reviews: PropTypes.arrayOf(PropTypes.shape({
-    id: PropTypes.number.isRequired,
-    user: PropTypes.shape({
-      id: PropTypes.number.isRequired,
-      name: PropTypes.string.isRequired,
-    }).isRequired,
-    rating: PropTypes.number.isRequired,
-    comment: PropTypes.string.isRequired,
-    date: PropTypes.instanceOf(Date),
-  })).isRequired,
-  loadReviews: PropTypes.func.isRequired,
-  activeItemId: PropTypes.string.isRequired,
-  setActiveItem: PropTypes.func.isRequired,
-};
 
 const mapStateToProps = (state) => ({
   movies: getMovies(state),

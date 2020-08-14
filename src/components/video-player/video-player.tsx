@@ -1,11 +1,20 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import {history} from '@/history';
 import {humanizeTimeElapsed} from '@/utils';
 
 const PERCENTS = 100;
 
-const VideoPlayer = ({children, isPlaying, title, duration, timeElapsed, onPlayClick, onFullscreenClick}) => {
+interface Props {
+  children: React.ReactElement;
+  isPlaying: boolean;
+  title: string;
+  duration: number;
+  timeElapsed: number;
+  onPlayClick: () => void;
+  onFullscreenClick: () => void;
+};
+
+const VideoPlayer: React.FunctionComponent<Props> = ({children, isPlaying, title, duration, timeElapsed, onPlayClick, onFullscreenClick}) => {
   const timeElapsedString = humanizeTimeElapsed(timeElapsed);
   const progress = timeElapsed / duration * PERCENTS;
   return (
@@ -71,16 +80,6 @@ const VideoPlayer = ({children, isPlaying, title, duration, timeElapsed, onPlayC
       </div>
     </div>
   );
-};
-
-VideoPlayer.propTypes = {
-  children: PropTypes.element.isRequired,
-  isPlaying: PropTypes.bool.isRequired,
-  title: PropTypes.string.isRequired,
-  duration: PropTypes.number.isRequired,
-  timeElapsed: PropTypes.number.isRequired,
-  onPlayClick: PropTypes.func.isRequired,
-  onFullscreenClick: PropTypes.func.isRequired,
 };
 
 export {VideoPlayer};

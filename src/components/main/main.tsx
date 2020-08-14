@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {FILM_OBJECT_PROP_TYPES} from '@/const';
+import {FilmObject, AuthInfo} from '@/types';
 
 import {PromoMovieCard} from '@/components/promo-movie-card/promo-movie-card';
 import {MoviesList} from '@/components/movies-list/movies-list';
@@ -17,6 +17,17 @@ const ADD_CARDS_ON_SHOW_MORE = 8;
 
 const MoviesListWrapped = withShowMoreButton(withActiveItem(MoviesList));
 const GenresListWrapped = withActiveItem(GenresList);
+
+interface Props {
+  promoMovie: FilmObject;
+  movies: FilmObject[];
+  currentGenre: string;
+  filteredMovies: FilmObject[];
+  onTitleClick: (genre: string) => void;
+  authorizationStatus: AuthorizationStatus;
+  authorizationInfo: AuthInfo;
+  onToggleFavorite: () => void;
+};
 
 const Main = ({
   promoMovie,
@@ -58,22 +69,6 @@ const Main = ({
       </div>
     </React.Fragment>
   );
-};
-
-Main.propTypes = {
-  promoMovie: PropTypes.shape(FILM_OBJECT_PROP_TYPES).isRequired,
-  movies: PropTypes.arrayOf(PropTypes.shape(FILM_OBJECT_PROP_TYPES).isRequired).isRequired,
-  currentGenre: PropTypes.string.isRequired,
-  filteredMovies: PropTypes.arrayOf(PropTypes.shape(FILM_OBJECT_PROP_TYPES).isRequired).isRequired,
-  onTitleClick: PropTypes.func.isRequired,
-  authorizationStatus: PropTypes.oneOf(Object.values(AuthorizationStatus)),
-  authorizationInfo: PropTypes.shape({
-    id: PropTypes.number,
-    email: PropTypes.string,
-    name: PropTypes.string,
-    avatar: PropTypes.string,
-  }).isRequired,
-  onToggleFavorite: PropTypes.func.isRequired,
 };
 
 export {Main};

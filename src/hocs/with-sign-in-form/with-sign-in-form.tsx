@@ -1,15 +1,32 @@
 import React, {PureComponent, createRef} from 'react';
-import PropTypes from 'prop-types';
+import {Subtract} from 'utility-types';
 
 import {checkEmail} from '@/utils';
 
+interface State {
+  isValidEmail: boolean;
+};
+
+interface InjectingProps {
+  renderEmailInput: () => React.ReactNode;
+  renderPasswordInput: () => React.ReactNode;
+  isValidEmail: boolean;
+  onSubmit: (evt: React.FormEvent) => void;
+};
+
 const withSignInForm = (Component) => {
-  class WithSignInForm extends PureComponent {
+  type P = React.ComponentProps<typeof Component>;
+  type T = Subtract<P, InjectingProps>;
+
+  class WithSignInForm extends PureComponent<T, State> {
+    private emailInputRef: React.RefObject<HTMLInputElement>;
+    private passwordInputRef: React.RefObject<HTMLInputElement>;
+
     constructor(props) {
       super(props);
 
-      this._emailInputRef = createRef();
-      this._passwordInputRef = createRef();
+      this.emailInputRef = createRef();
+      this.passwordInputRef = createRef();
 
       this.state = {
         isValidEmail: true,
@@ -20,7 +37,7 @@ const withSignInForm = (Component) => {
     }
 
     onEmailInput() {
-      if (checkEmail(this._emailInputRef.current.value)) {
+      if (checkEmail(this.emailInputRef.current.value)) {
         this.setState({
           isValidEmail: true
         });
@@ -34,10 +51,10 @@ const withSignInForm = (Component) => {
     onSubmit(evt) {
       evt.preventDefault();
 
-      if (this.state.isValidEmail && this._passwordInputRef.current.value.length > 0) {
+      if (this.state.isValidEmail && this.passwordInputRef.current.value.length > 0) {
         this.props.onSignIn({
-          email: this._emailInputRef.current.value,
-          password: this._passwordInputRef.current.value,
+          email: this.emailInputRef.current.value,
+          password: this.passwordInputRef.current.value,
         });
       }
     }
@@ -49,7 +66,7 @@ const withSignInForm = (Component) => {
           renderEmailInput={() => {
             return (
               <input
-                ref={this._emailInputRef}
+                ref={this.emailInputRef}
                 className="sign-in__input"
                 type="email"
                 placeholder="Email address"
@@ -63,7 +80,7 @@ const withSignInForm = (Component) => {
           renderPasswordInput={() => {
             return (
               <input
-                ref={this._passwordInputRef}
+                ref={this.passwordInputRef}
                 className="sign-in__input"
                 type="password"
                 placeholder="Password"
@@ -79,10 +96,6 @@ const withSignInForm = (Component) => {
       );
     }
   }
-
-  WithSignInForm.propTypes = {
-    onSignIn: PropTypes.func.isRequired,
-  };
 
   return WithSignInForm;
 };

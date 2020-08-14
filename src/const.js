@@ -26,8 +26,8 @@ const VIDEO_PLAYER_SETTINGS = {
 
 const SMALL_CARD_VIDEO_SETTINGS = {
   isMute: true,
-  width: `280`,
-  height: `175`,
+  width: 280,
+  height: 175,
 };
 
 const AppRoute = {

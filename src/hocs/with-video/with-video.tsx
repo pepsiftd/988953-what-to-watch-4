@@ -1,13 +1,29 @@
 import React, {createRef} from 'react';
-import PropTypes from 'prop-types';
+import {Subtract} from 'utility-types';
+
+interface InjectingProps {
+  children: React.ReactNode;
+};
 
 const withVideo = (Component) => {
-  class WithVideo extends React.Component {
+  type P = React.ComponentProps<typeof Component>;
+  type T = Subtract<P, InjectingProps>;
+
+  class WithVideo extends React.Component<T> {
+    private videoRef: React.RefObject<HTMLVideoElement>;
+    private videoSettings: {
+      src: string;
+      poster: string;
+      width: number;
+      height: number;
+      isMute: boolean;
+    };
+
     constructor(props) {
       super(props);
-      this._videoSettings = props.videoSettings;
+      this.videoSettings = props.videoSettings;
 
-      this._videoRef = createRef();
+      this.videoRef = createRef();
     }
 
     shouldComponentUpdate(nextProps) {
@@ -15,8 +31,8 @@ const withVideo = (Component) => {
     }
 
     componentDidMount() {
-      const {src, poster, width, height, isMute} = this._videoSettings;
-      const video = this._videoRef.current;
+      const {src, poster, width, height, isMute} = this.videoSettings;
+      const video = this.videoRef.current;
 
       video.src = src;
       video.poster = poster;
@@ -26,7 +42,7 @@ const withVideo = (Component) => {
     }
 
     componentWillUnmount() {
-      const video = this._videoRef.current;
+      const video = this.videoRef.current;
 
       video.src = ``;
       video.poster = ``;
@@ -38,7 +54,7 @@ const withVideo = (Component) => {
     }
 
     componentDidUpdate() {
-      const video = this._videoRef.current;
+      const video = this.videoRef.current;
 
       if (this.props.isActive) {
         video.play();
@@ -54,23 +70,12 @@ const withVideo = (Component) => {
           {...this.props}
         >
           <video
-            ref={this._videoRef}
+            ref={this.videoRef}
           />
         </Component>
       );
     }
   }
-
-  WithVideo.propTypes = {
-    videoSettings: PropTypes.shape({
-      src: PropTypes.string.isRequired,
-      poster: PropTypes.string.isRequired,
-      isMute: PropTypes.bool.isRequired,
-      width: PropTypes.string.isRequired,
-      height: PropTypes.string.isRequired,
-    }),
-    isActive: PropTypes.bool.isRequired,
-  };
 
   return WithVideo;
 };

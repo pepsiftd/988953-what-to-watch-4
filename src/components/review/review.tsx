@@ -1,8 +1,12 @@
 import React from 'react';
-import PropTypes from 'prop-types';
+import {ReviewData} from '@/types';
 import {getRatingString, getFormattedDate} from '@/utils';
 
-const Review = ({review}) => {
+interface Props {
+  review: ReviewData;
+};
+
+const Review: React.FunctionComponent<Props> = ({review}) => {
   const {user, rating, comment, date} = review;
   const dateString = getFormattedDate(date);
 
@@ -20,19 +24,6 @@ const Review = ({review}) => {
       <div className="review__rating">{getRatingString(rating)}</div>
     </div>
   );
-};
-
-Review.propTypes = {
-  review: PropTypes.shape({
-    id: PropTypes.number,
-    user: PropTypes.shape({
-      id: PropTypes.number.isRequired,
-      name: PropTypes.string.isRequired,
-    }).isRequired,
-    rating: PropTypes.number.isRequired,
-    comment: PropTypes.string.isRequired,
-    date: PropTypes.instanceOf(Date),
-  }).isRequired,
 };
 
 export {Review};

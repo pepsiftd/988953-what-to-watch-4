@@ -1,11 +1,20 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 
 import {GenresListItem} from '@/components/genres-list-item/genres-list-item';
 import {getGenresFromMovies} from '@/utils';
 import {MAX_GENRES_AMOUNT, ALL_GENRES_FILTER} from '@/const';
 
-const GenresList = ({movies, renderItem, setActiveItem, onTitleClick}) => {
+interface Props {
+  movies: {
+    id: number;
+    genre: string;
+  }[];
+  renderItem: (Item: React.ReactElement, id: number | string, itemProps: {}) => React.ReactElement;
+  setActiveItem: (id: number | string) => void;
+  onTitleClick: (id: number | string) => void;
+};
+
+const GenresList: React.FunctionComponent<Props> = ({movies, renderItem, setActiveItem, onTitleClick}) => {
   const genres = [ALL_GENRES_FILTER, ...getGenresFromMovies(movies).slice(0, MAX_GENRES_AMOUNT)];
 
   return (
@@ -29,16 +38,6 @@ const GenresList = ({movies, renderItem, setActiveItem, onTitleClick}) => {
 
     </ul>
   );
-};
-
-GenresList.propTypes = {
-  movies: PropTypes.arrayOf(PropTypes.shape({
-    id: PropTypes.number.isRequired,
-    genre: PropTypes.string.isRequired,
-  }).isRequired).isRequired,
-  renderItem: PropTypes.func.isRequired,
-  setActiveItem: PropTypes.func.isRequired,
-  onTitleClick: PropTypes.func.isRequired,
 };
 
 export {GenresList};

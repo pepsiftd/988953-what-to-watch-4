@@ -1,10 +1,23 @@
 import React, {PureComponent} from 'react';
-import PropTypes from 'prop-types';
+import {Subtract} from 'utility-types';
 
 import {ShowMoreButton} from '@/components/show-more-button/show-more-button';
 
+interface State {
+  cardsShowing: number;
+  isButtonShowing: boolean;
+};
+
+interface InjectingProps {
+  cardsShowing: number;
+  renderShowMore: () => React.ReactNode;
+};
+
 const withShowMoreButton = (Component) => {
-  class WithShowMoreButton extends PureComponent {
+  type P = React.ComponentProps<typeof Component>;
+  type T = Subtract<P, InjectingProps>;
+
+  class WithShowMoreButton extends PureComponent<T, State> {
     constructor(props) {
       super(props);
 
@@ -51,12 +64,6 @@ const withShowMoreButton = (Component) => {
         />);
     }
   }
-
-  WithShowMoreButton.propTypes = {
-    movies: PropTypes.array.isRequired,
-    initialCardsCount: PropTypes.number.isRequired,
-    addCardsOnShowMore: PropTypes.number.isRequired,
-  };
 
   return WithShowMoreButton;
 };

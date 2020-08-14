@@ -1,13 +1,20 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import {Redirect} from 'react-router-dom';
 import {AppRoute} from '@/const';
 import {AuthorizationStatus} from '@/reducer/user/user';
 import {PageFooter} from '@/components/page-footer/page-footer';
 import {Logo} from '@/components/logo/logo';
 
+interface Props {
+  isBadRequest: boolean;
+  authorizationStatus: AuthorizationStatus;
+  renderPasswordInput: () => React.ReactElement;
+  renderEmailInput: () => React.ReactElement;
+  isValidEmail: boolean;
+  onSubmit: () => void;
+};
 
-const SignIn = ({authorizationStatus, renderEmailInput, renderPasswordInput, isBadRequest, isValidEmail, onSubmit}) => {
+const SignIn: React.FunctionComponent<Props> = ({authorizationStatus, renderEmailInput, renderPasswordInput, isBadRequest, isValidEmail, onSubmit}) => {
   const isAuthorized = authorizationStatus === AuthorizationStatus.AUTHORIZED;
 
   if (isAuthorized) {
@@ -59,16 +66,6 @@ const SignIn = ({authorizationStatus, renderEmailInput, renderPasswordInput, isB
       <PageFooter />
     </div>
   );
-};
-
-SignIn.propTypes = {
-  onSignIn: PropTypes.func.isRequired,
-  isBadRequest: PropTypes.bool.isRequired,
-  authorizationStatus: PropTypes.oneOf(Object.values(AuthorizationStatus)).isRequired,
-  renderPasswordInput: PropTypes.func.isRequired,
-  renderEmailInput: PropTypes.func.isRequired,
-  isValidEmail: PropTypes.bool.isRequired,
-  onSubmit: PropTypes.func.isRequired,
 };
 
 export {SignIn};

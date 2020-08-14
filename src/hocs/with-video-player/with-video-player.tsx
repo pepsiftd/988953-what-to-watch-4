@@ -1,19 +1,48 @@
 import React, {createRef} from 'react';
-import PropTypes from 'prop-types';
+import {Subtract} from 'utility-types';
+
+interface State {
+  isPlaying: boolean;
+  progress: number;
+  isFullscreen: boolean;
+};
+
+interface InjectingProps {
+  isPlaying: boolean;
+  duration: number;
+  timeElapsed: number;
+  onPlayClick: () => void;
+  onFullscreenClick: () => void;
+  children: React.ReactNode;
+};
 
 const withVideoPlayer = (Component) => {
-  class WithVideoPlayer extends React.Component {
+  type P = React.ComponentProps<typeof Component>;
+  type T = Subtract<P, InjectingProps>;
+
+  class WithVideoPlayer extends React.Component<T, State> {
+    private videoRef: React.RefObject<HTMLVideoElement>;
+    private videoSettings: {
+      src: string;
+      poster: string;
+      isMute: boolean;
+      autoplay: boolean;
+      width: string;
+      height: string;
+    };
+    duration: number;
+
     constructor(props) {
       super(props);
-      this._videoSettings = props.videoSettings;
+      this.videoSettings = props.videoSettings;
 
       this.state = {
-        isPlaying: this._videoSettings.autoplay,
+        isPlaying: this.videoSettings.autoplay,
         progress: 0,
         isFullscreen: false,
       };
 
-      this._videoRef = createRef();
+      this.videoRef = createRef();
       this.duration = 0;
 
       this.onPlayClick = this.onPlayClick.bind(this);
@@ -27,12 +56,12 @@ const withVideoPlayer = (Component) => {
     }
 
     onFullscreenClick() {
-      this._videoRef.current.requestFullscreen();
+      this.videoRef.current.requestFullscreen();
     }
 
     componentDidMount() {
-      const {src, poster, isMute, autoplay} = this._videoSettings;
-      const video = this._videoRef.current;
+      const {src, poster, isMute, autoplay} = this.videoSettings;
+      const video = this.videoRef.current;
 
       video.autoplay = autoplay;
       video.src = src;
@@ -40,12 +69,12 @@ const withVideoPlayer = (Component) => {
       video.muted = isMute;
 
       video.oncanplaythrough = () => {
-        this.duration = parseInt(video.duration, 10);
+        this.duration = video.duration;
       };
 
       video.ontimeupdate = () => {
         this.setState({
-          progress: parseInt(video.currentTime, 10),
+          progress: video.currentTime,
         });
       };
 
@@ -64,7 +93,7 @@ const withVideoPlayer = (Component) => {
     }
 
     componentWillUnmount() {
-      const video = this._videoRef.current;
+      const video = this.videoRef.current;
 
       video.autoplay = null;
       video.src = ``;
@@ -77,7 +106,7 @@ const withVideoPlayer = (Component) => {
     }
 
     componentDidUpdate() {
-      const video = this._videoRef.current;
+      const video = this.videoRef.current;
 
       if (!this.state.isFullscreen) {
         if (this.state.isPlaying) {
@@ -89,7 +118,7 @@ const withVideoPlayer = (Component) => {
     }
 
     render() {
-      const {width, height} = this._videoSettings;
+      const {width, height} = this.videoSettings;
 
       return (
         <Component
@@ -103,20 +132,12 @@ const withVideoPlayer = (Component) => {
           <video
             width={width}
             height={height}
-            ref={this._videoRef}
+            ref={this.videoRef}
           />
         </Component>
       );
     }
   }
-
-  WithVideoPlayer.propTypes = {
-    videoSettings: PropTypes.shape({
-      src: PropTypes.string.isRequired,
-      isMute: PropTypes.bool.isRequired,
-    }),
-    isActive: PropTypes.bool.isRequired,
-  };
 
   return WithVideoPlayer;
 };

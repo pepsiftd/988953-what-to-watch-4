@@ -4,7 +4,7 @@ import {Logo} from '@/components/logo/logo';
 
 const LIGHT_LOGO_CLASSNAME = `logo__link--light`;
 
-const LogoLight = () => {
+const LogoLight: React.FunctionComponent = () => {
   return (
     <Logo additionalClassName={LIGHT_LOGO_CLASSNAME} />
   );

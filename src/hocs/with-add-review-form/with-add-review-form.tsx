@@ -1,10 +1,11 @@
 import React, {PureComponent} from 'react';
-import PropTypes from 'prop-types';
+import {Subtract} from 'utility-types';
+
 import {ReviewModel} from '@/models/review-model';
 
-const InputName = {
-  'rating': `rating`,
-  'review-text': `comment`,
+enum InputName {
+  'rating' = `rating`,
+  'review-text' = `comment`,
 };
 
 const COMMENT_MIN_LENGTH = 50;
@@ -15,8 +16,27 @@ const Error = {
   COMMENT_OUT_OF_RANGE: `Your review should not be shorter than ${COMMENT_MIN_LENGTH} or longer than ${COMMENT_MAX_LENGTH} symbols`
 };
 
+interface State {
+  rating: number;
+  comment: string;
+  isFormDisabled: boolean;
+  isSubmitButtonDisabled: boolean;
+  errors: string[];
+};
+
+interface InjectingProps {
+  isFormDisabled: boolean;
+  isSubmitButtonDisabled: boolean;
+  onSubmit: () => void;
+  onInput: (evt: React.FormEvent) => void;
+  errors: string[];
+};
+
 const withAddReviewForm = (Component) => {
-  class WithAddReviewForm extends PureComponent {
+  type P = React.ComponentProps<typeof Component>;
+  type T = Subtract<P, InjectingProps>;
+
+  class WithAddReviewForm extends PureComponent<T, State> {
     constructor(props) {
       super(props);
 
@@ -32,7 +52,7 @@ const withAddReviewForm = (Component) => {
       this.onInput = this.onInput.bind(this);
     }
 
-    _setError(errorText) {
+    _setError(errorText = null) {
       const errors = [];
       if (this.state.rating === null) {
         errors.push(Error.NO_RATING);
@@ -108,13 +128,6 @@ const withAddReviewForm = (Component) => {
       );
     }
   }
-
-  WithAddReviewForm.propTypes = {
-    movie: PropTypes.shape({
-      id: PropTypes.number.isRequired,
-    }).isRequired,
-    onSendReview: PropTypes.func.isRequired,
-  };
 
   return WithAddReviewForm;
 };

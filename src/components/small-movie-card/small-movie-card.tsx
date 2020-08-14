@@ -1,12 +1,23 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import {history} from '@/history';
 import {AppRoute} from '@/const';
 import {Link} from 'react-router-dom';
 
 const PREVIEW_START_TIMEOUT = 1000;
 
-const SmallMovieCard = ({movie, onMouseEnter, onMouseLeave, children}) => {
+interface Props {
+  movie: {
+    id: number;
+    title: string;
+    imageSrc: string;
+    preview: string;
+  };
+  children: React.ReactElement;
+  onMouseEnter: (id: number) => void;
+  onMouseLeave: () => void;
+};
+
+const SmallMovieCard: React.FunctionComponent<Props> = ({movie, onMouseEnter, onMouseLeave, children}) => {
   const {title, id} = movie;
   let timeout = null;
 
@@ -35,18 +46,6 @@ const SmallMovieCard = ({movie, onMouseEnter, onMouseLeave, children}) => {
       </h3>
     </article>
   );
-};
-
-SmallMovieCard.propTypes = {
-  movie: PropTypes.shape({
-    id: PropTypes.number.isRequired,
-    title: PropTypes.string.isRequired,
-    imageSrc: PropTypes.string.isRequired,
-    preview: PropTypes.string.isRequired,
-  }).isRequired,
-  children: PropTypes.element.isRequired,
-  onMouseEnter: PropTypes.func.isRequired,
-  onMouseLeave: PropTypes.func.isRequired,
 };
 
 export {SmallMovieCard};

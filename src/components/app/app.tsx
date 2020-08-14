@@ -1,9 +1,9 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 
 import {Router, Route, Switch} from 'react-router-dom';
 import {history} from '@/history';
+import {FilmObject, AuthInfo} from '@/types';
 import {AppRoute, FILM_OBJECT_PROP_TYPES, VIDEO_PLAYER_SETTINGS, MovieInfoTab} from '@/const';
 
 import {getMovies, getMoviesOfCurrentGenre, getPromoMovie, getFavoriteMovies} from '@/reducer/data/selectors';
@@ -32,7 +32,22 @@ const VideoPlayerWrapped = withVideoPlayer(VideoPlayer);
 const AddReviewWrapped = withAddReviewForm(AddReview);
 const SignInWrapped = withSignInForm(SignIn);
 
-const App = ({
+interface Props {
+  promoMovie: FilmObject,
+  movies: FilmObject[],
+  filteredMovies: FilmObject[],
+  favoriteMovies: FilmObject[],
+  currentGenre: string,
+  onTitleClick: () => void,
+  authorizationStatus: AuthorizationStatus,
+  authorizationInfo: AuthInfo,
+  onSignIn: () => void,
+  isBadRequest: boolean,
+  onToggleFavorite: () => void,
+  onSendReview: () => void,
+};
+
+const App: React.FunctionComponent<Props> = ({
   promoMovie,
   movies,
   filteredMovies,
@@ -129,26 +144,6 @@ const App = ({
       </Switch>
     </Router>
   );
-};
-
-App.propTypes = {
-  promoMovie: PropTypes.shape(FILM_OBJECT_PROP_TYPES).isRequired,
-  movies: PropTypes.arrayOf(PropTypes.shape(FILM_OBJECT_PROP_TYPES).isRequired).isRequired,
-  filteredMovies: PropTypes.arrayOf(PropTypes.shape(FILM_OBJECT_PROP_TYPES).isRequired).isRequired,
-  favoriteMovies: PropTypes.arrayOf(PropTypes.shape(FILM_OBJECT_PROP_TYPES).isRequired).isRequired,
-  currentGenre: PropTypes.string.isRequired,
-  onTitleClick: PropTypes.func.isRequired,
-  authorizationStatus: PropTypes.oneOf(Object.values(AuthorizationStatus)),
-  authorizationInfo: PropTypes.shape({
-    id: PropTypes.number,
-    email: PropTypes.string,
-    name: PropTypes.string,
-    avatar: PropTypes.string,
-  }).isRequired,
-  onSignIn: PropTypes.func.isRequired,
-  isBadRequest: PropTypes.bool.isRequired,
-  onToggleFavorite: PropTypes.func.isRequired,
-  onSendReview: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({

@@ -1,13 +1,20 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import {AuthorizationStatus} from '@/reducer/user/user';
-import {FILM_OBJECT_PROP_TYPES, AppRoute} from '@/const';
+import {AppRoute} from '@/const';
+import {FilmObject, AuthInfo} from '@/types';
 import {history} from '@/history';
 
 import {UserBlock} from '@/components/user-block/user-block';
 import {Logo} from '@/components/logo/logo';
 
-const PromoMovieCard = ({movie, onToggleFavorite, authorizationStatus, authorizationInfo}) => {
+interface Props {
+  movie: FilmObject;
+  onToggleFavorite: (id: number) => void;
+  authorizationStatus: AuthorizationStatus;
+  authorizationInfo: AuthInfo;
+};
+
+const PromoMovieCard: React.FunctionComponent<Props> = ({movie, onToggleFavorite, authorizationStatus, authorizationInfo}) => {
   const {
     id,
 
@@ -86,18 +93,6 @@ const PromoMovieCard = ({movie, onToggleFavorite, authorizationStatus, authoriza
       </div>
     </section>
   );
-};
-
-PromoMovieCard.propTypes = {
-  movie: PropTypes.shape(FILM_OBJECT_PROP_TYPES).isRequired,
-  onToggleFavorite: PropTypes.func.isRequired,
-  authorizationStatus: PropTypes.oneOf(Object.values(AuthorizationStatus)).isRequired,
-  authorizationInfo: PropTypes.shape({
-    id: PropTypes.number,
-    email: PropTypes.string,
-    name: PropTypes.string,
-    avatar: PropTypes.string,
-  }).isRequired,
 };
 
 export {PromoMovieCard};

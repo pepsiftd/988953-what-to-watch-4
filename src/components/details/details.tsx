@@ -1,8 +1,15 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import {humanizeRunTime} from '@/utils';
 
-const Details = ({director, starring, runTime, genre, year}) => {
+interface Props {
+  director: string;
+  starring: string[];
+  runTime: number;
+  genre: string;
+  year: number;
+};
+
+const Details: React.FunctionComponent<Props> = ({director, starring, runTime, genre, year}) => {
   const timeString = humanizeRunTime(runTime);
   return (
     <div className="movie-card__text movie-card__row">
@@ -41,14 +48,6 @@ const Details = ({director, starring, runTime, genre, year}) => {
       </div>
     </div>
   );
-};
-
-Details.propTypes = {
-  director: PropTypes.string.isRequired,
-  starring: PropTypes.arrayOf(PropTypes.string).isRequired,
-  runTime: PropTypes.number.isRequired,
-  genre: PropTypes.string.isRequired,
-  year: PropTypes.number.isRequired,
 };
 
 export {Details};

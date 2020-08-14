@@ -1,11 +1,16 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import {Link} from 'react-router-dom';
 import {AuthorizationStatus} from '@/reducer/user/user';
 import {AppRoute} from '@/const';
+import {AuthInfo} from '@/types';
+
+interface Props {
+  authorizationStatus: AuthorizationStatus;
+  authorizationInfo: AuthInfo;
+};
 
 
-const UserBlock = ({authorizationStatus, authorizationInfo}) => {
+const UserBlock: React.FunctionComponent<Props> = ({authorizationStatus, authorizationInfo}) => {
   const {avatar} = authorizationInfo;
   return (
     <div className="user-block">
@@ -22,16 +27,6 @@ const UserBlock = ({authorizationStatus, authorizationInfo}) => {
 
     </div>
   );
-};
-
-UserBlock.propTypes = {
-  authorizationStatus: PropTypes.oneOf(Object.values(AuthorizationStatus)).isRequired,
-  authorizationInfo: PropTypes.shape({
-    id: PropTypes.number,
-    email: PropTypes.string,
-    name: PropTypes.string,
-    avatar: PropTypes.string,
-  }).isRequired,
 };
 
 export {UserBlock};

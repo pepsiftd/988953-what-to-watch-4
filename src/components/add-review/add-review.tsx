@@ -1,14 +1,27 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import {Link} from 'react-router-dom';
 import {FILM_OBJECT_PROP_TYPES, AppRoute} from '@/const';
+import {FilmObject, AuthInfo} from '@/types';
 
 import {AuthorizationStatus} from '@/reducer/user/user';
 
 import {UserBlock} from '@/components/user-block/user-block';
 import {Logo} from '@/components/logo/logo';
 
-const AddReview = ({movie, errors, onSubmit, isFormDisabled, onInput, authorizationStatus, authorizationInfo, isSubmitButtonDisabled}) => {
+interface Props {
+  movie: FilmObject;
+  errors: string[];
+  onInput: () => void;
+  onSubmit: () => void;
+  authorizationStatus: AuthorizationStatus;
+  authorizationInfo: AuthInfo;
+  isSubmitButtonDisabled: boolean;
+  isFormDisabled: boolean;
+};
+
+const AddReview: React.FunctionComponent<Props>
+= ({movie, errors, onSubmit, isFormDisabled, onInput, authorizationStatus, authorizationInfo, isSubmitButtonDisabled}) => {
+
   const {id, title, backgroundImage, poster} = movie;
   return (
     <section className="movie-card movie-card--full">
@@ -89,22 +102,6 @@ const AddReview = ({movie, errors, onSubmit, isFormDisabled, onInput, authorizat
 
     </section>
   );
-};
-
-AddReview.propTypes = {
-  movie: PropTypes.shape(FILM_OBJECT_PROP_TYPES),
-  errors: PropTypes.arrayOf(PropTypes.string).isRequired,
-  onInput: PropTypes.func.isRequired,
-  onSubmit: PropTypes.func.isRequired,
-  authorizationStatus: PropTypes.oneOf(Object.values(AuthorizationStatus)).isRequired,
-  authorizationInfo: PropTypes.shape({
-    id: PropTypes.number,
-    email: PropTypes.string,
-    name: PropTypes.string,
-    avatar: PropTypes.string,
-  }).isRequired,
-  isSubmitButtonDisabled: PropTypes.bool.isRequired,
-  isFormDisabled: PropTypes.bool.isRequired,
 };
 
 export {AddReview};

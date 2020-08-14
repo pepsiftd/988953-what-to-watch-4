@@ -1,7 +1,14 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import {getRatingEstimate, getRatingString} from '@/utils';
 import {MAX_ACTORS_IN_SHORT_DETAILS} from '@/const';
+
+interface Props {
+  ratingScore: number;
+  ratingCount: number;
+  description: string;
+  director: string;
+  starring: string[];
+};
 
 const Overview = ({ratingScore, ratingCount, description, director, starring}) => {
   const starringShort = starring.slice(0, MAX_ACTORS_IN_SHORT_DETAILS);
@@ -27,14 +34,6 @@ const Overview = ({ratingScore, ratingCount, description, director, starring}) =
       </div>
     </React.Fragment>
   );
-};
-
-Overview.propTypes = {
-  ratingScore: PropTypes.number.isRequired,
-  ratingCount: PropTypes.number.isRequired,
-  description: PropTypes.string.isRequired,
-  director: PropTypes.string.isRequired,
-  starring: PropTypes.arrayOf(PropTypes.string).isRequired,
 };
 
 export {Overview};

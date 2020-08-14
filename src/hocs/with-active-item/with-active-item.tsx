@@ -1,8 +1,22 @@
 import React, {PureComponent} from 'react';
-import PropTypes from 'prop-types';
+import {Subtract} from 'utility-types';
+
+interface State {
+  currentItemId: number | string;
+};
+
+interface InjectingProps {
+  activeItemId: number | string;
+  renderItem: (ItemComponent: React.ComponentClass, itemId: number | string, itemProps: {}) => React.ReactNode;
+  setActiveItem: (id: string | number) => void;
+  clearActiveItem: () => void;
+};
 
 const withActiveItem = (Component) => {
-  class WithActiveItem extends PureComponent {
+  type P = React.ComponentProps<typeof Component>;
+  type T = Subtract<P, InjectingProps>;
+
+  class WithActiveItem extends PureComponent<T, State> {
     constructor(props) {
       super(props);
       this.state = {
@@ -39,13 +53,6 @@ const withActiveItem = (Component) => {
       );
     }
   }
-
-  WithActiveItem.propTypes = {
-    initialItemId: PropTypes.oneOfType([
-      PropTypes.string,
-      PropTypes.number,
-    ]),
-  };
 
   return WithActiveItem;
 };

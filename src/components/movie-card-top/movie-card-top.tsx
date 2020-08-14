@@ -1,8 +1,17 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import {history} from '@/history';
 import {AppRoute} from '@/const';
 import {Link} from 'react-router-dom';
+
+interface Props {
+  id: number;
+  title: string;
+  year: number;
+  genre: string;
+  isFavorite: boolean;
+  isAuthorized: boolean;
+  onToggleFavorite: (id: number) => void;
+};
 
 const MovieCardTop = ({id, title, year, genre, isFavorite, isAuthorized, onToggleFavorite}) => {
   return (
@@ -47,16 +56,6 @@ const MovieCardTop = ({id, title, year, genre, isFavorite, isAuthorized, onToggl
       </div>
     </div>
   );
-};
-
-MovieCardTop.propTypes = {
-  id: PropTypes.number.isRequired,
-  title: PropTypes.string.isRequired,
-  year: PropTypes.number.isRequired,
-  genre: PropTypes.string.isRequired,
-  isFavorite: PropTypes.bool.isRequired,
-  isAuthorized: PropTypes.bool.isRequired,
-  onToggleFavorite: PropTypes.func.isRequired,
 };
 
 export {MovieCardTop};

@@ -4,7 +4,11 @@ import {Route, Redirect} from 'react-router-dom';
 import {AppRoute} from '@/const';
 import {AuthorizationStatus} from '@/reducer/user/user';
 
-const PrivateRoute = (props) => {
+interface Props {
+  authorizationStatus: AuthorizationStatus;
+};
+
+const PrivateRoute: React.FunctionComponent<Props> = (props) => {
   const {authorizationStatus} = props;
 
   if (authorizationStatus === AuthorizationStatus.UNAUTHORIZED) {
@@ -18,10 +22,6 @@ const PrivateRoute = (props) => {
       {...props}
     />
   );
-};
-
-PrivateRoute.propTypes = {
-  authorizationStatus: PropTypes.oneOf(Object.values(AuthorizationStatus)).isRequired
 };
 
 export {PrivateRoute};

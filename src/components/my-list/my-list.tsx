@@ -1,6 +1,6 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import {AuthorizationStatus} from '@/reducer/user/user';
+import {AuthInfo} from '@/types';
 
 import {withActiveItem} from '@/hocs/with-active-item/with-active-item';
 
@@ -10,6 +10,17 @@ import {PageFooter} from '@/components/page-footer/page-footer';
 import {Logo} from '@/components/logo/logo';
 
 const MoviesListWrapped = withActiveItem(MoviesList);
+
+interface Props {
+  authorizationStatus: AuthorizationStatus;
+  authorizationInfo: AuthInfo;
+  favoriteMovies: {
+    id: number;
+    title: string;
+    imageSrc: string;
+    preview: string;
+  }[];
+};
 
 const MyList = ({favoriteMovies, authorizationStatus, authorizationInfo}) => {
   return (
@@ -36,22 +47,6 @@ const MyList = ({favoriteMovies, authorizationStatus, authorizationInfo}) => {
       <PageFooter />
     </div>
   );
-};
-
-MyList.propTypes = {
-  authorizationStatus: PropTypes.oneOf(Object.values(AuthorizationStatus)),
-  authorizationInfo: PropTypes.shape({
-    id: PropTypes.number,
-    email: PropTypes.string,
-    name: PropTypes.string,
-    avatar: PropTypes.string,
-  }).isRequired,
-  favoriteMovies: PropTypes.arrayOf(PropTypes.shape({
-    id: PropTypes.number.isRequired,
-    title: PropTypes.string.isRequired,
-    imageSrc: PropTypes.string.isRequired,
-    preview: PropTypes.string.isRequired,
-  }).isRequired).isRequired,
 };
 
 export {MyList};

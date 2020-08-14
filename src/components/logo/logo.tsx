@@ -3,7 +3,11 @@ import PropTypes from 'prop-types';
 import {Link} from 'react-router-dom';
 import {AppRoute} from '@/const';
 
-const Logo = ({additionalClassName = ``}) => {
+interface Props {
+  additionalClassName?: string;
+};
+
+const Logo: React.FunctionComponent<Props> = ({additionalClassName = ``}) => {
   return (
     <div className="logo">
       <Link to={AppRoute.ROOT} className={`logo__link ${additionalClassName}`}>
@@ -13,10 +17,6 @@ const Logo = ({additionalClassName = ``}) => {
       </Link>
     </div>
   );
-};
-
-Logo.propTypes = {
-  additionalClassName: PropTypes.string,
 };
 
 export {Logo};

@@ -1,11 +1,15 @@
 import React from 'react';
-import PropTypes from 'prop-types';
+import {ReviewData} from '@/types';
 
 import {Review} from '@/components/review/review';
 
 const COLUMNS_AMOUNT = 2;
 
-const Reviews = ({reviews}) => {
+interface Props {
+  reviews: ReviewData[];
+};
+
+const Reviews: React.FunctionComponent<Props> = ({reviews}) => {
   const columnHeight = Math.ceil(reviews.length / COLUMNS_AMOUNT);
   return (
     <div className="movie-card__reviews movie-card__row">
@@ -21,19 +25,6 @@ const Reviews = ({reviews}) => {
       </div>
     </div>
   );
-};
-
-Reviews.propTypes = {
-  reviews: PropTypes.arrayOf(PropTypes.shape({
-    id: PropTypes.number.isRequired,
-    user: PropTypes.shape({
-      id: PropTypes.number.isRequired,
-      name: PropTypes.string.isRequired,
-    }).isRequired,
-    rating: PropTypes.number.isRequired,
-    comment: PropTypes.string.isRequired,
-    date: PropTypes.instanceOf(Date),
-  })).isRequired,
 };
 
 export {Reviews};

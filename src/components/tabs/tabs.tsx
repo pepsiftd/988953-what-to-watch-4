@@ -1,6 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {MovieInfoTab} from '@/const';
+import {MovieInfoTab} from '@/types';
+
+interface Props {
+  activeItemId: MovieInfoTab;
+  setActiveItem: (id: MovieInfoTab) => void;
+};
 
 const Tabs = ({activeItemId, setActiveItem}) => {
   return (
@@ -39,11 +44,6 @@ const Tabs = ({activeItemId, setActiveItem}) => {
       </ul>
     </nav>
   );
-};
-
-Tabs.propTypes = {
-  activeItemId: PropTypes.string.isRequired,
-  setActiveItem: PropTypes.func.isRequired,
 };
 
 export {Tabs};
