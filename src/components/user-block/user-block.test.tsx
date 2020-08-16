@@ -2,12 +2,10 @@ import React from 'react';
 import renderer from 'react-test-renderer';
 import {Router} from 'react-router-dom';
 import {history} from '@/history';
+import {userInfo} from '@/test-data/user';
 
 import {UserBlock} from './user-block';
 
-const authInfo = {
-  avatar: `img/avatar.jpg`,
-};
 
 describe(`UserBlock`, () => {
   it(`should render a login link when unauthorized`, () => {
@@ -28,7 +26,7 @@ describe(`UserBlock`, () => {
         <Router history={history}>
           <UserBlock
             authorizationStatus="AUTHORIZED"
-            authorizationInfo={authInfo}
+            authorizationInfo={userInfo}
           />
         </Router>
     );

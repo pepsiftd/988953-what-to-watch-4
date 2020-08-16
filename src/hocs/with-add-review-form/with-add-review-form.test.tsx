@@ -1,6 +1,7 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
 import PropTypes from 'prop-types';
+import {noop} from '@/utils';
 
 import {withAddReviewForm} from './with-add-review-form';
 
@@ -34,7 +35,7 @@ it(`withAddReviewForm renders correctly`, () => {
         movie={{
           id: 5
         }}
-        onSendReview={() => {}}
+        onSendReview={noop}
       />
   );
 

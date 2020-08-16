@@ -1,4 +1,4 @@
-import {extend} from '@/utils';
+import {extend, noop} from '@/utils';
 import {UserInfoModel} from '@/models/user-info-model';
 import {RequestRoute} from '@/const';
 
@@ -76,7 +76,7 @@ const Operation = {
       });
   },
 
-  login: (authorizationData, onSuccess = () => {}, onFail = () => {}) => (dispatch, getState, api) => {
+  login: (authorizationData, onSuccess = noop, onFail = noop) => (dispatch, getState, api) => {
     return api.post(RequestRoute.LOGIN, {
       email: authorizationData.email,
       password: authorizationData.password,

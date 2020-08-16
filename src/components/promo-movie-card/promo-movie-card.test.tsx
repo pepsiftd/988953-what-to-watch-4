@@ -2,43 +2,20 @@ import React from 'react';
 import renderer from 'react-test-renderer';
 import {Router} from 'react-router-dom';
 import {history} from '@/history';
+import {noop} from '@/utils';
 
 import {PromoMovieCard} from './promo-movie-card';
-
-const movie = {
-  id: 15,
-
-  title: `Movie Title`,
-  genre: `Horror`,
-  year: 15345,
-  imageSrc: `image.jpg`,
-  preview: `preview`,
-  fullVideo: `fullvideo.mp4`,
-
-  poster: `bigimage.jpgg`,
-  backgroundImage: `backgroundImage.jpg`,
-  backgroundColor: `#FACE8D`,
-  description: `NICE`,
-  rating: 155,
-  scoresCount: 5,
-  director: `John connor`,
-  starring: [`chubakka`, `leia`, `skywalker`],
-  runTime: 556,
-  isFavorite: false,
-};
-
-const authInfo = {
-  avatar: `img/avatar.jpg`,
-};
+import {movie} from '@/test-data/movies';
+import {userInfo} from '@/test-data/user';
 
 it(`PromoMovieCard should render correctly`, () => {
   const tree = renderer.create(
       <Router history={history}>
         <PromoMovieCard
           movie={movie}
-          onToggleFavorite={() => {}}
+          onToggleFavorite={noop}
           authorizationStatus={`AUTHORIZED`}
-          authorizationInfo={authInfo}
+          authorizationInfo={userInfo}
         />
       </Router>
   );

@@ -1,38 +1,16 @@
 import React from 'react';
 import Enzyme, {shallow} from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
+import {noop} from '@/utils';
 
 import {PromoMovieCard} from './promo-movie-card';
+import {movie} from '@/test-data/movies';
+import {userInfo} from '@/test-data/user';
 
 Enzyme.configure({
   adapter: new Adapter(),
 });
 
-const movie = {
-  id: 15,
-
-  title: `Movie Title`,
-  genre: `Horror`,
-  year: 15345,
-  imageSrc: `image.jpg`,
-  preview: `preview`,
-  fullVideo: `fullvideo.mp4`,
-
-  poster: `bigimage.jpgg`,
-  backgroundImage: `backgroundImage.jpg`,
-  backgroundColor: `#FACE8D`,
-  description: `NICE`,
-  rating: 155,
-  scoresCount: 5,
-  director: `John connor`,
-  starring: [`chubakka`, `leia`, `skywalker`],
-  runTime: 556,
-  isFavorite: false,
-};
-
-const authInfo = {
-  avatar: `img/avatar.jpg`,
-};
 
 it(`PromoMovieCard clicks calls function correctly`, () => {
   const onToggleFavorite = jest.fn();
@@ -41,14 +19,14 @@ it(`PromoMovieCard clicks calls function correctly`, () => {
         movie={movie}
         onToggleFavorite={onToggleFavorite}
         authorizationStatus={`AUTHORIZED`}
-        authorizationInfo={authInfo}
+        authorizationInfo={userInfo}
       />
   );
 
   const btn = card.find(`.btn--list`);
 
   btn.simulate(`click`, {
-    preventDefault: () => {}
+    preventDefault: noop
   });
 
   expect(onToggleFavorite).toHaveBeenCalledTimes(1);

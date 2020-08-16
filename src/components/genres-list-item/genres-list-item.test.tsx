@@ -1,5 +1,6 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
+import {noop} from '@/utils';
 
 import {GenresListItem} from './genres-list-item';
 
@@ -8,7 +9,7 @@ describe(`GenresListItem renders`, () => {
     const tree = renderer.create(
         <GenresListItem
           genre={`All genres`}
-          onTitleClick={() => {}}
+          onTitleClick={noop}
           isActive={true}
         />
     );
@@ -20,7 +21,7 @@ describe(`GenresListItem renders`, () => {
     const tree = renderer.create(
         <GenresListItem
           genre={`All genres`}
-          onTitleClick={() => {}}
+          onTitleClick={noop}
           isActive={false}
         />
     );

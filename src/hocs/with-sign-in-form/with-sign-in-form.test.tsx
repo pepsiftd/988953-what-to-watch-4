@@ -1,6 +1,7 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
 import PropTypes from 'prop-types';
+import {noop} from '@/utils';
 
 import {withSignInForm} from './with-sign-in-form';
 
@@ -29,7 +30,7 @@ it(`withSignInForm renders inputs correctly`, () => {
 
   const tree = renderer.create(
       <MockComponentWrapped
-        onSignIn={() => {}}
+        onSignIn={noop}
       />
   );
 

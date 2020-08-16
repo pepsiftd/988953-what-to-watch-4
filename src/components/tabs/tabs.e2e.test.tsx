@@ -2,6 +2,7 @@ import React from 'react';
 import Enzyme, {shallow} from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 import {MovieInfoTab} from '@/const';
+import {noop} from '@/utils';
 
 import {Tabs} from './tabs';
 
@@ -22,7 +23,7 @@ it(`Tabs clicks calls function correctly`, () => {
 
   links.forEach((link) => {
     link.simulate(`click`, {
-      preventDefault: () => {}
+      preventDefault: noop
     });
   });
 

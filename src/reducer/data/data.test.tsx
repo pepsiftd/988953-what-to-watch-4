@@ -3,8 +3,9 @@ import {FilmModel} from '@/models/film-model';
 import {ReviewModel} from '@/models/review-model';
 import MockAdapter from 'axios-mock-adapter';
 import {createAPI} from '@/api.js';
+import {noop} from '@/utils';
 
-const api = createAPI(() => {});
+const api = createAPI(noop);
 
 const movies = [
   {
@@ -163,7 +164,7 @@ describe(`Data Operation`, () => {
     const dispatch = jest.fn();
     const filmsLoader = Operation.loadFilms();
 
-    return filmsLoader(dispatch, () => {}, api)
+    return filmsLoader(dispatch, noop, api)
       .then(() => {
         expect(dispatch).toHaveBeenCalledTimes(1);
         expect(dispatch).toHaveBeenNthCalledWith(1, {
@@ -177,7 +178,7 @@ describe(`Data Operation`, () => {
     const dispatch = jest.fn();
     const promoLoader = Operation.loadPromo();
 
-    return promoLoader(dispatch, () => {}, api)
+    return promoLoader(dispatch, noop, api)
       .then(() => {
         expect(dispatch).toHaveBeenCalledTimes(1);
         expect(dispatch).toHaveBeenNthCalledWith(1, {
@@ -191,7 +192,7 @@ describe(`Data Operation`, () => {
     const dispatch = jest.fn();
     const filmsLoader = Operation.loadFavorite();
 
-    return filmsLoader(dispatch, () => {}, api)
+    return filmsLoader(dispatch, noop, api)
       .then(() => {
         expect(dispatch).toHaveBeenCalledTimes(1);
         expect(dispatch).toHaveBeenNthCalledWith(1, {
@@ -206,7 +207,7 @@ describe(`Data Operation`, () => {
     const id = 1;
     const reviewsLoader = Operation.loadReviews(id);
 
-    return reviewsLoader(dispatch, () => {}, api)
+    return reviewsLoader(dispatch, noop, api)
       .then(() => {
         expect(dispatch).toHaveBeenCalledTimes(1);
         expect(dispatch).toHaveBeenNthCalledWith(1, {

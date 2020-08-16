@@ -3,6 +3,7 @@ import React from 'react';
 import {SmallMovieCard} from '@/components/small-movie-card/small-movie-card';
 import {withVideo} from '@/hocs/with-video/with-video';
 import {SMALL_CARD_VIDEO_SETTINGS} from '@/const';
+import {noop} from '@/utils';
 
 const SmallMovieCardWithVideo = withVideo(SmallMovieCard);
 
@@ -20,7 +21,7 @@ interface Props {
   renderShowMore: () => void;
 }
 
-const MoviesList: React.FunctionComponent<Props> = ({movies, renderItem, setActiveItem, clearActiveItem, cardsShowing, renderShowMore = () => {}}) => {
+const MoviesList: React.FunctionComponent<Props> = ({movies, renderItem, setActiveItem, clearActiveItem, cardsShowing, renderShowMore = noop}) => {
   const cardsShowingCount = cardsShowing ? cardsShowing : movies.length;
   return (
     <React.Fragment>

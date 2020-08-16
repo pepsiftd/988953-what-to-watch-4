@@ -4,31 +4,10 @@ import {Router} from 'react-router-dom';
 import {history} from '@/history';
 
 import {AddReview} from './add-review';
+import {movie} from '@/test-data/movies';
+import {userInfo} from '@/test-data/user';
+import {noop} from '@/utils';
 
-const movie = {
-  title: `I Am the Movie`,
-  genre: `Thriller`,
-  year: 2001,
-  id: 0,
-  imageSrc: `image.jpg`,
-  preview: `preview`,
-  fullVideo: `fullvideo.mp4`,
-
-  poster: `bigimage.jpgg`,
-  backgroundImage: `backgroundImage.jpg`,
-  backgroundColor: `#FACE8D`,
-  description: `NICE`,
-  rating: 155,
-  scoresCount: 5,
-  director: `John connor`,
-  starring: [`chubakka`, `leia`, `skywalker`],
-  runTime: 556,
-  isFavorite: false,
-};
-
-const authInfo = {
-  avatar: `img/avatar.jpg`,
-};
 
 it(`AddReview renders correctly`, () => {
   const tree = renderer.create(
@@ -36,10 +15,10 @@ it(`AddReview renders correctly`, () => {
         <AddReview
           movie={movie}
           errors={[]}
-          onSubmit={() => {}}
-          onInput={() => {}}
+          onSubmit={noop}
+          onInput={noop}
           authorizationStatus={`AUTHORIZED`}
-          authorizationInfo={authInfo}
+          authorizationInfo={userInfo}
           isSubmitButtonDisabled={false}
           isFormDisabled={false}
         />

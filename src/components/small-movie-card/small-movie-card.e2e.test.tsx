@@ -3,17 +3,11 @@ import Enzyme, {shallow} from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 
 import {SmallMovieCard} from './small-movie-card';
+import {movie} from '@/test-data/movies';
 
 Enzyme.configure({
   adapter: new Adapter()
 });
-
-const movie = {
-  id: 152,
-  title: `Some movie: Revenge`,
-  imageSrc: `img/some-movie-revenge.jpg`,
-  preview: `preview-link.mp4`,
-};
 
 const onMouseEnter = jest.fn();
 const onMouseLeave = jest.fn();

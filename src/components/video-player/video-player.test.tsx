@@ -1,5 +1,6 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
+import {noop} from '@/utils';
 
 import {VideoPlayer} from './video-player';
 
@@ -10,9 +11,9 @@ it(`VideoPlayer renders correctly`, () => {
         title="Movie Title"
         timeElapsed={553}
         duration={3695}
-        onPlayClick={() => {}}
-        onFullscreenClick={() => {}}
-        onExitClick={() => {}}
+        onPlayClick={noop}
+        onFullscreenClick={noop}
+        onExitClick={noop}
       >
         <video />
       </VideoPlayer>

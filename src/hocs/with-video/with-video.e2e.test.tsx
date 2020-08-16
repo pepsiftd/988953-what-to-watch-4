@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Enzyme, {mount} from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
+import {noop} from '@/utils';
 
 import {withVideo} from './with-video';
 
@@ -39,7 +40,7 @@ it(`Video starts playing when updated with isActive-prop set true`, () => {
       />
   );
 
-  window.HTMLMediaElement.prototype.play = () => {};
+  window.HTMLMediaElement.prototype.play = noop;
 
   const {_videoRef} = wrapper.instance();
   jest.spyOn(_videoRef.current, `play`);
@@ -64,7 +65,7 @@ it(`Video calls load when updated with isActive-prop set false`, () => {
       />
   );
 
-  window.HTMLMediaElement.prototype.load = () => {};
+  window.HTMLMediaElement.prototype.load = noop;
 
   const {_videoRef} = wrapper.instance();
   jest.spyOn(_videoRef.current, `load`);

@@ -2,15 +2,10 @@ import {initialState, ActionType, ActionCreator, Operation, reducer, Authorizati
 import MockAdapter from 'axios-mock-adapter';
 import {createAPI} from '@/api.js';
 import {UserInfoModel} from '@/models/user-info-model';
+import {noop} from '@/utils';
+import {userInfo} from '@/test-data/user';
 
-const api = createAPI(() => {});
-
-const authInfo = {
-  'id': 1,
-  'email': `Oliver.conner@gmail.com`,
-  'name': `Oliver.conner`,
-  'avatar_url': `img/1.png`
-};
+const api = createAPI(noop);
 
 
 it(`User ActionCreator works correctly`, () => {
@@ -25,12 +20,12 @@ describe(`User Operation`, () => {
     const apiMock = new MockAdapter(api);
     apiMock
         .onGet(`/login`)
-        .reply(200, authInfo);
+        .reply(200, userInfo);
 
     const dispatch = jest.fn();
     const authChecker = Operation.checkAuth();
 
-    return authChecker(dispatch, () => {}, api)
+    return authChecker(dispatch, noop, api)
       .then(() => {
         expect(dispatch).toHaveBeenCalledTimes(2);
         expect(dispatch).toHaveBeenNthCalledWith(1, {
@@ -39,7 +34,7 @@ describe(`User Operation`, () => {
         });
         expect(dispatch).toHaveBeenNthCalledWith(2, {
           type: ActionType.SET_AUTHORIZATION_INFO,
-          payload: UserInfoModel.parseUserInfo(authInfo),
+          payload: UserInfoModel.parseUserInfo(userInfo),
         });
       });
   });
@@ -53,7 +48,7 @@ describe(`User Operation`, () => {
     const dispatch = jest.fn();
     const login = Operation.login({email: `lsdkfj`, password: ``});
 
-    return login(dispatch, () => {}, api)
+    return login(dispatch, noop, api)
       .then(() => {
         expect(dispatch).toHaveBeenCalledTimes(1);
         expect(dispatch).toHaveBeenNthCalledWith(1, {
@@ -67,12 +62,12 @@ describe(`User Operation`, () => {
     const apiMock = new MockAdapter(api);
     apiMock
       .onPost(`/login`)
-      .reply(200, authInfo);
+      .reply(200, userInfo);
 
     const dispatch = jest.fn();
     const login = Operation.login({email: `correct@email.com`, password: `12345`});
 
-    return login(dispatch, () => {}, api)
+    return login(dispatch, noop, api)
       .then(() => {
         expect(dispatch).toHaveBeenCalledTimes(3);
         expect(dispatch).toHaveBeenNthCalledWith(1, {
@@ -85,7 +80,7 @@ describe(`User Operation`, () => {
         });
         expect(dispatch).toHaveBeenNthCalledWith(3, {
           type: ActionType.SET_AUTHORIZATION_INFO,
-          payload: UserInfoModel.parseUserInfo(authInfo),
+          payload: UserInfoModel.parseUserInfo(userInfo),
         });
       });
   });
@@ -123,9 +118,9 @@ describe(`User reducer`, () => {
       authorizationInfo: {},
     }, {
       type: ActionType.SET_AUTHORIZATION_INFO,
-      payload: authInfo,
+      payload: userInfo,
     })).toEqual({
-      authorizationInfo: authInfo,
+      authorizationInfo: userInfo,
     });
   });
 });

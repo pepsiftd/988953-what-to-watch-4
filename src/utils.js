@@ -85,6 +85,10 @@ const checkEmail = (email) => {
   return pattern.test(email.trim());
 };
 
+const noop = () => {
+  // do nothing
+};
+
 export {
   extend,
   getMoviesByGenre,
@@ -96,4 +100,5 @@ export {
   getRatingString,
   getFormattedDate,
   checkEmail,
+  noop,
 };

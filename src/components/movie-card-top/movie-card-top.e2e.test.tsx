@@ -2,6 +2,7 @@ import React from 'react';
 import Enzyme, {shallow} from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 
+import {noop} from '@/utils';
 import {MovieCardTop} from './movie-card-top';
 
 Enzyme.configure({
@@ -26,7 +27,7 @@ it(`Add to favorite button click calls function correctly`, () => {
   const btn = card.find(`.btn--list`);
 
   btn.simulate(`click`, {
-    preventDefault: () => {}
+    preventDefault: noop
   });
 
   expect(onToggleFavorite).toHaveBeenCalledTimes(1);
