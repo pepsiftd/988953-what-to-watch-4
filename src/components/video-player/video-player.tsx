@@ -12,7 +12,7 @@ interface Props {
   timeElapsed: number;
   onPlayClick: () => void;
   onFullscreenClick: () => void;
-};
+}
 
 const VideoPlayer: React.FunctionComponent<Props> = ({children, isPlaying, title, duration, timeElapsed, onPlayClick, onFullscreenClick}) => {
   const timeElapsedString = humanizeTimeElapsed(timeElapsed);

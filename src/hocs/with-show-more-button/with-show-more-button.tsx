@@ -6,14 +6,14 @@ import {ShowMoreButton} from '@/components/show-more-button/show-more-button';
 interface State {
   cardsShowing: number;
   isButtonShowing: boolean;
-};
+}
 
 interface InjectingProps {
   cardsShowing: number;
   renderShowMore: () => React.ReactNode;
-};
+}
 
-const withShowMoreButton = (Component) => {
+const withShowMoreButton: (Component: React.ComponentClass) => React.ReactNode = (Component) => {
   type P = React.ComponentProps<typeof Component>;
   type T = Subtract<P, InjectingProps>;
 

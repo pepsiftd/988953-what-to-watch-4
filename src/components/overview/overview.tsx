@@ -8,9 +8,9 @@ interface Props {
   description: string;
   director: string;
   starring: string[];
-};
+}
 
-const Overview = ({ratingScore, ratingCount, description, director, starring}) => {
+const Overview: React.FunctionComponent<Props> = ({ratingScore, ratingCount, description, director, starring}) => {
   const starringShort = starring.slice(0, MAX_ACTORS_IN_SHORT_DETAILS);
   const starringString = starringShort.join(`, `);
   const score = getRatingString(ratingScore);

@@ -1,6 +1,6 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
-import {FILM_OBJECT_PROP_TYPES, AppRoute} from '@/const';
+import {AppRoute} from '@/const';
 import {FilmObject, AuthInfo} from '@/types';
 
 import {AuthorizationStatus} from '@/reducer/user/user';
@@ -17,7 +17,7 @@ interface Props {
   authorizationInfo: AuthInfo;
   isSubmitButtonDisabled: boolean;
   isFormDisabled: boolean;
-};
+}
 
 const AddReview: React.FunctionComponent<Props>
 = ({movie, errors, onSubmit, isFormDisabled, onInput, authorizationStatus, authorizationInfo, isSubmitButtonDisabled}) => {

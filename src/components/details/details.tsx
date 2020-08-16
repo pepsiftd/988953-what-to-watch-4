@@ -7,7 +7,7 @@ interface Props {
   runTime: number;
   genre: string;
   year: number;
-};
+}
 
 const Details: React.FunctionComponent<Props> = ({director, starring, runTime, genre, year}) => {
   const timeString = humanizeRunTime(runTime);

@@ -5,7 +5,7 @@ interface State {
   isPlaying: boolean;
   progress: number;
   isFullscreen: boolean;
-};
+}
 
 interface InjectingProps {
   isPlaying: boolean;
@@ -14,9 +14,9 @@ interface InjectingProps {
   onPlayClick: () => void;
   onFullscreenClick: () => void;
   children: React.ReactNode;
-};
+}
 
-const withVideoPlayer = (Component) => {
+const withVideoPlayer: (Component: React.ComponentClass) => React.ReactNode = (Component) => {
   type P = React.ComponentProps<typeof Component>;
   type T = Subtract<P, InjectingProps>;
 

@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import {FilmObject, AuthInfo} from '@/types';
 
 import {PromoMovieCard} from '@/components/promo-movie-card/promo-movie-card';
@@ -27,9 +26,9 @@ interface Props {
   authorizationStatus: AuthorizationStatus;
   authorizationInfo: AuthInfo;
   onToggleFavorite: () => void;
-};
+}
 
-const Main = ({
+const Main: React.FunctionComponent<Props> = ({
   promoMovie,
   movies,
   currentGenre,

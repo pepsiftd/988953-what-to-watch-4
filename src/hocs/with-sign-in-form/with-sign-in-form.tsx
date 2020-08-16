@@ -5,16 +5,16 @@ import {checkEmail} from '@/utils';
 
 interface State {
   isValidEmail: boolean;
-};
+}
 
 interface InjectingProps {
   renderEmailInput: () => React.ReactNode;
   renderPasswordInput: () => React.ReactNode;
   isValidEmail: boolean;
   onSubmit: (evt: React.FormEvent) => void;
-};
+}
 
-const withSignInForm = (Component) => {
+const withSignInForm: (Component: React.ComponentClass) => React.ReactNode = (Component) => {
   type P = React.ComponentProps<typeof Component>;
   type T = Subtract<P, InjectingProps>;
 

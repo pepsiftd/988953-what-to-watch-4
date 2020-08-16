@@ -2,7 +2,7 @@ import React from 'react';
 
 import {LogoLight} from '@/components/logo-light/logo-light';
 
-const PageFooter = () => {
+const PageFooter: React.FunctionComponent = () => {
   return (
     <footer className="page-footer">
       <LogoLight />

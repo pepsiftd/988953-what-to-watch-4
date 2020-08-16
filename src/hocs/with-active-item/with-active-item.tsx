@@ -3,16 +3,16 @@ import {Subtract} from 'utility-types';
 
 interface State {
   currentItemId: number | string;
-};
+}
 
 interface InjectingProps {
   activeItemId: number | string;
-  renderItem: (ItemComponent: React.ComponentClass, itemId: number | string, itemProps: {}) => React.ReactNode;
+  renderItem: (ItemComponent: React.ComponentClass, itemId: number | string, itemProps: Record<string, unknown>) => React.ReactNode;
   setActiveItem: (id: string | number) => void;
   clearActiveItem: () => void;
-};
+}
 
-const withActiveItem = (Component) => {
+const withActiveItem: (Component: React.ComponentClass) => React.ReactNode = (Component) => {
   type P = React.ComponentProps<typeof Component>;
   type T = Subtract<P, InjectingProps>;
 

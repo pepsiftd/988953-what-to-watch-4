@@ -1,11 +1,10 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 
 interface Props {
   genre: string;
   onTitleClick: (id: string) => void;
   isActive: boolean;
-};
+}
 
 const GenresListItem: React.FunctionComponent<Props> = ({genre, onTitleClick, isActive}) => {
   const activeGenreClass = `catalog__genres-item--active`;

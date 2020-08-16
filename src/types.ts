@@ -18,7 +18,7 @@ interface FilmObject {
   starring: string[];
   runTime: number;
   isFavorite: boolean;
-};
+}
 
 interface ReviewData {
   id: number;
@@ -29,19 +29,19 @@ interface ReviewData {
   rating: number;
   comment: string;
   date: Date;
-};
+}
 
 interface AuthInfo {
   id?: number;
   email?: string;
   name?: string;
   avatar?: string;
-};
+}
 
 enum MovieInfoTab {
   OVERVIEW = `Overview`,
   DETAILS = `Details`,
   REVIEWS = `Reviews`,
-};
+}
 
 export {FilmObject, AuthInfo, ReviewData, MovieInfoTab};

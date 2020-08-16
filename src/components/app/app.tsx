@@ -4,7 +4,7 @@ import {connect} from 'react-redux';
 import {Router, Route, Switch} from 'react-router-dom';
 import {history} from '@/history';
 import {FilmObject, AuthInfo} from '@/types';
-import {AppRoute, FILM_OBJECT_PROP_TYPES, VIDEO_PLAYER_SETTINGS, MovieInfoTab} from '@/const';
+import {AppRoute, VIDEO_PLAYER_SETTINGS, MovieInfoTab} from '@/const';
 
 import {getMovies, getMoviesOfCurrentGenre, getPromoMovie, getFavoriteMovies} from '@/reducer/data/selectors';
 import {getCurrentGenre} from '@/reducer/app/selectors';
@@ -45,7 +45,7 @@ interface Props {
   isBadRequest: boolean,
   onToggleFavorite: () => void,
   onSendReview: () => void,
-};
+}
 
 const App: React.FunctionComponent<Props> = ({
   promoMovie,

@@ -7,7 +7,7 @@ const COLUMNS_AMOUNT = 2;
 
 interface Props {
   reviews: ReviewData[];
-};
+}
 
 const Reviews: React.FunctionComponent<Props> = ({reviews}) => {
   const columnHeight = Math.ceil(reviews.length / COLUMNS_AMOUNT);

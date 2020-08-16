@@ -11,9 +11,9 @@ interface Props {
   isFavorite: boolean;
   isAuthorized: boolean;
   onToggleFavorite: (id: number) => void;
-};
+}
 
-const MovieCardTop = ({id, title, year, genre, isFavorite, isAuthorized, onToggleFavorite}) => {
+const MovieCardTop: React.FunctionComponent<Props> = ({id, title, year, genre, isFavorite, isAuthorized, onToggleFavorite}) => {
   return (
     <div className="movie-card__wrap">
       <div className="movie-card__desc">

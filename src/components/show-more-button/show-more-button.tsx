@@ -2,7 +2,7 @@ import React from 'react';
 
 interface Props {
   onClick: () => void;
-};
+}
 
 const ShowMoreButton: React.FunctionComponent<Props> = ({onClick}) => {
   return (

@@ -3,9 +3,9 @@ import {Subtract} from 'utility-types';
 
 import {ReviewModel} from '@/models/review-model';
 
-enum InputName {
-  'rating' = `rating`,
-  'review-text' = `comment`,
+const InputName = {
+  'rating': `rating`,
+  'review-text': `comment`,
 };
 
 const COMMENT_MIN_LENGTH = 50;
@@ -22,7 +22,7 @@ interface State {
   isFormDisabled: boolean;
   isSubmitButtonDisabled: boolean;
   errors: string[];
-};
+}
 
 interface InjectingProps {
   isFormDisabled: boolean;
@@ -30,9 +30,9 @@ interface InjectingProps {
   onSubmit: () => void;
   onInput: (evt: React.FormEvent) => void;
   errors: string[];
-};
+}
 
-const withAddReviewForm = (Component) => {
+const withAddReviewForm: (Component: React.ComponentClass) => React.ReactNode = (Component) => {
   type P = React.ComponentProps<typeof Component>;
   type T = Subtract<P, InjectingProps>;
 

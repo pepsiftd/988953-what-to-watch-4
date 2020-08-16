@@ -4,7 +4,7 @@ import {getRatingString, getFormattedDate} from '@/utils';
 
 interface Props {
   review: ReviewData;
-};
+}
 
 const Review: React.FunctionComponent<Props> = ({review}) => {
   const {user, rating, comment, date} = review;

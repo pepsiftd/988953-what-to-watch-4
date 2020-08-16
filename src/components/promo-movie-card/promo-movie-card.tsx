@@ -12,7 +12,7 @@ interface Props {
   onToggleFavorite: (id: number) => void;
   authorizationStatus: AuthorizationStatus;
   authorizationInfo: AuthInfo;
-};
+}
 
 const PromoMovieCard: React.FunctionComponent<Props> = ({movie, onToggleFavorite, authorizationStatus, authorizationInfo}) => {
   const {

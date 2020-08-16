@@ -3,9 +3,9 @@ import {Subtract} from 'utility-types';
 
 interface InjectingProps {
   children: React.ReactNode;
-};
+}
 
-const withVideo = (Component) => {
+const withVideo: (Component: React.ComponentClass) => React.ReactNode = (Component) => {
   type P = React.ComponentProps<typeof Component>;
   type T = Subtract<P, InjectingProps>;
 

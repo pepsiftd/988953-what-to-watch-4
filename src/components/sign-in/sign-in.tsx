@@ -12,7 +12,7 @@ interface Props {
   renderEmailInput: () => React.ReactElement;
   isValidEmail: boolean;
   onSubmit: () => void;
-};
+}
 
 const SignIn: React.FunctionComponent<Props> = ({authorizationStatus, renderEmailInput, renderPasswordInput, isBadRequest, isValidEmail, onSubmit}) => {
   const isAuthorized = authorizationStatus === AuthorizationStatus.AUTHORIZED;

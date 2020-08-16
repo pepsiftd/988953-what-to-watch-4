@@ -20,9 +20,9 @@ interface Props {
     imageSrc: string;
     preview: string;
   }[];
-};
+}
 
-const MyList = ({favoriteMovies, authorizationStatus, authorizationInfo}) => {
+const MyList: React.FunctionComponent<Props> = ({favoriteMovies, authorizationStatus, authorizationInfo}) => {
   return (
     <div className="user-page">
       <header className="page-header user-page__head">

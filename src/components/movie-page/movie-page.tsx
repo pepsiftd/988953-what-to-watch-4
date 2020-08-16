@@ -1,4 +1,4 @@
-import React, {PureComponent} from 'react';
+import * as React from 'react';
 import {connect} from 'react-redux';
 import {MovieInfoTab, MAX_CARDS_ON_MOVIE_PAGE} from '@/const';
 import {FilmObject, AuthInfo, ReviewData} from '@/types';
@@ -33,9 +33,9 @@ interface Props {
   loadReviews: (id: number) => void;
   activeItemId: string;
   setActiveItem: (id: string) => void;
-};
+}
 
-class MoviePage extends PureComponent<Props> {
+class MoviePage extends React.PureComponent<Props> {
   componentDidMount() {
     const {id, loadReviews} = this.props;
     loadReviews(id);

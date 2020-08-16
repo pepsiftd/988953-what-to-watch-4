@@ -9,10 +9,10 @@ interface Props {
     id: number;
     genre: string;
   }[];
-  renderItem: (Item: React.ReactElement, id: number | string, itemProps: {}) => React.ReactElement;
+  renderItem: (Item: React.ReactElement, id: number | string, itemProps: Record<string, unknown>) => React.ReactElement;
   setActiveItem: (id: number | string) => void;
   onTitleClick: (id: number | string) => void;
-};
+}
 
 const GenresList: React.FunctionComponent<Props> = ({movies, renderItem, setActiveItem, onTitleClick}) => {
   const genres = [ALL_GENRES_FILTER, ...getGenresFromMovies(movies).slice(0, MAX_GENRES_AMOUNT)];

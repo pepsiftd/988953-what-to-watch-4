@@ -15,7 +15,7 @@ interface Props {
   children: React.ReactElement;
   onMouseEnter: (id: number) => void;
   onMouseLeave: () => void;
-};
+}
 
 const SmallMovieCard: React.FunctionComponent<Props> = ({movie, onMouseEnter, onMouseLeave, children}) => {
   const {title, id} = movie;

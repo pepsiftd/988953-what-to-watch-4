@@ -7,7 +7,7 @@ import {AuthInfo} from '@/types';
 interface Props {
   authorizationStatus: AuthorizationStatus;
   authorizationInfo: AuthInfo;
-};
+}
 
 
 const UserBlock: React.FunctionComponent<Props> = ({authorizationStatus, authorizationInfo}) => {

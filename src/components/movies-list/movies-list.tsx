@@ -13,12 +13,12 @@ interface Props {
     imageSrc: string;
     preview: string;
   }[];
-  renderItem: (Item: React.ReactElement, id: number | string, itemProps: {}) => React.ReactElement;
+  renderItem: (Item: React.ReactElement, id: number | string, itemProps: Record<string, unknown>) => React.ReactElement;
   setActiveItem: (id: number) => void;
   clearActiveItem: () => void;
   cardsShowing: number;
   renderShowMore: () => void;
-};
+}
 
 const MoviesList: React.FunctionComponent<Props> = ({movies, renderItem, setActiveItem, clearActiveItem, cardsShowing, renderShowMore = () => {}}) => {
   const cardsShowingCount = cardsShowing ? cardsShowing : movies.length;

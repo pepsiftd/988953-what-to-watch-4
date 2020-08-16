@@ -1,13 +1,12 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import {MovieInfoTab} from '@/types';
 
 interface Props {
   activeItemId: MovieInfoTab;
   setActiveItem: (id: MovieInfoTab) => void;
-};
+}
 
-const Tabs = ({activeItemId, setActiveItem}) => {
+const Tabs: React.FunctionComponent<Props> = ({activeItemId, setActiveItem}) => {
   return (
     <nav className="movie-nav movie-card__nav">
       <ul className="movie-nav__list">

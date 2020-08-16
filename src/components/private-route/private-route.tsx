@@ -1,12 +1,11 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import {Route, Redirect} from 'react-router-dom';
 import {AppRoute} from '@/const';
 import {AuthorizationStatus} from '@/reducer/user/user';
 
 interface Props {
   authorizationStatus: AuthorizationStatus;
-};
+}
 
 const PrivateRoute: React.FunctionComponent<Props> = (props) => {
   const {authorizationStatus} = props;
