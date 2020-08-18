@@ -9,7 +9,7 @@ const store = {
     movies,
     promoMovie,
     favoriteMovies: [],
-    reviews: reviews,
+    reviews,
   },
   [NameSpace.APP]: {
     currentGenre: ALL_GENRES_FILTER,

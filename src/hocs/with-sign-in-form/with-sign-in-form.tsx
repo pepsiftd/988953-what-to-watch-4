@@ -14,7 +14,7 @@ interface InjectingProps {
   onSubmit: (evt: React.FormEvent) => void;
 }
 
-const withSignInForm: (Component: React.ComponentClass) => React.ReactNode = (Component) => {
+const withSignInForm: (Component: React.ComponentClass | React.FunctionComponent) => React.ComponentClass = (Component) => {
   type P = React.ComponentProps<typeof Component>;
   type T = Subtract<P, InjectingProps>;
 

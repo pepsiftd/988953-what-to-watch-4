@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import Enzyme, {mount} from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 import {noop} from '@/utils';
@@ -10,7 +9,11 @@ Enzyme.configure({
   adapter: new Adapter()
 });
 
-const Player = ({children}) => {
+interface Props {
+  children: React.ReactElement[] | React.ReactElement;
+}
+
+const Player: React.FunctionComponent<Props> = ({children}) => {
   return (
     <div>
       {children}
@@ -18,12 +21,6 @@ const Player = ({children}) => {
   );
 };
 
-Player.propTypes = {
-  children: PropTypes.oneOfType([
-    PropTypes.arrayOf(PropTypes.element),
-    PropTypes.element
-  ]).isRequired
-};
 
 it(`Video starts playing when updated with isActive-prop set true`, () => {
   const PlayerWrapped = withVideo(Player);

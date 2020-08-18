@@ -1,10 +1,13 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
-import PropTypes from 'prop-types';
 
 import {withVideo} from './with-video';
 
-const MockComponent = ({children}) => {
+interface Props {
+  children: React.ReactElement[] | React.ReactElement;
+}
+
+const MockComponent: React.FunctionComponent<Props> = ({children}) => {
   return (
     <div>
       {children}
@@ -12,12 +15,6 @@ const MockComponent = ({children}) => {
   );
 };
 
-MockComponent.propTypes = {
-  children: PropTypes.oneOfType([
-    PropTypes.arrayOf(PropTypes.element),
-    PropTypes.element
-  ]).isRequired
-};
 
 const MockComponentWithVideo = withVideo(MockComponent);
 

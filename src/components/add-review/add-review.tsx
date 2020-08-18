@@ -7,6 +7,7 @@ import {AuthorizationStatus} from '@/reducer/user/user';
 
 import {UserBlock} from '@/components/user-block/user-block';
 import {Logo} from '@/components/logo/logo';
+import {COMMENT_MIN_LENGTH, COMMENT_MAX_LENGTH} from '@/const';
 
 interface Props {
   movie: FilmObject;
@@ -73,7 +74,7 @@ const AddReview: React.FunctionComponent<Props>
           })}
           <div className="rating">
             <div className="rating__stars">
-              <input className="rating__input" id="star-1" type="radio" name="rating" value="1" required="" />
+              <input className="rating__input" id="star-1" type="radio" name="rating" value="1" required={true} />
               <label className="rating__label" htmlFor="star-1">Rating 1</label>
 
               <input className="rating__input" id="star-2" type="radio" name="rating" value="2" />
@@ -91,7 +92,7 @@ const AddReview: React.FunctionComponent<Props>
           </div>
 
           <div className="add-review__text">
-            <textarea className="add-review__textarea" name="review-text" id="review-text" placeholder="Review text" minLength="50" maxLength="400"></textarea>
+            <textarea className="add-review__textarea" name="review-text" id="review-text" placeholder="Review text" minLength={COMMENT_MIN_LENGTH} maxLength={COMMENT_MAX_LENGTH}></textarea>
             <div className="add-review__submit">
               <button className="add-review__btn" type="submit" disabled={isSubmitButtonDisabled}>Post</button>
             </div>

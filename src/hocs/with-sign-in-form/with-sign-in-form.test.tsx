@@ -1,11 +1,17 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
-import PropTypes from 'prop-types';
 import {noop} from '@/utils';
 
 import {withSignInForm} from './with-sign-in-form';
 
-const MockComponent = ({renderEmailInput, renderPasswordInput, isValidEmail, onSubmit}) => {
+interface Props {
+  renderPasswordInput: () => React.ReactNode;
+  renderEmailInput: () => React.ReactNode;
+  isValidEmail: boolean;
+  onSubmit: () => void;
+}
+
+const MockComponent: React.FunctionComponent<Props> = ({renderEmailInput, renderPasswordInput, isValidEmail, onSubmit}) => {
   return (
     <form
       onSubmit={onSubmit}
@@ -15,13 +21,6 @@ const MockComponent = ({renderEmailInput, renderPasswordInput, isValidEmail, onS
       {renderPasswordInput()}
     </form>
   );
-};
-
-MockComponent.propTypes = {
-  renderPasswordInput: PropTypes.func.isRequired,
-  renderEmailInput: PropTypes.func.isRequired,
-  isValidEmail: PropTypes.bool.isRequired,
-  onSubmit: PropTypes.func.isRequired,
 };
 
 

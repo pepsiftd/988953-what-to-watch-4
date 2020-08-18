@@ -12,7 +12,7 @@ interface InjectingProps {
   clearActiveItem: () => void;
 }
 
-const withActiveItem: (Component: React.ComponentClass) => React.ReactNode = (Component) => {
+const withActiveItem: (Component: React.ComponentClass | React.FunctionComponent) => React.ComponentClass = (Component) => {
   type P = React.ComponentProps<typeof Component>;
   type T = Subtract<P, InjectingProps>;
 

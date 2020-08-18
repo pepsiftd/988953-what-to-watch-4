@@ -3,9 +3,6 @@ import {Provider} from 'react-redux';
 import configureStore from 'redux-mock-store';
 import renderer from 'react-test-renderer';
 import App from './app';
-import {NameSpace} from '@/reducer/name-space';
-import {promoMovie, movies} from '@/test-data/movies';
-import {userInfo} from '@/test-data/user';
 import {store as testStoreData} from '@/test-data/store';
 
 import {noop} from '@/utils';

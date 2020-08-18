@@ -1,30 +1,29 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
-import PropTypes from 'prop-types';
 
 import {withActiveItem} from './with-active-item';
 
-const MockComponentItem = ({isActive}) => {
+interface ItemProps {
+  isActive: boolean;
+}
+
+const MockComponentItem: React.FunctionComponent<ItemProps> = ({isActive}) => {
   return (
     <li className={`list-item ${isActive ? `list-item--active` : ``}`} />
   );
 };
 
-MockComponentItem.propTypes = {
-  isActive: PropTypes.bool.isRequired
-};
+interface Props {
+  renderItem: (Component: React.FunctionComponent | React.ComponentClass, id: number | string, props: Record<string, unknown>) => React.ReactNode;
+}
 
-const MockComponent = ({renderItem}) => {
+const MockComponent: React.FunctionComponent<Props> = ({renderItem}) => {
   return (
     <ul>
       {renderItem(MockComponentItem, 1, {key: 1})}
       {renderItem(MockComponentItem, 2, {key: 2})}
     </ul>
   );
-};
-
-MockComponent.propTypes = {
-  renderItem: PropTypes.func.isRequired
 };
 
 it(`withActiveItem renders Active-Inactive items correctly`, () => {

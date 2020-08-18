@@ -1,11 +1,18 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
-import PropTypes from 'prop-types';
 import {noop} from '@/utils';
 
 import {withAddReviewForm} from './with-add-review-form';
 
-const MockComponent = ({isFormDisabled, isSubmitButtonDisabled, onSubmit, onInput, errors}) => {
+interface Props {
+  errors: string[];
+  onInput: () => void;
+  onSubmit: () => void;
+  isSubmitButtonDisabled: boolean;
+  isFormDisabled: boolean;
+}
+
+const MockComponent: React.FunctionComponent<Props> = ({isFormDisabled, isSubmitButtonDisabled, onSubmit, onInput, errors}) => {
   return (
     <form
       onSubmit={onSubmit}
@@ -16,14 +23,6 @@ const MockComponent = ({isFormDisabled, isSubmitButtonDisabled, onSubmit, onInpu
       <input type="submit" disabled={isSubmitButtonDisabled} />
     </form>
   );
-};
-
-MockComponent.propTypes = {
-  errors: PropTypes.arrayOf(PropTypes.string).isRequired,
-  onInput: PropTypes.func.isRequired,
-  onSubmit: PropTypes.func.isRequired,
-  isSubmitButtonDisabled: PropTypes.bool.isRequired,
-  isFormDisabled: PropTypes.bool.isRequired,
 };
 
 

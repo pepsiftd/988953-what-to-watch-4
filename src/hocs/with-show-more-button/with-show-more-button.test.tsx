@@ -1,19 +1,18 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
-import PropTypes from 'prop-types';
 
 import {withShowMoreButton} from './with-show-more-button';
 
-const MockComponent = ({renderShowMore}) => {
+interface Props {
+  renderShowMore: () => React.ReactNode;
+}
+
+const MockComponent: React.FunctionComponent<Props> = ({renderShowMore}) => {
   return (
     <div>
       {renderShowMore()}
     </div>
   );
-};
-
-MockComponent.propTypes = {
-  renderShowMore: PropTypes.func.isRequired
 };
 
 it(`withShowMoreButton renders ShowMoreButton correctly`, () => {
