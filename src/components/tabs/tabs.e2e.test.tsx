@@ -14,7 +14,7 @@ it(`Tabs clicks calls function correctly`, () => {
   const setActiveItem = jest.fn();
   const tabs = shallow(
       <Tabs
-        activeItemId="Overview"
+        activeItemId={MovieInfoTab.OVERVIEW}
         setActiveItem={setActiveItem}
       />
   );

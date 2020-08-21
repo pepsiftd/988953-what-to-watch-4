@@ -31,7 +31,7 @@ interface Props {
   authorizationInfo: AuthInfo;
   reviews: ReviewData[];
   loadReviews: (id: number) => void;
-  activeItemId: string;
+  activeItemId: MovieInfoTab;
   setActiveItem: (id: string) => void;
 }
 

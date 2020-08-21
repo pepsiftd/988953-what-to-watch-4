@@ -7,12 +7,12 @@ interface State {
 
 interface InjectingProps {
   activeItemId: number | string;
-  renderItem: (ItemComponent: React.ComponentClass, itemId: number | string, itemProps: Record<string, unknown>) => React.ReactNode;
+  renderItem: (ItemComponent: React.ComponentClass | React.FunctionComponent, itemId: number | string, itemProps: Record<string, unknown>) => React.ReactNode;
   setActiveItem: (id: string | number) => void;
   clearActiveItem: () => void;
 }
 
-const withActiveItem: (Component: React.ComponentClass | React.FunctionComponent) => React.ComponentClass = (Component) => {
+const withActiveItem = (Component) => {
   type P = React.ComponentProps<typeof Component>;
   type T = Subtract<P, InjectingProps>;
 

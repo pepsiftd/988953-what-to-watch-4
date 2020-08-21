@@ -13,10 +13,9 @@ interface InjectingProps {
   timeElapsed: number;
   onPlayClick: () => void;
   onFullscreenClick: () => void;
-  children: React.ReactNode;
 }
 
-const withVideoPlayer: (Component: React.ComponentClass) => React.ReactNode = (Component) => {
+const withVideoPlayer = (Component) => {
   type P = React.ComponentProps<typeof Component>;
   type T = Subtract<P, InjectingProps>;
 

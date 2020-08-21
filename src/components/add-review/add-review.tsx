@@ -67,14 +67,13 @@ const AddReview: React.FunctionComponent<Props>
             evt.preventDefault();
             onSubmit();
           }}
-          disabled={isFormDisabled}
         >
           {errors.map((error) => {
             return <p key={error}>{error}</p>;
           })}
           <div className="rating">
             <div className="rating__stars">
-              <input className="rating__input" id="star-1" type="radio" name="rating" value="1" required={true} />
+              <input className="rating__input" id="star-1" type="radio" name="rating" value="1" required={true} disabled={isFormDisabled} />
               <label className="rating__label" htmlFor="star-1">Rating 1</label>
 
               <input className="rating__input" id="star-2" type="radio" name="rating" value="2" />
@@ -92,9 +91,21 @@ const AddReview: React.FunctionComponent<Props>
           </div>
 
           <div className="add-review__text">
-            <textarea className="add-review__textarea" name="review-text" id="review-text" placeholder="Review text" minLength={COMMENT_MIN_LENGTH} maxLength={COMMENT_MAX_LENGTH}></textarea>
+            <textarea
+              className="add-review__textarea"
+              name="review-text"
+              id="review-text"
+              placeholder="Review text"
+              minLength={COMMENT_MIN_LENGTH}
+              maxLength={COMMENT_MAX_LENGTH}
+              disabled={isFormDisabled}
+            ></textarea>
             <div className="add-review__submit">
-              <button className="add-review__btn" type="submit" disabled={isSubmitButtonDisabled}>Post</button>
+              <button
+                className="add-review__btn"
+                type="submit"
+                disabled={isSubmitButtonDisabled || isFormDisabled}
+              >Post</button>
             </div>
 
           </div>

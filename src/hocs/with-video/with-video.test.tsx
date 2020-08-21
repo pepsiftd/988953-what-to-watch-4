@@ -3,11 +3,8 @@ import renderer from 'react-test-renderer';
 
 import {withVideo} from './with-video';
 
-interface Props {
-  children: React.ReactElement[] | React.ReactElement;
-}
 
-const MockComponent: React.FunctionComponent<Props> = ({children}) => {
+const MockComponent: React.FunctionComponent = ({children}) => {
   return (
     <div>
       {children}

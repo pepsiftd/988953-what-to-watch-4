@@ -12,6 +12,8 @@ it(`MoviesList should render correctly`, () => {
         renderItem={noop}
         setActiveItem={noop}
         clearActiveItem={noop}
+        cardsShowing={8}
+        renderShowMore={noop}
       />
   );
 

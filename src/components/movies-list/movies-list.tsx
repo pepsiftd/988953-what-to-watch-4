@@ -14,7 +14,7 @@ interface Props {
     imageSrc: string;
     preview: string;
   }[];
-  renderItem: (Item: React.ReactElement, id: number | string, itemProps: Record<string, unknown>) => React.ReactElement;
+  renderItem: (ItemComponent: React.ComponentClass, itemId: number | string, itemProps: Record<string, unknown>) => React.ReactNode;
   setActiveItem: (id: number) => void;
   clearActiveItem: () => void;
   cardsShowing: number;

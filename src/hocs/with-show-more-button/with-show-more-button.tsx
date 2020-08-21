@@ -13,7 +13,7 @@ interface InjectingProps {
   renderShowMore: () => React.ReactNode;
 }
 
-const withShowMoreButton: (Component: React.ComponentClass | React.FunctionComponent) => React.ComponentClass = (Component) => {
+const withShowMoreButton = (Component) => {
   type P = React.ComponentProps<typeof Component>;
   type T = Subtract<P, InjectingProps>;
 

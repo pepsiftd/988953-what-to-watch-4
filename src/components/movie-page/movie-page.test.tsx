@@ -5,8 +5,9 @@ import renderer from 'react-test-renderer';
 import {Router} from 'react-router-dom';
 import {history} from '@/history';
 import {noop} from '@/utils';
+import {MovieInfoTab} from '@/const';
 
-import {MoviePage} from './movie-page';
+import MoviePage from './movie-page';
 import {store as testStoreData} from '@/test-data/store';
 
 const mockStore = configureStore([]);
@@ -20,7 +21,7 @@ it(`MoviePage should render correctly`, () => {
           <MoviePage
             id={1}
             setActiveItem={noop}
-            activeItemId={`Overview`}
+            activeItemId={MovieInfoTab.OVERVIEW}
           />
         </Provider>
       </Router>,

@@ -9,7 +9,7 @@ interface Props {
     id: number;
     genre: string;
   }[];
-  renderItem: (Item: React.ReactElement, id: number | string, itemProps: Record<string, unknown>) => React.ReactElement;
+  renderItem: (ItemComponent: React.FunctionComponent, itemId: number | string, itemProps: Record<string, unknown>) => React.ReactNode;
   setActiveItem: (id: number | string) => void;
   onTitleClick: (id: number | string) => void;
 }
@@ -27,9 +27,9 @@ const GenresList: React.FunctionComponent<Props> = ({movies, renderItem, setActi
               {
                 key: genre,
                 genre,
-                onTitleClick: (...args) => {
-                  setActiveItem(...args);
-                  onTitleClick(...args);
+                onTitleClick: (args) => {
+                  setActiveItem(args);
+                  onTitleClick(args);
                 },
               }
           )

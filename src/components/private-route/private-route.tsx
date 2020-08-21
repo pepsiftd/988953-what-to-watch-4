@@ -4,10 +4,11 @@ import {AppRoute} from '@/const';
 import {AuthorizationStatus} from '@/reducer/user/user';
 
 interface Props {
-  authorizationStatus: AuthorizationStatus;
+  authorizationStatus: AuthorizationStatus.AUTHORIZED | AuthorizationStatus.UNAUTHORIZED;
+  // [propName: string]: any;
 }
 
-const PrivateRoute: React.FunctionComponent<Props> = (props) => {
+const PrivateRoute: Route<Props> = (props) => {
   const {authorizationStatus} = props;
 
   if (authorizationStatus === AuthorizationStatus.UNAUTHORIZED) {

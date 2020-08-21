@@ -16,11 +16,10 @@ const MockComponent: React.FunctionComponent<Props> = ({isFormDisabled, isSubmit
   return (
     <form
       onSubmit={onSubmit}
-      disabled={isFormDisabled}
     >
       {errors}
-      <input type="text" onInput={onInput} />
-      <input type="submit" disabled={isSubmitButtonDisabled} />
+      <input type="text" onInput={onInput} disabled={isFormDisabled} />
+      <input type="submit" disabled={isSubmitButtonDisabled || isFormDisabled} />
     </form>
   );
 };

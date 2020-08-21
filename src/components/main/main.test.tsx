@@ -16,7 +16,6 @@ it(`Main should render correctly`, () => {
           promoMovie={promoMovie}
           movies={movies}
           filteredMovies={movies}
-          favoriteMovies={[]}
           currentGenre={`All genres`}
           onTitleClick={onTitleClick}
           onToggleFavorite={noop}

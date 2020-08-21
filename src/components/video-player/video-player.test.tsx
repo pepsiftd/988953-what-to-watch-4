@@ -13,7 +13,6 @@ it(`VideoPlayer renders correctly`, () => {
         duration={3695}
         onPlayClick={noop}
         onFullscreenClick={noop}
-        onExitClick={noop}
       >
         <video />
       </VideoPlayer>

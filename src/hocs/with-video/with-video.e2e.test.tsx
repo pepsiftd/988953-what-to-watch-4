@@ -9,11 +9,8 @@ Enzyme.configure({
   adapter: new Adapter()
 });
 
-interface Props {
-  children: React.ReactElement[] | React.ReactElement;
-}
 
-const Player: React.FunctionComponent<Props> = ({children}) => {
+const Player: React.FunctionComponent = ({children}) => {
   return (
     <div>
       {children}

@@ -10,7 +10,6 @@ it(`SignIn screen should render correctly`, () => {
   const tree = renderer.create(
       <Router history={history}>
         <SignIn
-          onSignIn={noop}
           isBadRequest={false}
           authorizationStatus={`UNAUTHORIZED`}
           renderEmailInput={noop}

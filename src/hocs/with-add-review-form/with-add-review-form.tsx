@@ -4,10 +4,10 @@ import {Subtract} from 'utility-types';
 import {ReviewModel} from '@/models/review-model';
 import {COMMENT_MIN_LENGTH, COMMENT_MAX_LENGTH} from '@/const';
 
-const InputName = {
-  'rating': `rating`,
-  'review-text': `comment`,
-};
+enum InputName {
+  RATING = `rating`,
+  COMMENT = `review-text`,
+}
 
 const Error = {
   NO_RATING: `Please rate the movie by selecting stars amount`,
@@ -30,7 +30,7 @@ interface InjectingProps {
   errors: string[];
 }
 
-const withAddReviewForm: (Component: React.ComponentClass | React.FunctionComponent) => React.ComponentClass = (Component) => {
+const withAddReviewForm = (Component) => {
   type P = React.ComponentProps<typeof Component>;
   type T = Subtract<P, InjectingProps>;
 
@@ -75,11 +75,10 @@ const withAddReviewForm: (Component: React.ComponentClass | React.FunctionCompon
     }
 
     onInput(evt) {
-      const {name, value} = evt.target;
-
-      this.setState({
-        [InputName[name]]: value
-      }, () => {
+      this.setState((prevState) => ({
+        rating: evt.target.name === InputName.RATING ? evt.target.value : prevState.rating,
+        comment: evt.target.name === InputName.COMMENT ? evt.target.value : prevState.comment,
+      }), () => {
         this._validateForm();
         this._setError();
       });

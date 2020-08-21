@@ -5,7 +5,7 @@ interface InjectingProps {
   children: React.ReactNode;
 }
 
-const withVideo: (Component: React.ComponentClass | React.FunctionComponent) => React.ComponentClass = (Component) => {
+const withVideo = (Component) => {
   type P = React.ComponentProps<typeof Component>;
   type T = Subtract<P, InjectingProps>;
 
