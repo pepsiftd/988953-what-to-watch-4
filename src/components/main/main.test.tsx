@@ -1,7 +1,7 @@
-import React from 'react';
+import * as React from 'react';
 import {Router} from 'react-router-dom';
 import {history} from '@/history';
-import renderer from 'react-test-renderer';
+import * as renderer from 'react-test-renderer';
 import {Main} from './main';
 import {promoMovie, movies} from '@/test-data/movies';
 import {userInfo} from '@/test-data/user';

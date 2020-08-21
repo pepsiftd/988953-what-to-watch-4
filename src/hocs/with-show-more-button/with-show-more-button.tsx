@@ -1,4 +1,4 @@
-import React, {PureComponent} from 'react';
+import * as React from 'react';
 import {Subtract} from 'utility-types';
 
 import {ShowMoreButton} from '@/components/show-more-button/show-more-button';
@@ -17,7 +17,7 @@ const withShowMoreButton = (Component) => {
   type P = React.ComponentProps<typeof Component>;
   type T = Subtract<P, InjectingProps>;
 
-  class WithShowMoreButton extends PureComponent<T, State> {
+  class WithShowMoreButton extends React.PureComponent<T, State> {
     constructor(props) {
       super(props);
 

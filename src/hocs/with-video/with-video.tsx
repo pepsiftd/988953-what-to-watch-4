@@ -1,4 +1,4 @@
-import React, {createRef} from 'react';
+import * as React from 'react';
 import {Subtract} from 'utility-types';
 
 interface InjectingProps {
@@ -23,7 +23,7 @@ const withVideo = (Component) => {
       super(props);
       this.videoSettings = props.videoSettings;
 
-      this.videoRef = createRef();
+      this.videoRef = React.createRef();
     }
 
     shouldComponentUpdate(nextProps) {

@@ -1,4 +1,4 @@
-import React from 'react';
+import * as React from 'react';
 import {history} from '@/history';
 import {AppRoute} from '@/const';
 import {Link} from 'react-router-dom';

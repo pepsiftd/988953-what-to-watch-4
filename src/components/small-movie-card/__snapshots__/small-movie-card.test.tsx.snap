@@ -17,10 +17,10 @@ exports[`SmallMovieCard should render correct movie name 1`] = `
   >
     <a
       className="small-movie-card__link"
-      href="/films/152"
+      href="/films/15"
       onClick={[Function]}
     >
-      Some movie: Revenge
+      Movie Title
     </a>
   </h3>
 </article>

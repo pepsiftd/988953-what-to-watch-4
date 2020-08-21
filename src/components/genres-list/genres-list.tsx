@@ -1,4 +1,4 @@
-import React from 'react';
+import * as React from 'react';
 
 import {GenresListItem} from '@/components/genres-list-item/genres-list-item';
 import {getGenresFromMovies} from '@/utils';

@@ -2,10 +2,10 @@
 
 exports[`withAddReviewForm renders correctly 1`] = `
 <form
-  disabled={false}
   onSubmit={[Function]}
 >
   <input
+    disabled={false}
     onInput={[Function]}
     type="text"
   />

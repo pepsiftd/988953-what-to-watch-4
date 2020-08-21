@@ -1,5 +1,5 @@
-import React from 'react';
-import renderer from 'react-test-renderer';
+import * as React from 'react';
+import * as renderer from 'react-test-renderer';
 
 import {MoviesList} from './movies-list';
 import {movies} from '@/test-data/movies';

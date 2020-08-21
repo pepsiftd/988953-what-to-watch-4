@@ -1,4 +1,6 @@
 module.exports = {
+  resolver: `jest-webpack-resolver`,
+  rootDir: `./src`,
   transform: {
     "^.+\\.tsx?$": `ts-jest`,
     "^.+\\.js?$": `babel-jest`,

@@ -1,4 +1,4 @@
-import React, {createRef} from 'react';
+import * as React from 'react';
 import {Subtract} from 'utility-types';
 
 interface State {
@@ -41,7 +41,7 @@ const withVideoPlayer = (Component) => {
         isFullscreen: false,
       };
 
-      this.videoRef = createRef();
+      this.videoRef = React.createRef();
       this.duration = 0;
 
       this.onPlayClick = this.onPlayClick.bind(this);

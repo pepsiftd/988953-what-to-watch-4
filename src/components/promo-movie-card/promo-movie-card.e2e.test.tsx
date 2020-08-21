@@ -1,13 +1,13 @@
-import React from 'react';
-import Enzyme, {shallow} from 'enzyme';
-import Adapter from 'enzyme-adapter-react-16';
+import * as React from 'react';
+import {configure, shallow} from 'enzyme';
+import * as Adapter from 'enzyme-adapter-react-16';
 import {noop} from '@/utils';
 
 import {PromoMovieCard} from './promo-movie-card';
 import {movie} from '@/test-data/movies';
 import {userInfo} from '@/test-data/user';
 
-Enzyme.configure({
+configure({
   adapter: new Adapter(),
 });
 

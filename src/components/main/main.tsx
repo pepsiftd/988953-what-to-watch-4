@@ -1,4 +1,4 @@
-import React from 'react';
+import * as React from 'react';
 import {FilmObject, AuthInfo} from '@/types';
 
 import {PromoMovieCard} from '@/components/promo-movie-card/promo-movie-card';

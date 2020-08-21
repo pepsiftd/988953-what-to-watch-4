@@ -1,4 +1,4 @@
-import React from 'react';
+import * as React from 'react';
 import {getRatingEstimate, getRatingString} from '@/utils';
 import {MAX_ACTORS_IN_SHORT_DETAILS} from '@/const';
 

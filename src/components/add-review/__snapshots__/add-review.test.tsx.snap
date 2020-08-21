@@ -11,7 +11,7 @@ exports[`AddReview renders correctly 1`] = `
       className="movie-card__bg"
     >
       <img
-        alt="I Am the Movie"
+        alt="Movie Title"
         src="backgroundImage.jpg"
       />
     </div>
@@ -59,10 +59,10 @@ exports[`AddReview renders correctly 1`] = `
           >
             <a
               className="breadcrumbs__link"
-              href="/films/0"
+              href="/films/15"
               onClick={[Function]}
             >
-              I Am the Movie
+              Movie Title
             </a>
           </li>
           <li
@@ -100,7 +100,7 @@ exports[`AddReview renders correctly 1`] = `
       className="movie-card__poster movie-card__poster--small"
     >
       <img
-        alt="I Am the Movie poster"
+        alt="Movie Title poster"
         height="327"
         src="bigimage.jpgg"
         width="218"
@@ -113,7 +113,6 @@ exports[`AddReview renders correctly 1`] = `
     <form
       action="#"
       className="add-review__form"
-      disabled={false}
       onInput={[Function]}
       onSubmit={[Function]}
     >
@@ -125,9 +124,10 @@ exports[`AddReview renders correctly 1`] = `
         >
           <input
             className="rating__input"
+            disabled={false}
             id="star-1"
             name="rating"
-            required=""
+            required={true}
             type="radio"
             value="1"
           />
@@ -196,9 +196,10 @@ exports[`AddReview renders correctly 1`] = `
       >
         <textarea
           className="add-review__textarea"
+          disabled={false}
           id="review-text"
-          maxLength="400"
-          minLength="50"
+          maxLength={400}
+          minLength={50}
           name="review-text"
           placeholder="Review text"
         />

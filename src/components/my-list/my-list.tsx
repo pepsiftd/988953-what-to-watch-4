@@ -1,4 +1,4 @@
-import React from 'react';
+import * as React from 'react';
 import {AuthorizationStatus} from '@/reducer/user/user';
 import {AuthInfo} from '@/types';
 

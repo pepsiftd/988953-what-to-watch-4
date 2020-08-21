@@ -1,4 +1,4 @@
-import React, {PureComponent, createRef} from 'react';
+import * as React from 'react';
 import {Subtract} from 'utility-types';
 
 import {checkEmail} from '@/utils';
@@ -18,15 +18,15 @@ const withSignInForm = (Component) => {
   type P = React.ComponentProps<typeof Component>;
   type T = Subtract<P, InjectingProps>;
 
-  class WithSignInForm extends PureComponent<T, State> {
+  class WithSignInForm extends React.PureComponent<T, State> {
     private emailInputRef: React.RefObject<HTMLInputElement>;
     private passwordInputRef: React.RefObject<HTMLInputElement>;
 
     constructor(props) {
       super(props);
 
-      this.emailInputRef = createRef();
-      this.passwordInputRef = createRef();
+      this.emailInputRef = React.createRef();
+      this.passwordInputRef = React.createRef();
 
       this.state = {
         isValidEmail: true,

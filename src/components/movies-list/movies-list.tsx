@@ -1,4 +1,4 @@
-import React from 'react';
+import * as React from 'react';
 
 import {SmallMovieCard} from '@/components/small-movie-card/small-movie-card';
 import {withVideo} from '@/hocs/with-video/with-video';

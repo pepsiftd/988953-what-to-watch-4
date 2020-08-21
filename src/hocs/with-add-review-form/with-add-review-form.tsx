@@ -1,4 +1,4 @@
-import React, {PureComponent} from 'react';
+import * as React from 'react';
 import {Subtract} from 'utility-types';
 
 import {ReviewModel} from '@/models/review-model';
@@ -34,7 +34,7 @@ const withAddReviewForm = (Component) => {
   type P = React.ComponentProps<typeof Component>;
   type T = Subtract<P, InjectingProps>;
 
-  class WithAddReviewForm extends PureComponent<T, State> {
+  class WithAddReviewForm extends React.PureComponent<T, State> {
     constructor(props) {
       super(props);
 

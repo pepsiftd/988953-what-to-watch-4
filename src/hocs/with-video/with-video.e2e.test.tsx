@@ -1,11 +1,11 @@
-import React from 'react';
-import Enzyme, {mount} from 'enzyme';
-import Adapter from 'enzyme-adapter-react-16';
+import * as React from 'react';
+import {configure, mount} from 'enzyme';
+import * as Adapter from 'enzyme-adapter-react-16';
 import {noop} from '@/utils';
 
 import {withVideo} from './with-video';
 
-Enzyme.configure({
+configure({
   adapter: new Adapter()
 });
 
@@ -18,6 +18,9 @@ const Player: React.FunctionComponent = ({children}) => {
   );
 };
 
+
+window.HTMLMediaElement.prototype.play = noop;
+window.HTMLMediaElement.prototype.load = noop;
 
 it(`Video starts playing when updated with isActive-prop set true`, () => {
   const PlayerWrapped = withVideo(Player);
@@ -34,14 +37,13 @@ it(`Video starts playing when updated with isActive-prop set true`, () => {
       />
   );
 
-  window.HTMLMediaElement.prototype.play = noop;
 
-  const {_videoRef} = wrapper.instance();
-  jest.spyOn(_videoRef.current, `play`);
+  const {videoRef} = wrapper.instance();
+  jest.spyOn(videoRef.current, `play`);
 
   wrapper.instance().componentDidUpdate();
 
-  expect(_videoRef.current.play).toHaveBeenCalledTimes(1);
+  expect(videoRef.current.play).toHaveBeenCalledTimes(1);
 });
 
 it(`Video calls load when updated with isActive-prop set false`, () => {
@@ -59,12 +61,11 @@ it(`Video calls load when updated with isActive-prop set false`, () => {
       />
   );
 
-  window.HTMLMediaElement.prototype.load = noop;
 
-  const {_videoRef} = wrapper.instance();
-  jest.spyOn(_videoRef.current, `load`);
+  const {videoRef} = wrapper.instance();
+  jest.spyOn(videoRef.current, `load`);
 
   wrapper.instance().componentDidUpdate();
 
-  expect(_videoRef.current.load).toHaveBeenCalledTimes(1);
+  expect(videoRef.current.load).toHaveBeenCalledTimes(1);
 });
