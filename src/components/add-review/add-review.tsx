@@ -12,7 +12,7 @@ import {COMMENT_MIN_LENGTH, COMMENT_MAX_LENGTH} from '@/const';
 interface Props {
   movie: FilmObject;
   errors: string[];
-  onInput: () => void;
+  onInput: (evt: React.FormEvent) => void;
   onSubmit: () => void;
   authorizationStatus: AuthorizationStatus;
   authorizationInfo: AuthInfo;
@@ -62,7 +62,10 @@ const AddReview: React.FunctionComponent<Props>
         <form
           action="#"
           className="add-review__form"
-          onInput={onInput}
+          onInput={(evt) => {
+            evt.persist();
+            onInput(evt);
+          }}
           onSubmit={(evt) => {
             evt.preventDefault();
             onSubmit();

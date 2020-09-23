@@ -30,7 +30,9 @@ it(`AddReview calls callback functions onInput and onSubmit`, () => {
 
   const form = component.find(`form`);
 
-  form.simulate(`input`);
+  form.simulate(`input`, {
+    persist: noop
+  });
   form.simulate(`submit`, {
     preventDefault: noop
   });
